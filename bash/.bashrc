@@ -4,3 +4,7 @@ export PS1="\n$username\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;33m\]\h\[$(
 # add personal scripts and binaries to path
 export PATH=~/bin:$PATH
 export PATH=~/scripts:$PATH
+
+export GOPATH=~/development/go
+export GOBIN=$GOPATH/bin
+export PATH=$GOBIN:$PATH
