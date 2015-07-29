@@ -52,5 +52,8 @@ alias chgrp='chgrp --preserve-root'
 # allow completion in sudo commands
 alias sudo='sudo '
 
+# import dircolors
+eval $(dircolors ~/.config/bash/dircolors)
+
 export TERM=screen-256color
 export TMPDIR=/tmp
