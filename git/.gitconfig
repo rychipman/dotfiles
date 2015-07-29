@@ -3,3 +3,17 @@
 	name = Ryan Chipman
 [color]
 	ui = true
+[alias]
+	ci = commit
+	co = checkout
+	br = branch
+	lc = log ORIG_HEAD.. --stat --no-merges
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	undo = reset --hard
+	unstage = reset HEAD --
+	fixup = commit --fixup
+	amend = commit --amend
+	st = status
+	ri = rebase --interactive --autosquash
+	addp = add -p
+	re = rerere
