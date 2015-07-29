@@ -17,3 +17,5 @@
 	ri = rebase --interactive --autosquash
 	addp = add -p
 	re = rerere
+[rerere]
+	enabled = true
