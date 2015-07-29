@@ -1,3 +1,5 @@
 [user]
 	email = ryan@ryanchipman.com
 	name = Ryan Chipman
+[color]
+	ui = true
