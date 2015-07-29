@@ -17,3 +17,6 @@ export LSCOLORS=Gxfxcxdxbxegedabagacad
 export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
 export EDITOR='vim'
+
+export TERM=screen-256color
+export TMPDIR=/tmp
