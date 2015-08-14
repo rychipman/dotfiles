@@ -20,6 +20,9 @@ export LESS='--ignore-case --raw-control-chars'
 export PAGER='less'
 export EDITOR='vim'
 
+# set vim-style keybindings
+set -o vi
+
 # directory aliases
 alias ls='ls --color'
 alias sl='ls'
