@@ -9,7 +9,7 @@ export GOPATH=~/development/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
-export STOW_DIR=~/dotfiles
+export STOW_DIR=~/.dotfiles
 
 # Set colors for ls
 export CLICOLOR=1
