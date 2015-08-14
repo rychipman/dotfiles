@@ -62,3 +62,6 @@ eval $(dircolors ~/.config/bash/dircolors)
 
 export TERM=screen-256color
 export TMPDIR=/tmp
+
+# tmux convenience aliases
+alias tt='tmux attach-session -t'
