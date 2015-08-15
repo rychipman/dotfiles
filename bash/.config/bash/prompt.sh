@@ -24,14 +24,14 @@ set_prompt() {
     GIT_PS1_SHOWUPSTREAM="git verbose auto"
     GIT_PS1_HIDE_IF_PWD_IGNORED=1
 
-    PS1="\n"
-    PS1+="${namecolor}\\u"
-    PS1+="${white}@${blue}\\h"
-    PS1+=" ${white}in \\w"
-    PS1+="\n"
-    PS1+="${gitcolor}$(__git_ps1 " (%s)")"
-    PS1+="${white}$arrow"
-    PS1+="$reset"
+    PS1='\n'
+    PS1+='\[$namecolor\]\u'
+    PS1+='\[$white\]@\[$blue\]\h'
+    PS1+=' \[$white\]in \w'
+    PS1+='\n'
+    PS1+='\[$gitcolor\]$(__git_ps1 " (%s)")'
+    PS1+='\[$white\]$arrow'
+    PS1+='\[$reset\]'
 }
 
 PROMPT_COMMAND='set_prompt'
