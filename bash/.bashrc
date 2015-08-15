@@ -1,4 +1,4 @@
-source /usr/share/git/completion/git-prompt.sh
+source ~/.config/bash/git-prompt.sh
 
 set_prompt() {
     lastcmd=$?
