@@ -3,10 +3,11 @@ source ~/.config/bash/git-prompt.sh
 
 set_prompt() {
     lastcmd=$?
-    blue='\[\033[38;5;33m\]'
-    green='\[\033[38;5;41m\]'
-    white='\[\033[38;5;15m\]'
-    red='\[\033[38;5;31m\]'
+    blue=$(tput setaf 33)
+    green=$(tput setaf 41)
+    white=$(tput setaf 15)
+    red=$(tput setaf 196)
+    reset=$(tput sgr0)
     arrow=" →  "
 
     if [[ lastcmd -eq "0" ]]; then
@@ -14,12 +15,6 @@ set_prompt() {
     else
         namecolor="$red"
     fi
-
-    #if git status | grep "nothing to commit" > /dev/null 2>&1; then
-    #    gitcolor="$green"
-    #else
-    #    gitcolor="$red"
-    #fi
 
     GIT_PS1_SHOWSTASHSTATE=1
     GIT_PS1_SHOWDIRTYSTATE=1
@@ -36,6 +31,7 @@ set_prompt() {
     PS1+="\n"
     PS1+="${gitcolor}$(__git_ps1 " (%s)")"
     PS1+="${white}$arrow"
+    PS1+="$reset"
 }
 
 PROMPT_COMMAND='set_prompt'
