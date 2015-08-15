@@ -7,6 +7,7 @@ set_prompt() {
     green="$(tput setaf 41)"
     white="$(tput setaf 15)"
     red="$(tput setaf 196)"
+    gray="$(tput setaf 240)"
     reset="$(tput sgr0)"
     arrow=" →  "
 
