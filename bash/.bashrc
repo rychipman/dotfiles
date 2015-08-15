@@ -14,11 +14,19 @@ set_prompt() {
         namecolor="$red"
     fi
 
-    if git status | grep "nothing to commit" > /dev/null 2>&1; then
-        gitcolor="$green"
-    else
-        gitcolor="$red"
-    fi
+    #if git status | grep "nothing to commit" > /dev/null 2>&1; then
+    #    gitcolor="$green"
+    #else
+    #    gitcolor="$red"
+    #fi
+
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWCOLORHINTS=1
+    GIT_PS1_DESCRIBE_STYLE="branch"
+    GIT_PS1_SHOWUPSTREAM="git verbose auto"
+    GIT_PS1_HIDE_IF_PWD_IGNORED=1
 
     PS1="\n"
     PS1+="${namecolor}\\u"
