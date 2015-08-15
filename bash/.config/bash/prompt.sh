@@ -3,11 +3,11 @@ source ~/.config/bash/git-prompt.sh
 
 set_prompt() {
     lastcmd=$?
-    blue=$(tput setaf 33)
-    green=$(tput setaf 41)
-    white=$(tput setaf 15)
-    red=$(tput setaf 196)
-    reset=$(tput sgr0)
+    blue="$(tput setaf 33)"
+    green="$(tput setaf 41)"
+    white="$(tput setaf 15)"
+    red="$(tput setaf 196)"
+    reset="$(tput sgr0)"
     arrow=" →  "
 
     if [[ lastcmd -eq "0" ]]; then
