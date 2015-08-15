@@ -18,6 +18,7 @@
 	rbc = rebase --continue
 	addp = add -p
 	re = rerere
+	diffc = diff --cached
 [rerere]
 	enabled = true
 [push]
