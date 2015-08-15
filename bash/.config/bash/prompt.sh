@@ -40,3 +40,5 @@ set_prompt() {
 }
 
 PROMPT_COMMAND='set_prompt'
+
+export PS2=" ⟼  "
