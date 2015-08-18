@@ -19,13 +19,16 @@ set_prompt() {
     white="$(tput setaf 15)"
     red="$(tput setaf 196)"
     gray="$(tput setaf 240)"
+    orange="$(tput setaf 202)"
     reset="$(tput sgr0)"
     arrow=" →  "
 
-    if [[ lastcmd -eq "0" ]]; then
+    if [[ lastcmd -ne "0" ]]; then
+        namecolor="$red"
+    elif [[ $EUID -ne 0 ]]; then
         namecolor="$green"
     else
-        namecolor="$red"
+	namecolor="$orange"
     fi
 
 
