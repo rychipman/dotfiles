@@ -1,0 +1,13 @@
+#!/bin/bash
+
+font="Monaco"
+
+while getopts "l" opt; do
+  case $opt in
+    l)
+      dmenu_run -i -h 20 -y 0 -x 500 -w 600 -q -p ">" -fn "$font" -nb "#222222" -nf "#ffffff" -sb "#222222" -sf "#33bb55"
+      ;;
+  esac
+done
+
+
