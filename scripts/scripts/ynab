@@ -1,0 +1,3 @@
+#!/bin/bash
+
+WINEPREFIX=~/.wine-ynab wine ~/.wine-ynab/drive_c/Program\ Files\ \(x86\)/YNAB\ 4/YNAB\ 4.exe
