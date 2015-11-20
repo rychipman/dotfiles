@@ -48,3 +48,8 @@ set scrolloff=10
 set sidescrolloff=0 " same as default
 set sidescroll=1
 
+call plug#begin('~/.config/nvim/autoload/vim-plug')
+
+""" declare plugins here """
+
+call plug#end()
