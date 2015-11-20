@@ -51,5 +51,6 @@ set sidescroll=1
 call plug#begin('~/.config/nvim/autoload/vim-plug')
 
 """ declare plugins here """
+Plug 'wombat256.vim'
 
 call plug#end()
