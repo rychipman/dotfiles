@@ -54,7 +54,6 @@ call plug#begin('~/.config/nvim/autoload/vim-plug')
 
 """ leader key mappings """
 let mapleader="\<Space>"
-let localleader=','
 
 " sorting
 vnoremap <leader>o :sort<CR>
@@ -71,10 +70,10 @@ map <leader>Q :qa!<CR>
 map <leader>h :nohl<CR>
 
 " bind CTRL + motion keys to navigate between windows
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+"map <C-j> <C-w>j
+"map <C-k> <C-w>k
+"map <C-h> <C-w>h
+"map <C-l> <C-w>l
 
 " window splits
 map <leader>v <C-w>v
@@ -110,6 +109,25 @@ call plug#end()
 """ vim-smooth-scroll """
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 8, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 8, 2)<CR>
+
+""" auto-pairs """
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<leader>b'
+
+"""  vimskip """
+let g:vimskip_wraptocenter = 1
+ 
+""" emmet """
+let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_settings = {
+\  'html' : {
+\    'attr_quotes' : 'single',
+\    'tag_nl_leaf' : 'true',
+\    'indent'      : 'true',
+\    'tag_nl'      : 'true',
+\    'indentation' : '  '
+\  },
+\}
 
 """ theming """
 syntax enable
