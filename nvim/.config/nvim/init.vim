@@ -112,7 +112,7 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 8, 2)<CR>
 
 """ auto-pairs """
 let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<leader>b'
+"let g:AutoPairsShortcutBackInsert = '<leader>b'
 
 """  vimskip """
 let g:vimskip_wraptocenter = 1
