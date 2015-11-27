@@ -2,7 +2,7 @@
 # add personal scripts and binaries to path
 export PATH=~/bin:$PATH
 
-export GOPATH=~/development/go
+export GOPATH=~/dev/go
 export GOBIN=$GOPATH/bin
 export PATH=$GOBIN:$PATH
 
