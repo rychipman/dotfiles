@@ -71,13 +71,8 @@ hc pad $monitor $panel_height
 
     while true ; do
         # check wireless interface status once a second
-        qual=$(iwconfig wlo1 | grep 'Link Quality=' | awk '{gsub(/[=/]/," "); print $3}')
-        if [ -z "$qual" ]; then
-            network="none"
-        else
-            network="connected"
-        fi
-        echo "network"$'\t'$network
+        netstatus=$(connmanctl state | head -1 | awk '{print $3}')
+        echo "network"$'\t'$netstatus
         sleep 1 || break
     done > >(uniq_linebuffered) &
 
