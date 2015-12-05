@@ -1,0 +1,15 @@
+pcm.main {
+    type hw
+    card 1
+    device 0
+}
+pcm.!default {
+    type plug
+    slave {
+        pcm "main"
+    }
+}
+ctl.!default {
+    type hw
+    card 1
+}
