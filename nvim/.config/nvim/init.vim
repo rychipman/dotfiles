@@ -34,7 +34,8 @@ set writebackup " same as default
 set autoindent " same as default
 set smartindent
 set tabstop=4
-set softtabstop=0 " same as default TODO: check if this is correct
+set softtabstop=4
+set shiftwidth=4
 set expandtab
 set smarttab " same as default
 set wrap " same as default TODO: look into more advanced wrapping
