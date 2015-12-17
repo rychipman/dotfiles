@@ -17,11 +17,14 @@ def_key "h"
 def_key "h"
   master_screen
 
+def_key "x"
+  delete_playlist_items
+
+
+# same as default
+
 #def_key "delete"
 #  delete_playlist_items
-#
-#def_key "x"
-#  toggle_crossfade
 #
 #def_key "X"
 #  set_crossfade
