@@ -126,7 +126,7 @@ let g:user_emmet_settings = {
 \    'tag_nl_leaf' : 'true',
 \    'indent'      : 'true',
 \    'tag_nl'      : 'true',
-\    'indentation' : '  '
+\    'indentation' : '    '
 \  },
 \}
 
