@@ -1,3 +1,5 @@
 #!/bin/bash
 
-WINEPREFIX=~/.wine-ynab wine ~/.wine-ynab/drive_c/Program\ Files\ \(x86\)/YNAB\ 4/YNAB\ 4.exe
+# activation code: J46297JBS4JS5
+winedir=~/.local/share
+WINEPREFIX=$winedir/wine-ynab wine $winedir/wine-ynab/drive_c/Program\ Files\ \(x86\)/YNAB\ 4/YNAB\ 4.exe
