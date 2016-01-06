@@ -1,11 +1,9 @@
 #!/bin/bash
 
-font="Monaco"
-
 while getopts "l" opt; do
   case $opt in
     l)
-      dmenu_run -i -h 20 -y 0 -x 500 -w 600 -q -p ">" -fn "$font" -nb "#222222" -nf "#ffffff" -sb "#222222" -sf "#33bb55"
+      rofi -show run -lines 6 -width 500 -bw 2 -sidebar-mode -color-enabled -color-window '#2E2F33,#A2A7B5,#2E2F33' -color-normal '#2E2F33,#CAC9C6,#2E2F33,#2E2F33,#A2A7B5'  -color-active '#2E2F33,#F7B646,#2E2F33,#2E2F33,#F7B646' -separator-style solid -padding 25
       ;;
   esac
 done
