@@ -1,0 +1,8 @@
+#!/bin/bash
+
+rm ~/.nvimlog \
+   ~/.node_repl_history \
+   ~/.lesshst \
+   ~/.local/share/recently-used.xbel
+
+rm -rf ~/.local/share/Trash
