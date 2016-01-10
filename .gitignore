@@ -1,2 +1,5 @@
 **/*.log
 nvim/.config/nvim/autoload/vim-plug/*
+vim/.vim/autoload/vim-plug/*
+vim/.vim/.netrwhist
+vim/.vim/viminfo
