@@ -4,31 +4,32 @@ step=50
 min=10
 max=600
 start=200
+file=/sys/class/backlight/intel_backlight/brightness
 
 while getopts "idcmMs" opt; do
   case $opt in
     i)
-        current="$(cat /sys/class/backlight/intel_backlight/brightness)"
+        current="$(cat $file)"
         new="$((current + step))"
-        echo $new > /sys/class/backlight/intel_backlight/brightness
+        echo $new > $file
       ;;
     d)
-        current="$(cat /sys/class/backlight/intel_backlight/brightness)"
+        current="$(cat $file)"
         new="$((current - step))"
-        echo $new > /sys/class/backlight/intel_backlight/brightness
+        echo $new > $file
       ;;
     c)
-        cat /sys/class/backlight/intel_backlight/brightness
+        cat $file
         exit 0
       ;;
     m)
-        echo $min > /sys/class/backlight/intel_backlight/brightness
+        echo $min > $file
       ;;
     M)
-        echo $max > /sys/class/backlight/intel_backlight/brightness
+        echo $max > $file
       ;;
     s)
-        echo $start > /sys/class/backlight/intel_backlight/brightness
+        echo $start > $file
       ;;
   esac
 done
