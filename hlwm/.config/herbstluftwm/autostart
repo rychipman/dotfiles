@@ -24,7 +24,7 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 
 hc keybind $Mod-w close_or_remove
-hc keybind $Mod-Return spawn st -f "Monaco:size=13"
+hc keybind $Mod-Return spawn lxterminal
 hc keybind Control-Tab spawn launcher -l
 
 ## basic movement
@@ -87,12 +87,7 @@ hc keybind $Mod-p pseudotile toggle
 # mouse
 hc mouseunbind --all
 hc mousebind $Mod-Button1 move
-hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
-
-# focus
-hc keybind $Mod-BackSpace   cycle_monitor
-hc keybind $Mod-u jumpto urgent
 
 hc keybind F2 spawn sudo backlight.sh -d 300
 hc keybind F3 spawn sudo backlight.sh -i 300
