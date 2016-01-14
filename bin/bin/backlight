@@ -1,0 +1,34 @@
+#!/bin/bash
+
+step=50
+min=10
+max=600
+start=200
+
+while getopts "idcmMs" opt; do
+  case $opt in
+    i)
+        current="$(cat /sys/class/backlight/intel_backlight/brightness)"
+        new="$((current + step))"
+        echo $new > /sys/class/backlight/intel_backlight/brightness
+      ;;
+    d)
+        current="$(cat /sys/class/backlight/intel_backlight/brightness)"
+        new="$((current - step))"
+        echo $new > /sys/class/backlight/intel_backlight/brightness
+      ;;
+    c)
+        cat /sys/class/backlight/intel_backlight/brightness
+        exit 0
+      ;;
+    m)
+        echo $min > /sys/class/backlight/intel_backlight/brightness
+      ;;
+    M)
+        echo $max > /sys/class/backlight/intel_backlight/brightness
+      ;;
+    s)
+        echo $start > /sys/class/backlight/intel_backlight/brightness
+      ;;
+  esac
+done
