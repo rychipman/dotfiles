@@ -8,6 +8,9 @@ source ~/.config/bash/exports.sh
 # creates aliases
 source ~/.config/bash/aliases.sh
 
+# creates functions
+source ~/.config/bash/functions.sh
+
 # enables bash completion
 source ~/.config/bash/completion.sh
 
