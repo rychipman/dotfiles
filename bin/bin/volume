@@ -1,0 +1,41 @@
+#!/bin/bash
+
+step="5%"
+start="50%"
+
+mutestatus="$(amixer get Master | grep Mono: | awk '{print $6}')"
+volstatus="$(amixer get Master | grep Mono: | awk '{print $4}')"
+
+while getopts "idcmuts" opt; do
+  case $opt in
+    i)
+        amixer set Master "$step"+
+      ;;
+    d)
+        amixer set Master "$step"-
+      ;;
+    c)
+        if [[ "$mutestatus" == "[off]" ]]; then
+            echo "muted"
+        else
+            echo "$volstatus"
+        fi
+      ;;
+    m)
+        amixer set Master mute
+      ;;
+    u)
+        amixer set Master unmute
+      ;;
+    t)
+        if [[ "$mutestatus" == "[off]" ]]; then
+            amixer set Master unmute
+        else
+            amixer set Master mute
+        fi
+      ;;
+    s)
+        amixer set Master "$start"
+      ;;
+  esac
+done
