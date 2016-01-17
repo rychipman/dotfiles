@@ -20,3 +20,5 @@ set -o vi
 # import dircolors
 eval $(dircolors ~/.config/bash/dircolors)
 
+# start ssh-agent
+eval $(keychain --eval --quiet rchipman@delta rychipman@github chippy@theroot)
