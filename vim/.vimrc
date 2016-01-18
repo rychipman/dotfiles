@@ -117,6 +117,9 @@ Plug 'jayflo/vim-skip'   " move by fractional line-length units
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim'                " html expansion with emmet
 Plug 'lervag/vimtex'
+Plug 'wavded/vim-stylus'
+Plug 'AndrewRadev/vim-eco'
+Plug 'kchmck/vim-coffee-script'
 
 """ Improvements to vim functionality
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
