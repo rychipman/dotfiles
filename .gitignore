@@ -3,3 +3,7 @@ nvim/.config/nvim/autoload/vim-plug/*
 vim/.vim/autoload/vim-plug/*
 vim/.vim/.netrwhist
 vim/.vim/viminfo
+transmission/.config/transmission/blocklists
+transmission/.config/transmission/torrents
+transmission/.config/transmission/resume
+transmission/.config/transmission/stats.json
