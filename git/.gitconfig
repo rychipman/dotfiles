@@ -9,7 +9,6 @@
 	br = branch
 	lc = log ORIG_HEAD.. --stat --no-merges
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	unstage = reset HEAD --
 	fixup = commit --fixup
 	amend = commit --amend
 	st = status
@@ -18,8 +17,6 @@
 	addp = add -p
 	re = rerere
 	diffc = diff --cached
-	save = !git add -A && git ci -m "WIP"
-	wipe = !git add -A && git ci -m "WIPE SAVEPOINT" && git reset --hard HEAD
 [rerere]
 	enabled = true
 [push]
