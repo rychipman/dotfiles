@@ -20,5 +20,5 @@ set -o vi
 # import dircolors
 eval $(dircolors ~/.config/bash/dircolors)
 
-# start ssh-agent
-eval $(keychain --eval --quiet rchipman@delta rychipman@github chippy@theroot)
+# add gpg key to keyring
+eval $(keychain --eval --quiet --agents gpg 2EE67F58)
