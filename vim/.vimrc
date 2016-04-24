@@ -120,6 +120,7 @@ Plug 'lervag/vimtex'
 Plug 'wavded/vim-stylus'
 Plug 'AndrewRadev/vim-eco'
 Plug 'kchmck/vim-coffee-script'
+Plug 'rust-lang/rust.vim'
 
 """ Improvements to vim functionality
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
@@ -224,6 +225,12 @@ let g:vimskip_ignore_trailing_ws = 1
 "##########################################
 
 let g:vimtex_view_general_viewer = 'zathura'
+
+"##########################################
+"######## RUST.VIM OPTIONS ################
+"##########################################
+
+let g:rustfmt_autosave = 0
 
 "##########################################
 "######## EYE CANDY #######################
