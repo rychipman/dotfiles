@@ -1,0 +1,47 @@
+
+super + Return
+    lxterminal
+
+control + Tab
+    launcher -l
+
+super + p
+    rofi-pass
+
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    volume -{i,d,t}
+
+XF86MonBrightness{Up,Down}
+    sudo backlight -{i,d}
+
+# hlwm bindings
+
+super + shift + {q,r}
+    herbstclient {quit,reload}
+
+super + w
+    herbstclient close_or_remove
+
+super + {h,j,k,l}
+    herbstclient focus {left,down,up,right}
+
+super + control + {h,j,k,l}
+    herbstclient shift {left,down,up,right}
+
+super + shift + {h,j,k,l}
+    herbstclient resize {left,down,up,right} +0.03
+
+super + space
+    herbstclient split explode
+
+super + {o,i}
+    herbstclient use_index {+,-}1 --skip-visible
+
+super + control + {o,i}
+    herbstclient move_index {+,-}1 --skip-visible; herbstclient use_index {+,-}1 --skip-visible
+
+super + {s,f,d}
+    herbstclient {floating,fullscreen,pseudotile} toggle
+
+super + control + space
+    herbstclient cycle_layout 1
