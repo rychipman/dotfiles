@@ -1,6 +1,6 @@
 
 super + Return
-    lxterminal
+    lxterminal --working-directory=/home/rchipman
 
 control + Tab
     launcher -l
