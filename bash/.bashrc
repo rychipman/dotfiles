@@ -19,6 +19,3 @@ set -o vi
 
 # import dircolors
 eval $(dircolors ~/.config/bash/dircolors)
-
-# add gpg key to keyring
-eval $(keychain --eval --quiet --agents gpg 2EE67F58)
