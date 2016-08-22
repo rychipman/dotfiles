@@ -1,5 +1,0 @@
-#!/bin/bash
-
-rm -rf ~/.local/share/shotwell-clean
-mkdir -p ~/.local/share/shotwell-clean
-shotwell -d ~/.local/share/shotwell-clean

@@ -1,9 +1,0 @@
-#!/bin/bash
-
-repo="/home/rchipman/tmp/mnt/wd/borg/pictures"
-
-borg create -v --stats --progress \
-    "$repo::pictures_{now:%Y-%m-%d}_all_pics" \
-    /home/rchipman/tmp/mnt/seagate/pictures/ \
-    /home/rchipman/tmp/mnt/seagate/photo-org/
-
