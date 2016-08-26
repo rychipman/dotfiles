@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<root>
+    <item>
+        <name>Tab to Hyper</name>
+        <appendix>(Map Tab to Control + Option unless pressed alone)</appendix>
+        <identifier>private.tab_hyper</identifier>
+        <autogen>
+            __KeyOverlaidModifier__
+            KeyCode::TAB,
+            KeyCode::CONTROL_L,ModifierFlag::OPTION_L,
+            KeyCode::TAB
+        </autogen>
+    </item>
+    <item>
+        <name>Command_L to Command_L</name>
+        <appendix>(Escape if pressed once)</appendix>
+        <identifier>private.command_escape</identifier>
+        <autogen>
+            __KeyOverlaidModifier__
+            KeyCode::COMMAND_L,
+            KeyCode::COMMAND_L,
+            KeyCode::ESCAPE
+        </autogen>
+    </item>
+    <item>
+        <name>Return to Command_L</name>
+        <appendix>(Return if pressed once)</appendix>
+        <identifier>private.return_command</identifier>
+        <autogen>
+            __KeyOverlaidModifier__
+            KeyCode::RETURN,
+            KeyCode::COMMAND_L,
+            KeyCode::RETURN
+        </autogen>
+    </item>
+</root>
