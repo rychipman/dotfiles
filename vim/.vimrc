@@ -34,6 +34,9 @@ set noswapfile
 set nobackup
 set writebackup " same as default
 
+""" allow backspace to work as expected
+set backspace=2
+
 """ indentation and display
 set autoindent
 set smartindent
