@@ -1,6 +1,9 @@
 
 # add gnu coreutils to path
-export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
+# add gnu coreutils manpages to manpath
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 
 # Set colors for ls
 export CLICOLOR=1
