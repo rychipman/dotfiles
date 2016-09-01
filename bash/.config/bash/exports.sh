@@ -1,4 +1,7 @@
 
+# add gnu coreutils to path
+export PATH=$PATH:/usr/local/opt/coreutils/libexec/gnubin
+
 # Set colors for ls
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad
