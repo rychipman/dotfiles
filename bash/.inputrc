@@ -1,0 +1,16 @@
+
+# enable magic-space for history expansion
+Space:magic-space
+
+# ignore case during tab completion
+set completion-ignore-case on
+
+# collapse identical completed substrings
+set completion-prefix-display-length 2
+
+# navigate through completion options
+Control-j: menu-complete
+Control-k: menu-complete-backward
+
+# treat underscores and hyphens equally
+set completion-map-case on
