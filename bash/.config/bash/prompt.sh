@@ -12,6 +12,13 @@ git_status() {
     echo "$(__git_ps1 " (%s)")"
 }
 
+stoppedjobs() {
+    numjobs=$(jobs -s | wc -l | sed -e "s/ //g")
+    if [ $numjobs -ne 0 ]; then
+        echo " ($numjobs)"
+    fi
+}
+
 set_prompt() {
     lastcmd=$?
     blue="$(tput setaf 33)"
@@ -38,6 +45,7 @@ set_prompt() {
     PS1+=' \[$white\]in \w'
     PS1+='\n'
     PS1+='\[$gray\]$(git_status)'
+    PS1+='$(stoppedjobs)'
     PS1+='\[$white\]$arrow'
     PS1+='\[$reset\]'
 }
