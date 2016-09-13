@@ -38,3 +38,6 @@ alias tt='tmux attach-session -t'
 
 # dropbox
 alias dbx='dropbox-cli'
+
+# get better view of permissions for file
+alias perm='stat -c "%A %a %n"'
