@@ -115,6 +115,7 @@ Plug 'wombat256.vim'      " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'jayflo/vim-skip'   " move by fractional line-length units
+Plug 'airblade/vim-gitgutter' " add git diff info in gutter
 
 """ Language-specific plugins
 Plug 'fatih/vim-go'
