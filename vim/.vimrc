@@ -135,8 +135,6 @@ Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
 Plug 'junegunn/vim-oblique' " search improvements
 Plug 'junegunn/vim-pseudocl' " required for vim-oblique 
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
-Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'unicode.vim'
 "Plug 'tpope/vim-sleuth' " autodetecting tab sizes
