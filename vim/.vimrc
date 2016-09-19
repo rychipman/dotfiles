@@ -95,7 +95,7 @@ map <leader>n <Esc>:tabprevious<CR>
 map <leader>m <Esc>:tabnext<CR>
 
 " save a file that requires sudo escalation
-map <leader>w :SudoWrite<CR>
+map <leader>w :w ! sudo tee % >/dev/null <CR>
 
 """ restore cursor location
 function! RestoreCursorLocation()
