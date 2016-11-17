@@ -1,0 +1,35 @@
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# sets PS2
+source ~/.config/bash/prompt.sh
+
+# export variables
+source ~/.config/bash/exports.sh
+
+# creates aliases
+source ~/.config/bash/aliases.sh
+
+# creates functions
+source ~/.config/bash/functions.sh
+
+# enables bash completion
+source ~/.config/bash/completion.sh
+
+# source history-related configuration
+source ~/.config/bash/history.sh
+
+# source any contrib configurations from other stow packages
+for file in ~/.config/bash/contrib/*; do
+    source "$file"
+done
+
+# set vim-style keybindings
+set -o vi
+
+# import dircolors
+eval $(dircolors ~/.config/bash/dircolors)

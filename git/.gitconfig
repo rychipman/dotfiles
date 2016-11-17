@@ -23,3 +23,5 @@
 	default = simple
 [merge]
     ff = only
+[core]
+	excludesfile = ~/.config/git/ignore

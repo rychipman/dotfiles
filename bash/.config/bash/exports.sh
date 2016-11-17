@@ -1,17 +1,4 @@
 
-# add personal scripts and binaries to path
-export PATH=~/bin:$PATH
-
-export GOPATH=~/dev/go
-export GOBIN=$GOPATH/bin
-export PATH=$GOBIN:$PATH
-
-export STOW_DIR=~/.dotfiles
-
-# exports for borg backup
-export BORG_REPO=~/.backup
-export BORG_DISPLAY_PASSPHRASE=N
-
 # Set colors for ls
 export CLICOLOR=1
 export LSCOLORS=Gxfxcxdxbxegedabagacad

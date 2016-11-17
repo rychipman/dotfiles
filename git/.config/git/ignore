@@ -1,0 +1,8 @@
+.envrc
+*~
+*#
+*.pyc
+*.bak
+*.swp
+*.ignore
+venv
