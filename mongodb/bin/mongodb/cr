@@ -6,7 +6,7 @@
 # cr [--dry-run] [-i <issue number>] []
 
 JIRA_USER=ryan.chipman
-CR_PATH="$HOME/dev/kernel-tools/codereview/upload.py"
+CR_PATH="$HOME/bin/mongodb/upload.py"
 REVIEWERS="wisdom.omuya@10gen.com,craig.wilson@10gen.com,jeff.yemin@10gen.com"
 CC_LIST=""
 
