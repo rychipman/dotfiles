@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# TODO add --assume_yes
+# TODO add --quiet
+
+# cr [--dry-run] [-i <issue number>] []
+
+JIRA_USER=ryan.chipman
+CR_PATH="$HOME/dev/kernel-tools/codereview/upload.py"
+REVIEWERS="wisdom.omuya@10gen.com,craig.wilson@10gen.com,jeff.yemin@10gen.com"
+CC_LIST=""
+
+# set DRY_RUN if --dry-run provided as first arg
+if [ $# -gt 0 ]; then
+    if [ "$1" == "--dry-run" ]; then
+        DRY_RUN=true;
+        shift
+    fi
+fi
+
+# get current branch
+function get_git_branch() {
+    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
+}
+
+if [ -z "${JIRA_TICKET}" ]; then
+    JIRA_TICKET=`get_git_branch | sed -e "s/^.*-\([A-Z]*-[0-9]*\).*/\1/"`
+fi
+JIRA_FLAG="--jira=${JIRA_TICKET}"
+
+# get merge base
+if [ -z "${MERGE_BASE}" ]; then
+    MERGE_BASE=$(git merge-base master HEAD)
+fi
+
+# if issue number is provided, this
+# is not first submission. Turn off jira comment.
+if [ $# -gt 0 ]; then
+    if [ "$1" == "-i" ]; then
+        shift
+        ISSUE_FLAG="--issue=$1"
+        JIRA_FLAG="--nojira"
+        shift
+    fi
+fi
+
+if [ -z "${ISSUE_FLAG}" ]; then
+    DESCRIPTION_FLAG="--description=https://jira.mongodb.org/browse/${JIRA_TICKET}"
+else
+    ""
+    # TODO get description from git commit titles
+fi
+# TODO make description a separate variable
+
+echo "Dry Run: ${DRY_RUN:-false}"
+echo "JIRA Ticket: ${JIRA_TICKET}"
+echo "Merge Base: ${MERGE_BASE}"
+echo "Issue Flag: ${ISSUE_FLAG}"
+echo "Jira Flag: ${JIRA_FLAG}"
+echo "Description Flag: ${DESCRIPTION_FLAG}"
+echo "@: $@"
+
+if [ -n "$DRY_RUN" ]; then
+    exit 0
+fi
+
+python2 ${CR_PATH} --title="${JIRA_TICKET}${DESC}" --rev=${MERGE_BASE} \
+    ${DESCRIPTION_FLAG} \
+    --jira_user $JIRA_USER \
+    --cc="${CC_LIST}" \
+    --reviewers="${REVIEWERS}" \
+    ${LINT_FLAGS} ${ISSUE_FLAG} ${JIRA_FLAG} \
+    --oauth2 --no_oauth2_webbrowser "$@"
+    #--check-clang-format \
+    #--check-eslint \
