@@ -7,4 +7,5 @@ transmission/.config/transmission/blocklists
 transmission/.config/transmission/torrents
 transmission/.config/transmission/resume
 transmission/.config/transmission/stats.json
+mongodb/bin/mongodb/evergreen
 mongodb/.evergreen.yml
