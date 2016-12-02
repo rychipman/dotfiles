@@ -1,0 +1,17 @@
+#!/bin/bash
+
+REPO="rho:borg/test"
+
+borg create -v --stats \
+    $REPO::'{hostname}-{now:%Y-%m-%d}' \
+    /home/rchipman/tmp \
+    /home/rchipman/books \
+    --exclude ~/.cache
+
+borg prune -v $REPO \
+    --prefix '{hostname}-' \
+    --keep-within=3 \
+    --keep-daily=7 \
+    --keep-weekly=7 \
+    --keep-monthly=21 \
+    --keep-yearly=-1 \
