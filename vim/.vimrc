@@ -226,11 +226,6 @@ let g:vimskip_wraptocenter = 1
 let g:vimskip_ignore_initial_ws = 1
 let g:vimskip_ignore_trailing_ws = 1
 
-"##########################################
-"######## VIMTEX OPTIONS ##################
-"##########################################
-
-let g:vimtex_view_general_viewer = 'zathura'
 
 "##########################################
 "######## RUST.VIM OPTIONS ################
