@@ -215,6 +215,7 @@ let g:user_emmet_settings = {
 "##########################################
 
 let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<C-i>'
 
 "##########################################
 "######## VIM-SKIP OPTIONS ################
