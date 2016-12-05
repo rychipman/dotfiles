@@ -226,6 +226,9 @@ let g:vimskip_wraptocenter = 1
 let g:vimskip_ignore_initial_ws = 1
 let g:vimskip_ignore_trailing_ws = 1
 
+""" vim-oblique options
+let g:oblique#incsearch_highlight_all = 1
+let g:oblique#clear_highlightr= 1
 
 "##########################################
 "######## RUST.VIM OPTIONS ################
