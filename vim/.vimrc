@@ -121,7 +121,6 @@ call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 Plug 'wombat256.vim'      " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
-Plug 'jayflo/vim-skip'   " move by fractional line-length units
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
 "{{{
 let g:gitgutter_map_keys = 0
@@ -135,11 +134,7 @@ map <leader>g :Gstatus<CR>
 """ Language-specific plugins
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim'                " html expansion with emmet
-Plug 'lervag/vimtex'
 Plug 'wavded/vim-stylus'
-Plug 'AndrewRadev/vim-eco'
-Plug 'kchmck/vim-coffee-script'
-Plug 'rust-lang/rust.vim'
 
 """ Improvements to vim functionality
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
@@ -174,25 +169,6 @@ let g:user_emmet_settings = {
 
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<C-i>'
-
-"##########################################
-"######## VIM-SKIP OPTIONS ################
-"##########################################
-
-let g:vimskip_mode = "normal"
-let g:vimskip_wraptocenter = 1
-let g:vimskip_ignore_initial_ws = 1
-let g:vimskip_ignore_trailing_ws = 1
-
-""" vim-oblique options
-let g:oblique#incsearch_highlight_all = 1
-let g:oblique#clear_highlightr= 1
-
-"##########################################
-"######## RUST.VIM OPTIONS ################
-"##########################################
-
-let g:rustfmt_autosave = 0
 
 "##########################################
 "######## EYE CANDY #######################
