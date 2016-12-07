@@ -121,6 +121,9 @@ Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'jayflo/vim-skip'   " move by fractional line-length units
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
+"{{{
+let g:gitgutter_map_keys = 0
+"}}}
 
 Plug 'tpope/vim-fugitive'
 "{{{
