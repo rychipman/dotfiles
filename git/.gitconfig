@@ -15,6 +15,7 @@
 	ri = rebase --interactive --autosquash
 	rbc = rebase --continue
 	addp = add -p
+    aa = add --all --intent-to-add
 	re = rerere
 	diffc = diff --cached
 [rerere]
