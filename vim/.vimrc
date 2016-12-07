@@ -1,4 +1,6 @@
-autocmd! bufwritepost .vimrc source %   " automatically reload .vimrc
+autocmd!
+
+autocmd bufwritepost .vimrc source %   " automatically reload .vimrc
 
 set encoding=utf8           " Clean utf-8 encoding
 set termencoding=utf-8
