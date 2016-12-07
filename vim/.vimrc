@@ -117,62 +117,35 @@ augroup END
 """ plugins
 call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 
-""" declare plugins here """
 Plug 'wombat256.vim'      " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
-"{{{
-let g:gitgutter_map_keys = 0
-"}}}
-
+    let g:gitgutter_map_keys = 0
 Plug 'tpope/vim-fugitive'
-"{{{
-map <leader>g :Gstatus<CR>
-"}}}
-
-""" Language-specific plugins
+    map <leader>g :Gstatus<CR>
 Plug 'fatih/vim-go'
-Plug 'mattn/emmet-vim'                " html expansion with emmet
 Plug 'wavded/vim-stylus'
-
-""" Improvements to vim functionality
+Plug 'mattn/emmet-vim'                " html expansion with emmet
+    let g:user_emmet_leader_key='<C-e>'
+    let g:user_emmet_settings = {
+    \  'html' : {
+    \    'attr_quotes' : 'single',
+    \    'tag_nl_leaf' : 'true',
+    \    'indent'      : 'true',
+    \    'tag_nl'      : 'true',
+    \    'indentation' : '    '
+    \  },
+    \}
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
 Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
+    let g:AutoPairsFlyMode = 1
+    let g:AutoPairsShortcutBackInsert = '<C-i>'
 Plug 'junegunn/vim-oblique' " search improvements
-Plug 'junegunn/vim-pseudocl' " required for vim-oblique 
+Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
-Plug 'unicode.vim'
-Plug 'ervandew/supertab'
-"Plug 'tpope/vim-sleuth' " autodetecting tab sizes
 
 call plug#end()
-
-"##########################################
-"######## EMMET OPTS ######################
-"##########################################
-
-let g:user_emmet_leader_key='<C-e>'
-let g:user_emmet_settings = {
-\  'html' : {
-\    'attr_quotes' : 'single',
-\    'tag_nl_leaf' : 'true',
-\    'indent'      : 'true',
-\    'tag_nl'      : 'true',
-\    'indentation' : '    '
-\  },
-\}
-
-"##########################################
-"######## AUTO_PAIRS OPTS #################
-"##########################################
-
-let g:AutoPairsFlyMode = 1
-let g:AutoPairsShortcutBackInsert = '<C-i>'
-
-"##########################################
-"######## EYE CANDY #######################
-"##########################################
 
 """ syntax highlighting
 syntax on
