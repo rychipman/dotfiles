@@ -67,7 +67,7 @@ set sidescroll=1
 " add ruler to status bar
 set ruler
 
-set list listchars=trail:·,tab:»·
+set list listchars=tab:»·
 
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
@@ -214,5 +214,6 @@ let base16colorspace=256
 """ color scheme
 colorscheme wombat256mod        " set color scheme. good w/terminal
 highlight Normal ctermbg=233
+highlight SpecialKey ctermbg=233 ctermfg=235
 
 nohl
