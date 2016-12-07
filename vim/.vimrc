@@ -120,6 +120,11 @@ Plug 'wellle/targets.vim' " text objects
 Plug 'jayflo/vim-skip'   " move by fractional line-length units
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
 
+Plug 'tpope/vim-fugitive'
+"{{{
+map <leader>g :Gstatus<CR>
+"}}}
+
 """ Language-specific plugins
 Plug 'fatih/vim-go'
 Plug 'mattn/emmet-vim'                " html expansion with emmet
