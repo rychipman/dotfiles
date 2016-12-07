@@ -203,17 +203,17 @@ syntax enable
 """ highlight ejs as html
 au BufNewFile,BufRead *.ejs set filetype=html
 
-""" highlight bad whitespace
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
 """ colors
 set t_Co=256                    " ensure terminal works with 256 colors
 let base16colorspace=256
 
 """ color scheme
-colorscheme wombat256mod        " set color scheme. good w/terminal
+colorscheme wombat256mod
 highlight Normal ctermbg=233
 highlight SpecialKey ctermbg=233 ctermfg=235
+highlight ExtraWhitespace ctermbg=red
+
+""" highlight trailing whitespace
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 nohl
