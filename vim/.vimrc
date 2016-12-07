@@ -67,6 +67,8 @@ set sidescroll=1
 " add ruler to status bar
 set ruler
 
+set list listchars=trail:·,tab:»·
+
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
 
