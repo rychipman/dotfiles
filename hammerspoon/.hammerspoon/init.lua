@@ -10,6 +10,11 @@ hs.hotkey.bind(hyper, "R", function()
     hs.reload()
 end)
 
+-- sleep displays
+hs.hotkey.bind(hyper, "delete", function()
+    os.execute("pmset displaysleepnow")
+end)
+
 -- easy fullscreening
 hs.hotkey.bind(hyper, "F", function()
     hs.window.focusedWindow():toggleFullScreen()
