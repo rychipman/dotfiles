@@ -1,6 +1,8 @@
 
 # enable magic-space for history expansion
-Space:magic-space
+$if Bash
+    Space:magic-space
+$endif
 
 # ignore case during tab completion
 set completion-ignore-case on
