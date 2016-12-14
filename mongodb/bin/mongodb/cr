@@ -75,6 +75,6 @@ python2 ${CR_PATH} --title="${JIRA_TICKET}${DESC}" --rev=${MERGE_BASE} \
     --cc="${CC_LIST}" \
     --reviewers="${REVIEWERS}" \
     ${LINT_FLAGS} ${ISSUE_FLAG} ${JIRA_FLAG} \
-    --oauth2 --no_oauth2_webbrowser
+    --oauth2
     #--check-clang-format \
     #--check-eslint \
