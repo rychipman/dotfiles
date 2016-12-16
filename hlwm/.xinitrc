@@ -1,4 +1,4 @@
-set-keymap
+~/bin/set-keymap
 feh --bg-scale ~/.config/herbstluftwm/bg
 dunst &
 redshift &

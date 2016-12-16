@@ -3,19 +3,19 @@ super + Return
     lxterminal --working-directory=/home/rchipman
 
 control + Tab
-    launcher -l
+    ~/bin/launcher -l
 
 super + p
     rofi-pass
 
 XF86Audio{RaiseVolume,LowerVolume,Mute}
-    volume -{i,d,t}
+    sudo ~/bin/volume -{i,d,t}
 
 XF86MonBrightness{Up,Down}
-    sudo backlight -{i,d}
+    sudo ~/bin/backlight -{i,d}
 
 super + m
-    lock
+    ~/bin/lock
 
 # hlwm bindings
 
