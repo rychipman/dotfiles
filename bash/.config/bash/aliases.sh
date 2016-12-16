@@ -5,9 +5,6 @@ alias sl='ls'
 alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -lah'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
 alias mkdir='mkdir -pv'
 
 # grep, searching stuff
