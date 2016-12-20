@@ -140,8 +140,8 @@ Plug 'mattn/emmet-vim'                " html expansion with emmet
     \}
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
 Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
+    let g:AutoPairsShortcutBackInsert = '<C-u>'
     let g:AutoPairsFlyMode = 1
-    let g:AutoPairsShortcutBackInsert = '<C-i>'
 Plug 'junegunn/vim-oblique' " search improvements
 Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
