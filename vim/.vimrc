@@ -1,7 +1,5 @@
 autocmd!
 
-autocmd bufwritepost .vimrc source %   " automatically reload .vimrc
-
 set encoding=utf8           " Clean utf-8 encoding
 set termencoding=utf-8
 
@@ -78,6 +76,9 @@ noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
 
 let mapleader="\<Space>"
 let localleader=','
+
+" reload .vimrc
+map <leader>r <Esc>:source ~/.vimrc<CR>
 
 " sorting
 vnoremap <leader>o :sort<CR>
