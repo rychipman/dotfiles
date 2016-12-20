@@ -20,6 +20,11 @@ hs.hotkey.bind(hyper, "F", function()
     hs.window.focusedWindow():toggleFullScreen()
 end)
 
+-- open Spotify
+hs.hotkey.bind(hyper, "H", function()
+    hs.application.launchOrFocus("Spotify")
+end)
+
 -- open iTerm
 hs.hotkey.bind(hyper, "J", function()
     hs.application.launchOrFocus("iTerm")
