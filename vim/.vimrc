@@ -23,6 +23,8 @@ set viminfo='100,f1,\"100,:20,n~/.vim/viminfo
 set number                  " turn on line numbers
 set hidden                  " for better buffer mangement
 
+set completeopt=            ""
+
 """ search stuff
 set incsearch               " incremental search
 set hlsearch                " highlight search terms
@@ -145,6 +147,10 @@ Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
 Plug 'junegunn/vim-oblique' " search improvements
 Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
+Plug 'lifepillar/vim-mucomplete'
+    set shortmess+=c
+    set completeopt=menu,menuone,noinsert,noselect
+    let g:mucomplete#enable_auto_at_startup = 1
 
 call plug#end()
 
