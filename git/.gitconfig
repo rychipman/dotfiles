@@ -1,30 +1,30 @@
-[user]
-	email = ryan@ryanchipman.com
-	name = Ryan Chipman
-[color]
-	ui = true
 [alias]
+	addp = add -p
+	amend = commit --amend
+	br = branch
 	ci = commit
 	co = checkout
-    cp = cherry-pick
-	br = branch
+	diffc = diff --cached
+	fixup = commit --fixup
 	lc = log ORIG_HEAD.. --stat --no-merges
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	fixup = commit --fixup
-	amend = commit --amend
-	st = status
-	ri = rebase --interactive --autosquash
 	rbc = rebase --continue
-	addp = add -p
-    aa = add --all --intent-to-add
 	re = rerere
-	diffc = diff --cached
-[rerere]
-	enabled = true
-[push]
-	default = simple
-[merge]
-    ff = only
+	ri = rebase --interactive --autosquash
+	st = status
+    aa = add --all --intent-to-add
+    cp = cherry-pick
+[color]
+	ui = true
 [core]
 	excludesfile = ~/.config/git/ignore
     hooksPath = ~/.config/git/hooks
+[merge]
+    ff = only
+[push]
+	default = simple
+[rerere]
+	enabled = true
+[user]
+	email = ryan@ryanchipman.com
+	name = Ryan Chipman
