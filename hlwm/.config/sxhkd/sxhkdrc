@@ -14,7 +14,7 @@ XF86Audio{RaiseVolume,LowerVolume,Mute}
 XF86MonBrightness{Up,Down}
     sudo ~/bin/backlight -{i,d}
 
-super + m
+super + BackSpace
     ~/bin/lock
 
 # hlwm bindings
