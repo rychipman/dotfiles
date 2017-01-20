@@ -95,18 +95,6 @@ vnoremap <leader>o :sort<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" remove highlights from last search
-map <leader>h :nohl<CR>
-
-" window splits
-map <leader>v <C-w>v
-map <leader>s <C-w>s
-
-" navigation between tabs
-map <leader>t <Esc>:tabnew<CR>
-map <leader>n <Esc>:tabprevious<CR>
-map <leader>m <Esc>:tabnext<CR>
-
 " save a file that requires sudo escalation
 map <leader>w :w ! sudo tee % >/dev/null <CR>
 
