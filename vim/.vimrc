@@ -21,6 +21,7 @@ set shortmess=filnrxtToOI    " see :help shortmess
 set viminfo='100,f1,\"100,:20,n~/.vim/viminfo
 
 set number                  " turn on line numbers
+set relativenumber          " use relative line numbers
 set hidden                  " for better buffer mangement
 
 set completeopt=            ""
