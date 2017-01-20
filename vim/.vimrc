@@ -86,7 +86,7 @@ let mapleader="\<Space>"
 let localleader=','
 
 " reload .vimrc
-map <leader>r <Esc>:source ~/.vimrc<CR>
+nnoremap <leader>r :source ~/.vimrc<CR>
 
 " sorting
 vnoremap <leader>o :sort<CR>
@@ -159,8 +159,8 @@ Plug 'lifepillar/vim-mucomplete'
     let g:mucomplete#enable_auto_at_startup = 1
 Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_map = ''
-    map <leader>e <Esc>:CtrlP<CR>
-    map <leader>b <Esc>:CtrlPBuffer<CR>
+    nnoremap <leader>e :CtrlP<CR>
+    nnoremap <leader>b :CtrlPBuffer<CR>
 Plug 'justinmk/vim-sneak'
 
 call plug#end()
