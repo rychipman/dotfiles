@@ -158,6 +158,7 @@ Plug 'lifepillar/vim-mucomplete'
     set completeopt=menu,menuone,noinsert,noselect
     let g:mucomplete#enable_auto_at_startup = 1
 Plug 'ctrlpvim/ctrlp.vim'
+    let g:ctrlp_map = ''
     map <leader>e <Esc>:CtrlP<CR>
     map <leader>b <Esc>:CtrlPBuffer<CR>
 
