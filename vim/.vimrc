@@ -75,6 +75,11 @@ set list listchars=tab:»·
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
 
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprevious<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+
 " leaders
 
 let mapleader="\<Space>"
