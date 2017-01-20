@@ -83,7 +83,7 @@ nnoremap [l :lprevious<CR>
 " leaders
 
 let mapleader="\<Space>"
-let localleader=','
+let maplocalleader='\'
 
 " reload .vimrc
 nnoremap <leader>r :source ~/.vimrc<CR>
