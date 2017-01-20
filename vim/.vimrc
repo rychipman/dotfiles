@@ -130,7 +130,7 @@ Plug 'wombat256.vim'      " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
-    let g:gitgutter_map_keys = 0
+    let g:gitgutter_map_keys = 1
 Plug 'tpope/vim-fugitive'
     map <leader>g :Gstatus<CR>
 Plug 'fatih/vim-go'
