@@ -161,6 +161,7 @@ Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_map = ''
     map <leader>e <Esc>:CtrlP<CR>
     map <leader>b <Esc>:CtrlPBuffer<CR>
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
