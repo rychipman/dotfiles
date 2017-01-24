@@ -152,6 +152,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'unblevable/quick-scope'
     let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+Plug 'mhinz/vim-grepper'
+    let g:grepper = {}
+    nnoremap <leader>f :Grepper<CR>
 
 call plug#end()
 
