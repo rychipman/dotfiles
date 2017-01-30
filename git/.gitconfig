@@ -18,7 +18,7 @@
 	ui = true
 [core]
 	excludesfile = ~/.config/git/ignore
-    hooksPath = ~/.config/git/hooks
+    hooksPath = ~/.config/git/hooks/runners/
 [merge]
     ff = only
 [push]
