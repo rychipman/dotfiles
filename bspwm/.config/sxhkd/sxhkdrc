@@ -1,0 +1,57 @@
+
+super + Return
+    lxterminal --working-directory=/home/rchipman
+
+control + Tab
+    ~/bin/launcher -l
+
+super + p
+    rofi-pass
+
+XF86Audio{RaiseVolume,LowerVolume,Mute}
+    sudo ~/bin/volume -{i,d,t}
+
+XF86MonBrightness{Up,Down}
+    sudo ~/bin/backlight -{i,d}
+
+super + BackSpace
+    ~/bin/lock
+
+# bspwm bindings
+
+super + q
+    bspc quit
+
+super + r
+    pkill -USR1 sxhkd
+
+super + {h,j,k,l}
+    bspc node --focus {west,south,north,east}
+
+super + {o,i}
+    bspc desktop --focus {next,prev}
+
+super + w
+    bspc node --close
+
+# movement mode
+
+super + m : m : {h,j,k,l}
+    bspc node --focus {west,south,north,east}
+
+super + m : m : {o,i}
+    bspc desktop --focus {next,prev}
+
+super + m : m : d
+    bspc node --close
+
+super + m : m : x
+    bspc desktop --focus next; \
+    bspc desktop prev --remove
+
+super + m : m : a
+    bspc monitor --add-desktops new; \
+    bspc desktop --focus next
+
+super + m : m : Return
+    rofi-pass
