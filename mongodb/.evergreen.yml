@@ -1,0 +1,10 @@
+api_server_host: http://evergreen-api.mongodb.com:8080/api
+ui_server_host: https://evergreen.mongodb.com
+api_key: 
+user: ryan.chipman
+projects:
+- name: sqlproxy
+  default: true
+  variants:
+  tasks:
+  - all
