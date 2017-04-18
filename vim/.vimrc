@@ -175,6 +175,11 @@ highlight Normal ctermbg=233
 highlight SpecialKey ctermbg=233 ctermfg=235
 highlight ExtraWhitespace ctermbg=red
 
+highlight DiffAdd ctermbg=22
+highlight DiffDelete ctermbg=52
+highlight DiffChange ctermbg=234
+highlight DiffText ctermbg=23
+
 """ highlight trailing whitespace
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
