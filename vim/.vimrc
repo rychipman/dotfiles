@@ -75,11 +75,6 @@ set list listchars=tab:»·
 noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
 noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
 
-nnoremap ]q :cnext<CR>
-nnoremap [q :cprevious<CR>
-nnoremap ]l :lnext<CR>
-nnoremap [l :lprevious<CR>
-
 " leaders
 
 let mapleader="\<Space>"
@@ -155,6 +150,11 @@ Plug 'unblevable/quick-scope'
 Plug 'mhinz/vim-grepper'
     let g:grepper = {}
     nnoremap <leader>f :Grepper<CR>
+Plug 'romainl/vim-qf'
+    nmap ]q <Plug>QfCnext
+    nmap [q <Plug>QfCprevious
+    nmap ]l <Plug>QfLnext
+    nmap [l <Plug>QfLprevious
 
 call plug#end()
 
