@@ -4,6 +4,7 @@
 	br = branch
 	ci = commit
 	co = checkout
+    dangling = ! git lg $(git fsck --no-reflog | awk '/dangling commit/ {print $3}')
 	diffc = diff --cached
 	fixup = commit --fixup
 	lc = log ORIG_HEAD.. --stat --no-merges
