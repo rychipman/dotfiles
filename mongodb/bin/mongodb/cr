@@ -7,7 +7,7 @@
 
 JIRA_USER=ryan.chipman
 CR_PATH="$HOME/bin/mongodb/upload.py"
-REVIEWERS="spencer.jackson@10gen.com,andreas.nilsson@10gen.com"
+REVIEWERS="jeff.yemin@10gen.com,craig.wilson@10gen.com,wisdom.omuya@10gen.com"
 CC_LIST=""
 
 while getopts "di:m:r:" opt; do
