@@ -117,6 +117,7 @@ Plug 'airblade/vim-gitgutter' " add git diff info in gutter
 Plug 'tpope/vim-fugitive'
     map <leader>g :Gstatus<CR>
 Plug 'fatih/vim-go'
+    let g:go_fmt_command = "goimports"
 Plug 'wavded/vim-stylus'
 Plug 'mattn/emmet-vim'                " html expansion with emmet
     let g:user_emmet_leader_key='<C-e>'
