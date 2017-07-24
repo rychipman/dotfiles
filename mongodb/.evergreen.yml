@@ -3,6 +3,15 @@ ui_server_host: https://evergreen.mongodb.com
 api_key: 
 user: ryan.chipman
 projects:
+- name: mongosql-auth-c
+  default: false
+  variants:
+  - full_matrix__os~windows-vs2013
+  - full_matrix__os~osx
+  - full_matrix__os~ubuntu1404-64
+  - full_matrix__os~rhel70
+  tasks:
+  - all
 - name: sqlproxy
   default: true
   variants:
