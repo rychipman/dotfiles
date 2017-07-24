@@ -7,8 +7,8 @@
 
 JIRA_USER=ryan.chipman
 CR_PATH="$HOME/bin/mongodb/upload.py"
-REVIEWERS="jeff.yemin@10gen.com,craig.wilson@10gen.com,wisdom.omuya@10gen.com"
-CC_LIST=""
+REVIEWERS="craig.wilson@10gen.com,wisdom.omuya@10gen.com"
+CC_LIST="devin.hilly@10gen.com,brigitte.lamarche@10gen.com"
 
 while getopts "di:m:r:" opt; do
     case $opt in
