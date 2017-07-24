@@ -15,5 +15,8 @@ projects:
 - name: sqlproxy
   default: true
   variants:
+  - full_matrix__os_full_matrix~osx_mongodb_version~latest_mongodb_topology~standalone
+  - full_matrix__os_full_matrix~windows_mongodb_version~latest_mongodb_topology~standalone
+  - full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~latest_mongodb_topology~standalone
   tasks:
   - all
