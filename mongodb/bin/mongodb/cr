@@ -1,16 +1,28 @@
 #!/bin/bash
 
-# TODO add --assume_yes
-# TODO add --quiet
+function usage() {
+    cat <<EOF
+Usage: cr [OPTIONS]
 
-# cr [--dry-run] [-i <issue number>] []
+Options:
+  -d    do a dry run (i.e. don't actually submit the request to the cr app)
+  -i    existing code review issue to update
+  -r    revision to diff against. two revisions can be specified with <before>:<after>
+  -h    display this help
+
+EOF
+}
+
+function get_git_branch() {
+    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
+}
 
 JIRA_USER=ryan.chipman
 CR_PATH="$HOME/bin/mongodb/upload.py"
 REVIEWERS="craig.wilson@10gen.com,wisdom.omuya@10gen.com"
 CC_LIST="devin.hilly@10gen.com,brigitte.lamarche@10gen.com"
 
-while getopts "di:m:r:" opt; do
+while getopts "di:r:h" opt; do
     case $opt in
         d)
             DRY_RUN=true
@@ -20,61 +32,60 @@ while getopts "di:m:r:" opt; do
             ISSUE_FLAG="--issue=$ISSUE"
             JIRA_FLAG="--nojira"
             ;;
-        m)
-            MESSAGE="$OPTARG"
-            ;;
         r)
-            MERGE_BASE="$OPTARG"
+            DIFF_REV="$OPTARG"
+            ;;
+        h)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
             ;;
     esac
 done
 
-# get current branch
-function get_git_branch() {
-    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
-}
-
-if [ -z "${JIRA_TICKET}" ]; then
-    JIRA_TICKET=`get_git_branch | sed -e "s/^.*-\([A-Z]*-[0-9]*\).*/\1/"`
-fi
+JIRA_TICKET=`get_git_branch | sed -e "s/^.*-\([A-Z]*-[0-9]*\).*/\1/"`
+ISSUE_DESCRIPTION="https://jira.mongodb.org/browse/${JIRA_TICKET}"
+TICKET_TITLE="${JIRA_TICKET}: a description goes here"
 
 if [ -z "${JIRA_FLAG}" ]; then
     JIRA_FLAG="--jira=${JIRA_TICKET}"
 fi
 
-# get merge base
-if [ -z "${MERGE_BASE}" ]; then
-    MERGE_BASE=$(git merge-base master HEAD)
+if [ -z "${DIFF_REV}" ]; then
+    DIFF_REV=$(git merge-base master HEAD)
 fi
 
-DESCRIPTION="https://jira.mongodb.org/browse/${JIRA_TICKET}
-
-$MESSAGE"
-
-if [ -z "${ISSUE_FLAG}" ]; then
-    DESCRIPTION_FLAG="--description=$DESCRIPTION"
-else
-    ""
-    # TODO get description from git commit titles
-fi
-# TODO make description a separate variable
-
+echo "upload.py location: ${CR_PATH}"
 echo "Dry Run: ${DRY_RUN:-false}"
-echo "Merge Base: ${MERGE_BASE}"
-echo "Issue Flag: ${ISSUE_FLAG}"
-echo "Jira Flag: ${JIRA_FLAG}"
-echo "Description Flag: ${DESCRIPTION_FLAG}"
+echo "Code Review Metadata:"
+echo "  Existing Issue: ${ISSUE:-none (new cr)}"
+echo "  Description: ${ISSUE_DESCRIPTION}"
+echo "  Diff revision(s): ${DIFF_REV}"
+echo "Jira Metadata:"
+echo "  Jira Flag: ${JIRA_FLAG}"
+echo "  Jira User: ${JIRA_USER}"
+echo "  Jira Ticket: ${JIRA_TICKET}"
+echo "Reviewer Metadata:"
+echo "  Reviewers: ${REVIEWERS}"
+echo "  CCs: ${CC_LIST}"
 
 if [ -n "$DRY_RUN" ]; then
     exit 0
 fi
 
-python2 ${CR_PATH} --title="${JIRA_TICKET}${DESC}" --rev=${MERGE_BASE} \
-    ${DESCRIPTION_FLAG} \
+python2 ${CR_PATH} \
+    --rev=${DIFF_REV} \
+    \
+    --title="${TICKET_TITLE}" \
+    --description="${ISSUE_DESCRIPTION}" \
+    --issue="${ISSUE}"
+    \
+    ${JIRA_FLAG} \
     --jira_user $JIRA_USER \
+    \
     --cc="${CC_LIST}" \
     --reviewers="${REVIEWERS}" \
-    ${LINT_FLAGS} ${ISSUE_FLAG} ${JIRA_FLAG} \
     --oauth2
-    #--check-clang-format \
-    #--check-eslint \
