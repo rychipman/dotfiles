@@ -145,6 +145,8 @@ Plug 'ctrlpvim/ctrlp.vim'
     let g:ctrlp_map = ''
     nnoremap <leader>e :CtrlP<CR>
     nnoremap <leader>b :CtrlPBuffer<CR>
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
     let g:grepper = {}
