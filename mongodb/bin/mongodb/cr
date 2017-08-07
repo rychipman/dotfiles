@@ -8,6 +8,8 @@ Options:
   -d    do a dry run (i.e. don't actually submit the request to the cr app)
   -i    existing code review issue to update
   -r    revision to diff against. two revisions can be specified with <before>:<after>
+  -m    message to display. if this is a new cr issue, this will be in the title after
+        the ticket number. if not, it will be the patchset title.
   -h    display this help
 
 EOF
@@ -17,12 +19,13 @@ function get_git_branch() {
     git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
 }
 
+# these variables are the same no matter what runtime options are used
 JIRA_USER=ryan.chipman
 CR_PATH="$HOME/bin/mongodb/upload.py"
 REVIEWERS="craig.wilson@10gen.com,wisdom.omuya@10gen.com"
 CC_LIST="devin.hilly@10gen.com,brigitte.lamarche@10gen.com"
 
-while getopts "di:r:h" opt; do
+while getopts "di:r:m:h" opt; do
     case $opt in
         d)
             DRY_RUN=true
@@ -34,6 +37,9 @@ while getopts "di:r:h" opt; do
             ;;
         r)
             DIFF_REV="$OPTARG"
+            ;;
+        m)
+            MESSAGE="$OPTARG"
             ;;
         h)
             usage
@@ -48,7 +54,14 @@ done
 
 JIRA_TICKET=`get_git_branch | sed -e "s/^.*-\([A-Z]*-[0-9]*\).*/\1/"`
 ISSUE_DESCRIPTION="https://jira.mongodb.org/browse/${JIRA_TICKET}"
-TICKET_TITLE="${JIRA_TICKET}: a description goes here"
+TICKET_TITLE="${JIRA_TICKET}: ${MESSAGE}"
+PATCHSET_TITLE="${MESSAGE}"
+
+if [ -z "$ISSUE" ]; then
+    TITLE="$TICKET_TITLE"
+else
+    TITLE="$PATCHSET_TITLE"
+fi
 
 if [ -z "${JIRA_FLAG}" ]; then
     JIRA_FLAG="--jira=${JIRA_TICKET}"
@@ -62,6 +75,7 @@ echo "upload.py location: ${CR_PATH}"
 echo "Dry Run: ${DRY_RUN:-false}"
 echo "Code Review Metadata:"
 echo "  Existing Issue: ${ISSUE:-none (new cr)}"
+echo "  Title: ${TITLE}"
 echo "  Description: ${ISSUE_DESCRIPTION}"
 echo "  Diff revision(s): ${DIFF_REV}"
 echo "Jira Metadata:"
@@ -79,9 +93,9 @@ fi
 python2 ${CR_PATH} \
     --rev=${DIFF_REV} \
     \
-    --title="${TICKET_TITLE}" \
+    --title="${TITLE}" \
     --description="${ISSUE_DESCRIPTION}" \
-    --issue="${ISSUE}"
+    ${ISSUE_FLAG} \
     \
     ${JIRA_FLAG} \
     --jira_user $JIRA_USER \
