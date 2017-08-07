@@ -114,8 +114,6 @@ Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
-Plug 'tpope/vim-fugitive'
-    map <leader>g :Gstatus<CR>
 Plug 'fatih/vim-go'
     let g:go_fmt_command = "goimports"
 Plug 'wavded/vim-stylus'
@@ -141,12 +139,13 @@ Plug 'lifepillar/vim-mucomplete'
     set shortmess+=c
     set completeopt=menu,menuone,noinsert,noselect
     let g:mucomplete#enable_auto_at_startup = 1
-Plug 'ctrlpvim/ctrlp.vim'
-    let g:ctrlp_map = ''
-    nnoremap <leader>e :CtrlP<CR>
-    nnoremap <leader>b :CtrlPBuffer<CR>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+    nnoremap <leader>e :Files<CR>
+    nnoremap <leader>b :Buffers<CR>
+    nnoremap <leader>c :Commits<CR>
+Plug 'tpope/vim-fugitive'
+    nnoremap <leader>g :Gstatus<CR>
 Plug 'romainl/vim-qf'
     nmap ]q <Plug>QfCnext
     nmap [q <Plug>QfCprevious
