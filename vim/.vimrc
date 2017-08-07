@@ -147,7 +147,6 @@ Plug 'ctrlpvim/ctrlp.vim'
     nnoremap <leader>b :CtrlPBuffer<CR>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'romainl/vim-qf'
     nmap ]q <Plug>QfCnext
     nmap [q <Plug>QfCprevious
