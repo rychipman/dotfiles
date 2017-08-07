@@ -148,9 +148,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'mhinz/vim-grepper'
-    let g:grepper = {}
-    nnoremap <leader>f :Grepper<CR>
 Plug 'romainl/vim-qf'
     nmap ]q <Plug>QfCnext
     nmap [q <Plug>QfCprevious
