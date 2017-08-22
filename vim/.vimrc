@@ -144,6 +144,22 @@ Plug 'junegunn/fzf.vim'
     nnoremap <leader>e :Files<CR>
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>c :Commits<CR>
+    nnoremap <leader>f :Ag
+    nnoremap <leader>h :History:<CR>
+    let g:fzf_colors ={
+    \   'fg':      ['fg', 'Normal'],
+    \   'bg':      ['bg', 'Normal'],
+    \   'hl':      ['fg', 'Comment'],
+    \   'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \   'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \   'hl+':     ['fg', 'Statement'],
+    \   'info':    ['fg', 'PreProc'],
+    \   'prompt':  ['fg', 'Conditional'],
+    \   'pointer': ['fg', 'Exception'],
+    \   'marker':  ['fg', 'Keyword'],
+    \   'spinner': ['fg', 'Label'],
+    \   'header':  ['fg', 'Comment']
+    \}
 Plug 'tpope/vim-fugitive'
     nnoremap <leader>g :Gstatus<CR>
 Plug 'romainl/vim-qf'
