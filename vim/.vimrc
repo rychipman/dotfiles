@@ -136,7 +136,7 @@ Plug 'junegunn/vim-oblique' " search improvements
 Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
 Plug 'lifepillar/vim-mucomplete'
-    set shortmess+=c
+    set shortmess+=c " don't display completion-related messages
     set completeopt=menu,menuone,noinsert,noselect
     let g:mucomplete#enable_auto_at_startup = 1
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
