@@ -1,11 +1,8 @@
-# permanently set alternative root dir
-# root=/path/to/root
 
-# optional rofi parameters:
-# keep in mind that 0.15.7 has different arguments compared to
-# latest git. for rofi-pass this means that "-i" will not work with
-# 0.15.7.
-rofiopts="-i -width 700 -no-levenshtein-sort"
+# rofi command. Make sure to have "$@" as last argument
+_rofi () {
+    rofi -no-auto-select -kb-row-tab '' -kb-accept-entry "!Return" "$@"
+}
 
 # fields to be used
 URL_field='url'
@@ -26,8 +23,8 @@ BROWSER='firefox'
 
 default_do='autopass' # copyPass, typeUser, typePass, copyUser, copyUrl, viewEntry, typeMenu, actionMenu, copyMenu, openUrl
 auto_enter='false'
-notify='false'
-passlength='20'
+notify='true'
+default_autotype='user :tab pass :enter'
 
 # seconds to wait before re-opening showEntry-menu
 # after autotyping an entry. Set to "off" to disable
@@ -42,12 +39,19 @@ help_color=""
 clip=primary
 
 # Custom Keybindings
-autotype="Control+a"
-type_user="Control+u"
-type_pass="Control+p"
-open_url="Control+o"
-show="Control+s"
-action_menu="Control+m"
-type_menu="Control+y"
-help="Control+h"
-switch="Control+x"
+autotype="Alt+1"
+type_user="Alt+2"
+type_pass="Alt+3"
+open_url="Alt+4"
+copy_name="Alt+u"
+copy_url="Alt+l"
+copy_pass="Alt+p"
+show="Alt+o"
+copy_entry="Alt+2"
+type_entry="Alt+1"
+copy_menu="Alt+c"
+action_menu="Alt+a"
+type_menu="Alt+t"
+help="Alt+h"
+switch="Alt+x"
+insert_pass="Alt+n"
