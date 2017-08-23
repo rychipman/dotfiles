@@ -1,20 +1,19 @@
 [alias]
+    aa = add --all --intent-to-add
 	addp = add -p
 	amend = commit --amend
 	br = branch
 	ci = commit
 	co = checkout
+    cp = cherry-pick
     dangling = ! git lg $(git fsck --no-reflog | awk '/dangling commit/ {print $3}')
 	diffc = diff --cached
 	fixup = commit --fixup
 	lc = log ORIG_HEAD.. --stat --no-merges
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	rbc = rebase --continue
-	re = rerere
 	ri = rebase --interactive --autosquash
 	st = status
-    aa = add --all --intent-to-add
-    cp = cherry-pick
 [color]
 	ui = true
 [core]
