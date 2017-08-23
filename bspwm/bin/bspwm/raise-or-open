@@ -1,0 +1,16 @@
+#!/bin/bash
+
+program="$1"
+desktop="${2:-$program}"
+
+# add desktop if it doesn't exist
+bspc query -D -d $desktop || bspc monitor -a $desktop
+
+# set the desktop layout to monocle
+bspc desktop $desktop --layout monocle
+
+# focus the desktop
+bspc desktop -f $desktop
+
+# if the desktop is empty, start the program
+bspc query -N -d $desktop || $program

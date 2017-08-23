@@ -1,6 +1,11 @@
 #!/bin/sh
 
-bspc monitor -d one two three
+bspc monitor -d home
 
 bspc config border_width 2
-bspc config window_gap 12
+bspc config window_gap 10
+
+# monocle mode settings
+bspc config gapless_monocle true
+bspc config paddingless_monocle true
+bspc config borderless_monocle true

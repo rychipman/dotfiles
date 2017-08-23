@@ -20,38 +20,39 @@ super + BackSpace
 # bspwm bindings
 
 super + q
+    pkill dunst redshift unclutter sxhkd; \
     bspc quit
 
 super + r
     pkill -USR1 sxhkd
 
-super + {h,j,k,l}
-    bspc node --focus {west,south,north,east}
+super + {i,o}
+    bspc node --focus {prev,next}
 
-super + {o,i}
+super + {comma,period}
     bspc desktop --focus {next,prev}
+
+super + h
+    bspc desktop --focus home
+
+super + k
+    ~/bin/bspwm/raise-or-open firefox
+
+super + j
+    ~/bin/bspwm/raise-or-open lxterminal
+
+super + l
+    ~/bin/bspwm/raise-or-open slack
 
 super + w
     bspc node --close
 
-# movement mode
+super + f
+    state=fullscreen; \
+    bspc query -N --node focused.fullscreen && state=tiled; \
+    bspc node --state $state
 
-super + m : m : {h,j,k,l}
-    bspc node --focus {west,south,north,east}
-
-super + m : m : {o,i}
-    bspc desktop --focus {next,prev}
-
-super + m : m : d
-    bspc node --close
-
-super + m : m : x
-    bspc desktop --focus next; \
-    bspc desktop prev --remove
-
-super + m : m : a
-    bspc monitor --add-desktops new; \
-    bspc desktop --focus next
-
-super + m : m : Return
-    rofi-pass
+super + m
+    state=monocle; \
+    bspc query -T -d | grep monocle && state=tiled; \
+    bspc desktop --layout $state
