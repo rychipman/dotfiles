@@ -83,6 +83,7 @@ LOGGER = logging.getLogger('upload')
 
 # URL of the default Jira server.
 DEFAULT_JIRA_SERVER = "https://jira.mongodb.org"
+IN_CODE_REVIEW_STATUS = "In code review"
 
 # The account type used for authentication.
 # This line could be changed by the review server (see handler for
@@ -178,47 +179,88 @@ svn_auto_props_map = None
 def ParseJiraCases(msg):
   return re.findall(r'[A-Z]+-[1-9][0-9]*', msg)
 
+
 def UpdateJiraCases(jira_server, jira_user, jira_tickets, issue):
+  CONN_TIMEOUT = 10
   try:
-    import suds
+    import requests
   except ImportError:
-    print "WARNING: Dependency missing for updating Jira.  Please 'pip install suds'."
+    print "WARNING: Dependency missing for updating Jira.  Please 'pip install requests'."
     return
 
   print "Updating jira tickets " + ', '.join(jira_tickets)
-  jira_url = jira_server + '/rpc/soap/jirasoapservice-v2?wsdl'
-  jira = suds.client.Client(jira_url)
+  jira_url = jira_server + '/rest/api/2'
+  jira_auth_url = jira_server + '/rest/auth/1'
 
   try:
     logging.raiseExceptions = False
-    logging.getLogger('suds.client').propagate = False
-    auth_token = jira.service.login(
-      jira_user,
-      GetPassword(server=jira_server, user=jira_user, prompt="Jira password for %s: " % jira_user))
-  except suds.WebFault, ex:
-    print "Could not authenticate to jira service: " + ex.fault.faultstring
+    logging.getLogger('jira.rest').propagate = False
+    auth_response = requests.get(jira_auth_url + '/session', auth=(jira_user,
+                                                                   GetPassword(server=jira_server, user=jira_user,
+                                                                               prompt="Jira password for %s: " % jira_user
+                                                                               )
+                                                                   ), timeout=CONN_TIMEOUT)
+    auth_response.raise_for_status()
+    auth_cookies = auth_response.cookies
+  except requests.exceptions.Timeout:
+    print 'Network Connection timed out'
     return
-
+  except requests.exceptions.HTTPError:
+    if auth_response.status_code == 403:
+      print 'CAPTCHA required!  Go to', jira_server, 'and logout and log back in to use this tool.'
+      return
+    elif auth_response.status_code == 401:
+      print 'Incorrect password'
+      return
+    else:
+      print 'An unknown error occurred authenticating to Jira'
+      return
   issue_comment = 'Code review url: %s' % issue
   for ticket in jira_tickets:
     try:
-      jira.service.addComment(auth_token, ticket, dict(body=issue_comment, roleLevel='Developers'))
-    except suds.WebFault, ex:
-      print "Failed to add comment to ticket %s: %s" % (ticket, ex.fault.faultstring)
+      jira_comment_url = jira_url + '/issue/' + ticket + '/comment'
+      comment_response = requests.post(jira_comment_url, json={'body': issue_comment,
+                                                               'visibility': {
+                                                                 'type': 'role',
+                                                                 'value': 'Developers'
+                                                               }
+                                                               }, cookies=auth_cookies, timeout=CONN_TIMEOUT)
+      comment_response.raise_for_status()
+    except (requests.exceptions.HTTPError, requests.exceptions.Timeout) as ex:
+      print "Failed to add comment to ticket %s: %s" % (ticket, ex)
+      return
 
   # Change state to In Code Review if we can. -- try different transitions for different start state
   for ticket in jira_tickets:
+    jira_state_url = jira_url + '/issue/' + ticket + '/transitions'
+    jira_status_url = jira_url + '/issue/' + ticket + '?fields=status'
     transitionFailed = True
-    for code in ["751", "761", "711", "731"]:
-        try:
-          jira.service.progressWorkflowAction(auth_token, ticket, code, None)
-        except suds.WebFault, ex:
-          transitionFailed = True
-        transitionFailed = False
-        break
-
-    if transitionFailed:
-        print "Failed to transition to 'In Code Review' for ticket %s" % (ticket)
+    try:
+      status_response = requests.get(jira_status_url, cookies=auth_cookies, timeout=CONN_TIMEOUT)
+      status_response.raise_for_status()
+      issue_status = status_response.json()["fields"]["status"]["name"]
+    except (requests.exceptions.HTTPError, requests.exceptions.Timeout) as ex:
+      print "EXCEPTION! %s" % ex
+    if issue_status.lower() != IN_CODE_REVIEW_STATUS.lower():
+      # figure out what the code review transition code is
+      try:
+        updated = False
+        available_transitions = requests.get(jira_state_url, cookies=auth_cookies, timeout=CONN_TIMEOUT)
+        available_transitions.raise_for_status()
+        for transition in available_transitions.json()['transitions']:
+          if transition['to'] and transition['to']['name'].lower() == IN_CODE_REVIEW_STATUS.lower():
+            # execute the transition, if it exists
+            code = transition['id']
+            transition_response = requests.post(jira_state_url, json={'transition': {'id': code}}, cookies=auth_cookies, timeout=CONN_TIMEOUT)
+            transition_response.raise_for_status()
+            updated = True
+            break
+        if not updated:
+          print "Failed to transition to 'In Code Review' for ticket %s" % (ticket)
+      except (requests.exceptions.HTTPError, requests.exceptions.Timeout) as ex:
+        print "EXCEPTION! %s" % ex
+    else:
+      print "Ticket %s is already in status 'In Code Review'" % (ticket)
 
 
 def GetEmail(prompt):
@@ -349,8 +391,6 @@ def readRepoConfig():
     gitRoot = RunShell(["git", "rev-parse", "--show-toplevel"]).strip()
 
     path = os.path.sep.join([gitRoot, 'codereview.rc' ])
-    print "os.path.sep.join = ", os.path.sep.join([gitRoot, 'codereview.rc'])
-    print "os.path.join = ", os.path.join(gitRoot, 'codereview.rc')
     if os.path.exists(path):
       with open(path) as configFile:
         for line in configFile:
@@ -406,6 +446,7 @@ class ClientLoginError(urllib2.HTTPError):
     # self.args is modified so it cannot be used as-is so save the value in
     # self._reason.
     return self._reason
+
 
 
 class AbstractRpcServer(object):
