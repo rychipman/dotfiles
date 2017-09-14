@@ -52,6 +52,11 @@ while getopts "di:r:m:h" opt; do
     esac
 done
 
+if [ "$ISSUE_FLAG" = "" ] && [ "$MESSAGE" = "" ]; then
+    echo "Must provide issue description ( -m ... ) for new issue"
+    exit 1
+fi
+
 JIRA_TICKET=`get_git_branch | sed -e "s/^.*-\([A-Z]*-[0-9]*\).*/\1/"`
 ISSUE_DESCRIPTION="https://jira.mongodb.org/browse/${JIRA_TICKET}"
 TICKET_TITLE="${JIRA_TICKET}: ${MESSAGE}"
