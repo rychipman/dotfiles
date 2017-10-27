@@ -225,10 +225,80 @@ highlight Normal ctermbg=233
 highlight SpecialKey ctermbg=233 ctermfg=235
 highlight ExtraWhitespace ctermbg=red
 
-highlight DiffAdd ctermbg=22
-highlight DiffDelete ctermbg=52
-highlight DiffChange ctermbg=234
-highlight DiffText ctermbg=23
+highlight mDiffInvisible ctermbg=234 ctermfg=234
+
+highlight DiffAdd ctermbg=234 ctermfg=234
+highlight DiffDelete ctermbg=234 ctermfg=234
+highlight DiffChange ctermbg=234 ctermfg=234
+
+"highlight DiffText ctermbg=23
+
+highlight mDiffNormal ctermbg=234
+highlight mDiffAdd ctermbg=green
+highlight mDiffDelete ctermbg=red
+highlight mDiffChangeDeleteLine ctermbg=red
+highlight mDiffChangeAddLine ctermbg=green
+highlight mDiffChangeDeleteText ctermbg=blue
+highlight mDiffChangeAddText ctermbg=blue
+
+nnoremap <leader>de :call SynStack()<CR>
+function! SynStack()
+    let state = synIDattr((diff_hlID('.',col('.'))), 'name')
+    echo state
+endfunction
+
+nnoremap <leader>do :call RecolorDiffBuffer('old')<CR>
+nnoremap <leader>dn :call RecolorDiffBuffer('new')<CR>
+nnoremap <leader>dw :call RecolorDiffBuffer('working')<CR>
+nnoremap <leader>di :call RecolorDiffBuffer('index')<CR>
+function! RecolorDiffBuffer(strategy)
+
+    let diffHighlights = {
+\       'old': {
+\           'DiffAdd': 'mDiffDelete',
+\           'DiffDelete': 'mDiffInvisible',
+\           'DiffChange': 'mDiffChangeDeleteLine',
+\           'DiffText': 'mDiffChangeDeleteText',
+\       },
+\       'new': {
+\           'DiffAdd': 'mDiffAdd',
+\           'DiffDelete': 'mDiffInvisible',
+\           'DiffChange': 'mDiffChangeAddLine',
+\           'DiffText': 'mDiffChangeAddText',
+\       },
+\       'working': {
+\           'DiffAdd': 'mDiffAdd',
+\           'DiffDelete': 'mDiffDelete',
+\       },
+\       'index': {
+\           'DiffAdd': 'mDiffNormal',
+\           'DiffDelete': 'mDiffNormal',
+\       },
+\   }
+
+    let num_lines = line('$')
+    let line_num = 0
+    while line_num < num_lines
+        let line_state = CellState(line_num, 1)
+        if line_state == "DiffAdd" || line_state == "DiffDelete"
+            call matchaddpos(diffHighlights[a:strategy][line_state], [line_num], 100)
+        elseif line_state == "DiffChange" || line_state == "DiffText"
+            let num_cols = strlen(getline('.'))
+            let col_num = 0
+            while col_num < num_cols
+                let char_state = CellState(line_num, col_num)
+                call matchaddpos(diffHighlights[a:strategy][char_state], [line_num,col_num], 100)
+                let col_num += 1
+            endwhile
+        endif
+        let line_num += 1
+    endwhile
+
+endfunction
+
+function! CellState(row, col)
+    return synIDattr((diff_hlID(a:row,a:col)), "name")
+endfunction
 
 " highlight trailing whitespace
 augroup trailingWhitespace
