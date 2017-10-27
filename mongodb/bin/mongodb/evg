@@ -1,0 +1,59 @@
+#!/bin/bash
+
+function usage() {
+    cat <<EOF
+Usage: evg p [OPTIONS]
+
+Options:
+  -d    do a dry run (i.e. don't actually submit the request to the cr app)
+  -i    interactively select tasks (i.e. don't pass --finalize)
+  -h    display this help
+
+EOF
+}
+
+function get_git_branch() {
+    git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
+}
+
+# if we aren't patching, pass the command through to evergreen
+if [ "$1" != "p" ]; then
+    exec evergreen $@
+fi
+
+# remove the "p" from the cmdline args
+shift
+
+# calculate defaults
+DESCRIPTION="$(get_git_branch)"
+FINALIZE="--finalize"
+
+while getopts "d:ih" opt; do
+    case $opt in
+        d)
+            DESCRIPTION="$OPTARG"
+            ;;
+        i)
+            FINALIZE=""
+            ;;
+        h)
+            usage
+            exit 0
+            ;;
+        *)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+evergreen patch \
+    --yes \
+    --description "$DESCRIPTION" \
+    $FINALIZE \
+
+# if we didn't finalize the patch, open up the configuration page
+if [ "$FINALIZE" = "" ]; then
+    url="$(evergreen list-patches -n 1 | grep Configure | awk '{print $3}')"
+    open "$url"
+fi
