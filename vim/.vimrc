@@ -1,5 +1,7 @@
+" clear any existing top-level autocmds
 autocmd!
 
+" default options ---------------------------------------------------------- {{{
 set encoding=utf8           " Clean utf-8 encoding
 set termencoding=utf-8
 
@@ -71,52 +73,76 @@ set sidescroll=1
 set ruler
 
 set list listchars=tab:»·
+" ---------------------------------------------------------- default options }}}
 
-noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
-noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
+" status line -------------------------------------------------------------- {{{
+" always have the status line on
+set laststatus=2
 
-" leaders
+" define the statusline
+set statusline=%f\   " filename and a space
+set statusline+=%m   " modified indicator
+set statusline+=%r   " read-only indicator
+set statusline+=%h   " help-buffer indicator
+set statusline+=%w   " preview indicator
+set statusline+=%=   " switch to right side
+set statusline+=%c/
+set statusline+=%{strwidth(getline('.'))}
+set statusline+=\ \ \  " separation)
+set statusline+=%y   " filetype indicator
+set statusline+=\    " right side padding
+" -------------------------------------------------------------- status line }}}
 
-let mapleader="\<Space>"
-let maplocalleader='\'
+" filetype settings -------------------------------------------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldenable
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
 
-" reload .vimrc
-nnoremap <leader>r :source ~/.vimrc<CR>
+augroup filetype_help
+    autocmd!
+    autocmd FileType help nnoremap <buffer> q :q<cr>
+augroup END
+" -------------------------------------------------------- filetype settings }}}
 
-" sorting
-vnoremap <leader>o :sort<CR>
+" mappings ----------------------------------------------------------------- {{{
+
+" quicker jumps to line ends
+noremap H ^
+noremap L g_
 
 " better indentation behavior (stays highlighted)
 vnoremap < <gv
 vnoremap > >gv
 
-" save a file that requires sudo escalation
-map <leader>w :w ! sudo tee % >/dev/null <CR>
+" leaders
+let mapleader="\<space>"
+let maplocalleader="\\"
 
-""" restore cursor location
-function! RestoreCursorLocation()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
+" reload or edit .vimrc
+nnoremap <leader>rr :source $MYVIMRC<CR>
+nnoremap <leader>re :e $MYVIMRC<CR>
 
-augroup restoreCursor
-    autocmd!
-    autocmd BufWinEnter * call RestoreCursorLocation()
-augroup END
+" ----------------------------------------------------------------- mappings }}}
 
-""" plugins
+" plugins ------------------------------------------------------------------ {{{
 call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 
 Plug 'wombat256.vim'      " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
+Plug 'wavded/vim-stylus'
+Plug 'junegunn/vim-pseudocl' " required for vim-oblique
+Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
+Plug 'junegunn/vim-oblique' " search improvements
+
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
+
 Plug 'fatih/vim-go'
     let g:go_fmt_command = "goimports"
-Plug 'wavded/vim-stylus'
+
 Plug 'mattn/emmet-vim'                " html expansion with emmet
     let g:user_emmet_leader_key='<C-e>'
     let g:user_emmet_settings = {
@@ -128,25 +154,35 @@ Plug 'mattn/emmet-vim'                " html expansion with emmet
     \    'indentation' : '    '
     \  },
     \}
+
 Plug 'terryma/vim-smooth-scroll'      " smooth scrolling for page jumps
+    noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 11, 2)<CR>
+    noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 11, 2)<CR>
+
 Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
     let g:AutoPairsShortcutBackInsert = '<C-u>'
     let g:AutoPairsFlyMode = 1
-Plug 'junegunn/vim-oblique' " search improvements
-Plug 'junegunn/vim-pseudocl' " required for vim-oblique
-Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
+
 Plug 'lifepillar/vim-mucomplete'
-    set shortmess+=c " don't display completion-related messages
-    set completeopt=menu,menuone,noinsert,noselect
+    set shortmess-=c " don't display completion-related messages
+    set completeopt=menuone,noselect
+    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+    inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
     let g:mucomplete#enable_auto_at_startup = 1
+    let g:mucomplete#chains = {
+    \   'default': ['path', 'omni', 'keyn', 'dict', 'uspl'],
+    \   'vim': ['path', 'cmd', 'keyn'],
+    \}
+
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
     nnoremap <leader>e :Files<CR>
     nnoremap <leader>b :Buffers<CR>
     nnoremap <leader>c :Commits<CR>
-    nnoremap <leader>f :Ag
+    nnoremap <leader>f :Ag 
     nnoremap <leader>h :History:<CR>
-    let g:fzf_colors ={
+    let g:fzf_colors = {
     \   'fg':      ['fg', 'Normal'],
     \   'bg':      ['bg', 'Normal'],
     \   'hl':      ['fg', 'Comment'],
@@ -160,8 +196,10 @@ Plug 'junegunn/fzf.vim'
     \   'spinner': ['fg', 'Label'],
     \   'header':  ['fg', 'Comment']
     \}
+
 Plug 'tpope/vim-fugitive'
     nnoremap <leader>g :Gstatus<CR>
+
 Plug 'romainl/vim-qf'
     nmap ]q <Plug>QfCnext
     nmap [q <Plug>QfCprevious
@@ -169,19 +207,19 @@ Plug 'romainl/vim-qf'
     nmap [l <Plug>QfLprevious
 
 call plug#end()
+" ------------------------------------------------------------------ plugins }}}
 
-""" syntax highlighting
+" colors and theming ------------------------------------------------------- {{{
+
+" syntax highlighting
 syntax on
 syntax enable
 
-""" highlight ejs as html
-au BufNewFile,BufRead *.ejs set filetype=html
-
-""" colors
+" colors
 set t_Co=256                    " ensure terminal works with 256 colors
 let base16colorspace=256
 
-""" color scheme
+" color scheme
 colorscheme wombat256mod
 highlight Normal ctermbg=233
 highlight SpecialKey ctermbg=233 ctermfg=235
@@ -192,7 +230,31 @@ highlight DiffDelete ctermbg=52
 highlight DiffChange ctermbg=234
 highlight DiffText ctermbg=23
 
-""" highlight trailing whitespace
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" highlight trailing whitespace
+augroup trailingWhitespace
+    autocmd!
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
 
+" ------------------------------------------------------- colors and theming }}}
+
+" misc --------------------------------------------------------------------- {{{
+
+" restores cursor to last location in current file
+function! RestoreCursorLocation()
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
+endfunction
+
+" restore cursor location when opening buffer
+augroup restoreCursor
+    autocmd!
+    autocmd BufWinEnter * call RestoreCursorLocation()
+augroup END
+
+" --------------------------------------------------------------------- misc }}}
+
+" turn of highlights from a pre-existing search
 nohl
