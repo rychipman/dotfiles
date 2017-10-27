@@ -6,6 +6,7 @@ projects:
 - name: mongosql-auth-c
   default: false
   variants:
+  - full_matrix__os~windows-32
   - full_matrix__os~windows-vs2013
   - full_matrix__os~osx
   - full_matrix__os~ubuntu1404-64
