@@ -1,11 +1,14 @@
 #!/bin/bash
 
+set -o errexit
+
 function usage() {
     cat <<EOF
 Usage: evg p [OPTIONS]
 
 Options:
   -d    do a dry run (i.e. don't actually submit the request to the cr app)
+  -g    test groups to include in the patch (e.g. "perf,config")
   -i    interactively select tasks (i.e. don't pass --finalize)
   -h    display this help
 
@@ -28,8 +31,11 @@ shift
 DESCRIPTION="$(get_git_branch)"
 FINALIZE="--finalize"
 
-while getopts "d:ih" opt; do
+while getopts "d:g:ih" opt; do
     case $opt in
+        g)
+            TEST_GROUPS="$OPTARG"
+            ;;
         d)
             DESCRIPTION="$OPTARG"
             ;;
@@ -47,9 +53,38 @@ while getopts "d:ih" opt; do
     esac
 done
 
+TEST_GROUPS=${TEST_GROUPS:-default}
+for group in $( echo $TEST_GROUPS | sed 's/,/ /g' ); do
+    case $group in
+        perf)
+            VARIANTS="$VARIANTS""benchmark,"
+            ;;
+        config)
+            osx_config="config-tests__os_full_matrix~osx"
+            windows_config="config-tests__os_full_matrix~windows"
+            ubuntu_config="config-tests__os_full_matrix~ubuntu1404-64"
+            VARIANTS="$VARIANTS""$osx_config,$windows_config,$ubuntu_config,"
+            ;;
+        default)
+            osx_latest_standalone="full_matrix__os_full_matrix~osx_mongodb_version~latest_mongodb_topology~standalone"
+            windows_latest_standalone="full_matrix__os_full_matrix~windows_mongodb_version~latest_mongodb_topology~standalone"
+            ubuntu_latest_standalone="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~latest_mongodb_topology~standalone"
+            ubuntu_34_replica="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~3.4_mongodb_topology~replica-set"
+            ubuntu_32_sharded="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~3.2_mongodb_topology~sharded-cluster"
+            code_quality="code-quality"
+            VARIANTS="$VARIANTS""$code_quality,$osx_latest_standalone,$windows_latest_standalone,$ubuntu_latest_standalone,$ubuntu_34_replica,$ubuntu_32_sharded,"
+            ;;
+        none)
+            VARIANTS=""
+            ;;
+    esac
+done
+
 evergreen patch \
     --yes \
     --description "$DESCRIPTION" \
+    --variants "$VARIANTS" \
+    --tasks all \
     $FINALIZE \
 
 # if we didn't finalize the patch, open up the configuration page
