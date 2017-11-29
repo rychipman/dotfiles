@@ -140,6 +140,9 @@ Plug 'junegunn/vim-oblique' " search improvements
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
 
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
 Plug 'fatih/vim-go'
     let g:go_fmt_command = "goimports"
 
