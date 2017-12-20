@@ -38,3 +38,6 @@ alias dbx='dropbox-cli'
 
 # get better view of permissions for file
 alias perm='stat -c "%A %a %n"'
+
+# use $EDITOR if available, vi otherwise
+alias vim='[ -n $EDITOR ] && $EDITOR || vi'
