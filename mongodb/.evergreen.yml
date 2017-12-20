@@ -21,3 +21,9 @@ projects:
   - full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~latest_mongodb_topology~standalone
   tasks:
   - all
+- name: sqlproxy-dev
+  default: false
+  variants:
+  - all
+  tasks:
+  - all
