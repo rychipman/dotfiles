@@ -20,7 +20,11 @@ set splitbelow              " opens horizontal split below
 set shortmess=filnrxtToOI    " see :help shortmess
 
 " save up to 100 marks, enable capital marks
-set viminfo='100,f1,\"100,:20,n~/.vim/viminfo
+if has('nvim')
+    set viminfo='100,f1,\"100,:20,n~/.config/nvim/shada
+else
+    set viminfo='100,f1,\"100,:20,n~/.vim/viminfo
+endif
 
 set number                  " turn on line numbers
 set relativenumber          " use relative line numbers
