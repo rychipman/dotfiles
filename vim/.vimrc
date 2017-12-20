@@ -137,6 +137,8 @@ Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
 Plug 'junegunn/vim-oblique' " search improvements
 
+Plug 'vimwiki/vimwiki'
+
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
 
