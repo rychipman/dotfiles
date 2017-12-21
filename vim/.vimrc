@@ -172,17 +172,24 @@ Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
     let g:AutoPairsShortcutBackInsert = '<C-u>'
     let g:AutoPairsFlyMode = 1
 
-Plug 'lifepillar/vim-mucomplete'
-    set shortmess-=c " don't display completion-related messages
-    set completeopt=menuone,noselect
-    inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-    inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-    inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
-    let g:mucomplete#enable_auto_at_startup = 1
-    let g:mucomplete#chains = {
-    \   'default': ['path', 'omni', 'keyn', 'dict', 'uspl'],
-    \   'vim': ['path', 'cmd', 'keyn'],
-    \}
+if has('nvim')
+    Plug 'roxma/nvim-completion-manager'
+        inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+        inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+        inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+else
+    Plug 'lifepillar/vim-mucomplete'
+        set shortmess-=c " don't display completion-related messages
+        set completeopt=menuone,noselect
+        inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+        inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+        inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+        let g:mucomplete#enable_auto_at_startup = 1
+        let g:mucomplete#chains = {
+        \   'default': ['path', 'omni', 'keyn', 'dict', 'uspl'],
+        \   'vim': ['path', 'cmd', 'keyn'],
+        \}
+endif
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
