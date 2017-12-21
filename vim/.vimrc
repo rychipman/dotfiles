@@ -1,8 +1,11 @@
+" be explicit about encoding
+set encoding=utf8
+scriptencoding utf8
+
 " clear any existing top-level autocmds
 autocmd!
 
 " default options ---------------------------------------------------------- {{{
-set encoding=utf8           " Clean utf-8 encoding
 set termencoding=utf-8
 
 set history=1000            " Save a long command and undo history
@@ -11,13 +14,13 @@ set undodir=~/.vim/undo     " Save undo history across sessions
 
 set showcmd                 " show partially completed commands
 
-set mouse=                 " allow interactions via mouse
+set mouse=                  " allow interactions via mouse
 
-set gcr=a:blinkon0          " disable cursor blink
+set guicursor=a:blinkon0    " disable cursor blink
 set autoread                " load changes in files that happen outside vim
 set splitright              " open vertical splits to right
 set splitbelow              " opens horizontal split below
-set shortmess=filnrxtToOI    " see :help shortmess
+set shortmess=filnrxtToOI   " see :help shortmess
 
 " save up to 100 marks, enable capital marks
 if has('nvim')
@@ -121,12 +124,12 @@ vnoremap < <gv
 vnoremap > >gv
 
 " leaders
-let mapleader="\<space>"
-let maplocalleader="\\"
+let g:mapleader="\<space>"
+let g:maplocalleader="\\"
 
 " reload or edit .vimrc
 nnoremap <leader>rr :source $MYVIMRC<CR>
-nnoremap <leader>re :e $MYVIMRC<CR>
+nnoremap <leader>re :e ~/.vimrc<CR>
 
 " ----------------------------------------------------------------- mappings }}}
 
@@ -150,7 +153,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 
 Plug 'fatih/vim-go'
-    let g:go_fmt_command = "goimports"
+    let g:go_fmt_command = 'goimports'
 
 Plug 'mattn/emmet-vim'                " html expansion with emmet
     let g:user_emmet_leader_key='<C-e>'
@@ -233,7 +236,7 @@ syntax enable
 
 " colors
 set t_Co=256                    " ensure terminal works with 256 colors
-let base16colorspace=256
+let g:base16colorspace=256
 
 " color scheme
 colorscheme wombat256mod
@@ -259,8 +262,8 @@ highlight mDiffChangeAddText ctermbg=blue
 
 nnoremap <leader>de :call SynStack()<CR>
 function! SynStack()
-    let state = synIDattr((diff_hlID('.',col('.'))), 'name')
-    echo state
+    let l:state = synIDattr((diff_hlID('.',col('.'))), 'name')
+    echo l:state
 endfunction
 
 nnoremap <leader>do :call RecolorDiffBuffer('old')<CR>
@@ -269,7 +272,7 @@ nnoremap <leader>dw :call RecolorDiffBuffer('working')<CR>
 nnoremap <leader>di :call RecolorDiffBuffer('index')<CR>
 function! RecolorDiffBuffer(strategy)
 
-    let diffHighlights = {
+    let l:diffHighlights = {
 \       'old': {
 \           'DiffAdd': 'mDiffDelete',
 \           'DiffDelete': 'mDiffInvisible',
@@ -292,28 +295,28 @@ function! RecolorDiffBuffer(strategy)
 \       },
 \   }
 
-    let num_lines = line('$')
-    let line_num = 0
-    while line_num < num_lines
-        let line_state = CellState(line_num, 1)
-        if line_state == "DiffAdd" || line_state == "DiffDelete"
-            call matchaddpos(diffHighlights[a:strategy][line_state], [line_num], 100)
-        elseif line_state == "DiffChange" || line_state == "DiffText"
-            let num_cols = strlen(getline('.'))
-            let col_num = 0
-            while col_num < num_cols
-                let char_state = CellState(line_num, col_num)
-                call matchaddpos(diffHighlights[a:strategy][char_state], [line_num,col_num], 100)
-                let col_num += 1
+    let l:num_lines = line('$')
+    let l:line_num = 0
+    while l:line_num < l:num_lines
+        let l:line_state = CellState(l:line_num, 1)
+        if l:line_state ==# 'DiffAdd' || l:line_state ==# 'DiffDelete'
+            call matchaddpos(l:diffHighlights[a:strategy][l:line_state], [l:line_num], 100)
+        elseif l:line_state ==# 'DiffChange' || l:line_state ==# 'DiffText'
+            let l:num_cols = strlen(getline('.'))
+            let l:col_num = 0
+            while l:col_num < l:num_cols
+                let l:char_state = CellState(l:line_num, l:col_num)
+                call matchaddpos(l:diffHighlights[a:strategy][l:char_state], [l:line_num,l:col_num], 100)
+                let l:col_num += 1
             endwhile
         endif
-        let line_num += 1
+        let l:line_num += 1
     endwhile
 
 endfunction
 
 function! CellState(row, col)
-    return synIDattr((diff_hlID(a:row,a:col)), "name")
+    return synIDattr((diff_hlID(a:row,a:col)), 'name')
 endfunction
 
 " highlight trailing whitespace
@@ -328,7 +331,7 @@ augroup END
 
 " restores cursor to last location in current file
 function! RestoreCursorLocation()
-    if line("'\"") <= line("$")
+    if line("'\"") <= line('$')
         normal! g`"
         return 1
     endif
