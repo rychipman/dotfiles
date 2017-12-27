@@ -1,8 +1,65 @@
 #!/bin/bash
 
-rm ~/.nvimlog \
+rm -f \
+   ~/.nvimlog \
+   ~/.local/share/recently-used.xbel \
+   ~/.python_history \
    ~/.node_repl_history \
+   ~/.mysql_history \
    ~/.lesshst \
-   ~/.local/share/recently-used.xbel
+   ~/.node_repl_history \
+   ~/.bash_history \
+   ~/.config/pavucontrol.ini \
+   ~/.config/QtProject.conf \
+   ~/.config/Trolltech.conf \
 
-rm -rf ~/.local/share/Trash
+rm -rf \
+    ~/Desktop \
+    ~/Downloads \
+    ~/.gnome/ \
+    ~/.swt/ \
+    ~/.thumbnails/ \
+    ~/.mplayer/ \
+    ~/.macromedia/ \
+    ~/.local/share/Trash/ \
+    ~/.cache/chromium/ \
+    ~/.cache/google-chrome/ \
+    ~/.cache/dconf/ \
+    ~/.cache/osmgpsmap/ \
+    ~/.config/akonadi/ \
+    ~/.config/autostart/ \
+    ~/.config/Blue\ Jeans/ \
+    ~/.config/chromium/ \
+    ~/.config/dconf/ \
+    ~/.config/gconf/ \
+    ~/.config/google-chrome/ \
+    ~/.config/google-chrome-unstable/ \
+    ~/.config/google-googletalkplugin/ \
+    ~/.config/gtk-2.0/ \
+    ~/.config/gtk-3.0/ \
+    ~/.config/htop/ \
+    ~/.config/libreoffice/ \
+    ~/.config/menus/ \
+    ~/.config/mpv/ \
+    ~/.config/rncbc.org \
+    ~/.config/unity3d/ \
+    ~/.config/vlc/ \
+    ~/.config/wireshark/ \
+    ~/.local/share/akonadi/ \
+    ~/.local/share/applications/ \
+    ~/.local/share/desktop-directories/ \
+    ~/.local/share/icons/ \
+    ~/.local/share/lyrics/ \
+    ~/.local/share/marble/ \
+    ~/.local/share/mime/ \
+    ~/.local/share/vlc/ \
+    ~/.local/share/vulkan/ \
+    ~/.local/share/webkitgtk/ \
+    ~/.local/share/zathura/ \
+    ~/.cache/mozilla/ \
+    ~/.cache/gstreamer-1.0/ \
+    ~/.cache/thumbnails/ \
+    ~/.cache/vlc/ \
+    ~/.cache/webkit/ \
+    ~/.cache/webkitgtk/ \
+
