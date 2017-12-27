@@ -1,7 +1,4 @@
 
-super + Return
-    lxterminal --working-directory=/home/rchipman
-
 control + Tab
     ~/bin/launcher -l
 
@@ -19,12 +16,16 @@ super + BackSpace
 
 # bspwm bindings
 
+super + Return
+    rofi -show window
+
 super + q
     pkill dunst redshift unclutter sxhkd; \
     bspc quit
 
 super + r
-    pkill -USR1 sxhkd
+    pkill -USR1 sxhkd; \
+    notify-send "reloaded sxhkd config"
 
 super + {i,o}
     bspc node --focus {prev,next}
@@ -36,13 +37,13 @@ super + h
     bspc desktop --focus home
 
 super + k
-    ~/bin/bspwm/raise-or-open firefox
+    ~/bin/bspwm/winopen firefox
 
 super + j
-    ~/bin/bspwm/raise-or-open lxterminal
+    ~/bin/bspwm/winopen lxterminal
 
 super + l
-    ~/bin/bspwm/raise-or-open slack
+    ~/bin/bspwm/winopen --raise slack
 
 super + w
     bspc node --close
