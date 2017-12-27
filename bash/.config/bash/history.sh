@@ -8,7 +8,7 @@ shopt -s cmdhist
 export HISTCONTROL=ignorespace:ignoredups
 
 # histfile settings
-export HISTFILE=~/.bash_eternal_history
+export HISTFILE=~/.local/share/bash_eternal_history
 export HISTSIZE=
 export HISTFILESIZE=
 export HISTTIMEFORMAT="[%F %T] "
