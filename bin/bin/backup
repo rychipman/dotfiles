@@ -1,17 +1,9 @@
 #!/bin/bash
 
-REPO="rho:borg/test"
+repo="/home/rchipman/tmp/mnt/wd/borg/pictures"
 
-borg create -v --stats \
-    $REPO::'{hostname}-{now:%Y-%m-%d}' \
-    /home/rchipman/tmp \
-    /home/rchipman/books \
-    --exclude ~/.cache
+borg create -v --stats --progress \
+    "$repo::pictures_{now:%Y-%m-%d}_all_pics" \
+    /home/rchipman/tmp/mnt/seagate/pictures/ \
+    /home/rchipman/tmp/mnt/seagate/photo-org/
 
-borg prune -v $REPO \
-    --prefix '{hostname}-' \
-    --keep-within=3 \
-    --keep-daily=7 \
-    --keep-weekly=7 \
-    --keep-monthly=21 \
-    --keep-yearly=-1 \
