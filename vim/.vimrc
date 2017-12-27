@@ -146,6 +146,27 @@ Plug 'junegunn/vim-oblique' " search improvements
 
 Plug 'vimwiki/vimwiki'
 
+Plug 'w0rp/ale'
+    let g:ale_echo_cursor = 1
+    let g:ale_set_signs = 1
+    let g:ale_set_highlights = 1
+
+    let g:ale_sign_error = '●'
+    let g:ale_sign_warning = '●'
+    let g:ale_sign_info = '●'
+    let g:ale_sign_style_error = '●'
+    let g:ale_sign_style_warning = '●'
+
+    let g:ale_completion_enabled = 0
+
+    let g:ale_lint_on_enter = 1
+    let g:ale_lint_on_filetype_changed = 1
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_insert_leave = 1
+    let g:ale_lint_on_text_changed = 'normal'
+
+    let g:go_fmt_fail_silently = 1
+
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
 
@@ -324,6 +345,19 @@ augroup trailingWhitespace
     autocmd!
     autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 augroup END
+
+" sign-column highlighting for ale
+highlight clear SignColumn
+highlight SignColumn ctermbg=232
+
+highlight ALEErrorSign ctermbg=232 ctermfg=196
+highlight ALEError ctermbg=196 ctermfg=230
+
+highlight ALEWarningSign ctermbg=232 ctermfg=226
+highlight ALEWarning ctermbg=226 ctermfg=0
+
+highlight ALEInfoSign ctermbg=232 ctermfg=33
+highlight ALEInfo ctermbg=33 ctermfg=230
 
 " ------------------------------------------------------- colors and theming }}}
 
