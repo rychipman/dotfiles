@@ -133,6 +133,30 @@ nnoremap <leader>re :e ~/.vimrc<CR>
 
 " ----------------------------------------------------------------- mappings }}}
 
+" terminal options --------------------------------------------------------- {{{
+if has('nvim')
+    tnoremap <C-a>s <C-\><C-n><C-w>s :terminal<CR> i
+    tnoremap <C-a>v <C-\><C-n><C-w>v :terminal<CR> i
+    nnoremap <C-a>s <C-w>s :terminal<CR> i
+    nnoremap <C-a>v <C-\><C-n><C-w>v :terminal<CR> i
+
+    nnoremap <leader>tt :terminal<CR> i
+    nnoremap <leader>ts <C-w>s :terminal<CR> i
+    nnoremap <leader>tv <C-w>v :terminal<CR> i
+    tnoremap <leader>ts <C-\><C-n><C-w>s :terminal<CR> i
+    tnoremap <leader>tv <C-\><C-n><C-w>v :terminal<CR> i
+
+    augroup term_config
+        autocmd!
+        autocmd TermOpen * setlocal nonumber
+        autocmd TermOpen * setlocal norelativenumber
+        autocmd TermOpen * nnoremap <buffer> <C-c> i
+        autocmd TermOpen * nnoremap <buffer> <CR> i
+        autocmd TermOpen term://* tnoremap <ESC> <C-\><C-n>
+    augroup END
+endif
+" -------------------------------------------------------- terminal settings }}}
+
 " plugins ------------------------------------------------------------------ {{{
 call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 
