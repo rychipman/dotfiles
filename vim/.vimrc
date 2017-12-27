@@ -198,6 +198,7 @@ Plug 'jiangmiao/auto-pairs'           " closing brackets, parens, etc.
 
 if has('nvim')
     Plug 'roxma/nvim-completion-manager'
+        set completeopt=menuone,noselect
         inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
         inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
         inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
