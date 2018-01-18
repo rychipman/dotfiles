@@ -160,7 +160,7 @@ endif
 " plugins ------------------------------------------------------------------ {{{
 call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 
-Plug 'wombat256.vim'      " go-to color scheme
+Plug 'michalbachowski/vim-wombat256mod' " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'wavded/vim-stylus'
