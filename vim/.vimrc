@@ -147,8 +147,6 @@ if has('nvim')
     nnoremap <leader>tt :terminal<CR> i
     nnoremap <leader>ts <C-w>s :terminal<CR> i
     nnoremap <leader>tv <C-w>v :terminal<CR> i
-    tnoremap <leader>ts <C-\><C-n><C-w>s :terminal<CR> i
-    tnoremap <leader>tv <C-\><C-n><C-w>v :terminal<CR> i
 
     augroup term_config
         autocmd!
