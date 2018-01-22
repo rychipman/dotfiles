@@ -6,25 +6,32 @@ case $- in
 esac
 
 # sets PS2
+# shellcheck source=prompt.sh
 source ~/.config/bash/prompt.sh
 
 # export variables
+# shellcheck source=exports.sh
 source ~/.config/bash/exports.sh
 
 # creates aliases
+# shellcheck source=aliases.sh
 source ~/.config/bash/aliases.sh
 
 # creates functions
+# shellcheck source=functions.sh
 source ~/.config/bash/functions.sh
 
 # enables bash completion
+# shellcheck source=completion.sh
 source ~/.config/bash/completion.sh
 
 # source history-related configuration
+# shellcheck source=history.sh
 source ~/.config/bash/history.sh
 
 # source any contrib configurations from other stow packages
 for file in ~/.config/bash/contrib/*; do
+    # shellcheck source=/dev/null
     source "$file"
 done
 
