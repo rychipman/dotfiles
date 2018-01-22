@@ -29,6 +29,10 @@ else
     set viminfo='100,f1,\"100,:20,n~/.vim/viminfo
 endif
 
+if has('nvim')
+    set inccommand=nosplit
+endif
+
 set number                  " turn on line numbers
 set relativenumber          " use relative line numbers
 set hidden                  " for better buffer mangement
