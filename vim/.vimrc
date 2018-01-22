@@ -166,9 +166,8 @@ Plug 'michalbachowski/vim-wombat256mod' " go-to color scheme
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
 Plug 'wavded/vim-stylus'
-Plug 'junegunn/vim-pseudocl' " required for vim-oblique
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
-Plug 'junegunn/vim-oblique' " search improvements
+Plug 'junegunn/vim-slash' " search improvements
 
 Plug 'vimwiki/vimwiki'
 
