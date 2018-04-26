@@ -25,9 +25,9 @@ hs.hotkey.bind(hyper, "H", function()
     hs.application.launchOrFocus("Spotify")
 end)
 
--- open iTerm
+-- open emacs
 hs.hotkey.bind(hyper, "J", function()
-    hs.application.launchOrFocus("iTerm")
+    hs.application.launchOrFocus("emacs")
 end)
 
 -- open Firefox
