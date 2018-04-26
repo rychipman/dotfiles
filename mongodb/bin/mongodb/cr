@@ -95,7 +95,7 @@ if [ -n "$DRY_RUN" ]; then
     exit 0
 fi
 
-python2 ${CR_PATH} \
+python ${CR_PATH} \
     --rev=${DIFF_REV} \
     \
     --title="${TITLE}" \
