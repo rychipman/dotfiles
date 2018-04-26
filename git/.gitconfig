@@ -13,6 +13,7 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
     rba = rebase --abort
 	rbc = rebase --continue
+    redate = ! git rebase origin/master --exec 'GIT_COMMITTER_DATE="$(date -R)" git amend --date="$(date -R)"'
 	ri = rebase --interactive --autosquash
 	st = status
 [color]
