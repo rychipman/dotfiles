@@ -23,7 +23,7 @@
 [merge]
     ff = only
 [push]
-	default = simple
+	default = upstream
 [rerere]
 	enabled = true
 [user]
