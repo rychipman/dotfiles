@@ -20,3 +20,4 @@ export TERM=screen-256color
 # set tmpdir
 export TMPDIR=/tmp
 
+export PKG_CONFIG_PATH="/usr/local/Cellar/openssl/1.0.2n/lib/pkgconfig:$PKG_CONFIG_PATH"
