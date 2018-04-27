@@ -136,7 +136,7 @@ values."
                                :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.2)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -303,6 +303,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (setq mac-command-modifier 'control)
   (spacemacs/toggle-highlight-current-line-globally-off)
+  (setq powerline-image-apple-rgb t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
