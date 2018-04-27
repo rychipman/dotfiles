@@ -302,8 +302,11 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "L") (kbd "$"))
   (define-key evil-normal-state-map (kbd "H") (kbd "^"))
   (setq mac-command-modifier 'control)
-  (spacemacs/toggle-highlight-current-line-globally-off)
+  ;(spacemacs/toggle-highlight-current-line-globally-off)
+  (custom-set-faces '(hl-line ((t (:foreground nil :underline nil)))))
+  (custom-set-faces '(highlight ((t (:foreground nil)))))
   (setq powerline-image-apple-rgb t)
+  (setq-default truncate-lines 0)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
