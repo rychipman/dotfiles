@@ -325,4 +325,11 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:inherit nil :stipple nil :background "#1a1a1a" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Source Code Pro"))))
+ '(fringe ((t (:background "#131313"))))
+ '(highlight ((t (:foreground nil))))
+ '(hl-line ((t (:foreground nil :underline nil))))
+ '(linum ((t (:inherit (shadow default) :background "#131313"))))
+ '(linum-relative-current-face ((t (:inherit linum :foreground "#fff607" :weight bold))))
+ '(shadow ((t (:foreground "#666666"))))
+ '(window-divider-first-pixel ((t (:foreground "#131313")))))
