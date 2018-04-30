@@ -309,6 +309,12 @@ you should place your code here."
   (custom-set-faces '(highlight ((t (:foreground nil)))))
   (setq powerline-image-apple-rgb t)
   (setq-default truncate-lines 0)
+  (setq-default whitespace-style '(face
+                                   spaces
+                                   ;space-mark
+                                   tabs
+                                   tab-mark))
+  (global-whitespace-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -335,4 +341,6 @@ you should place your code here."
  '(linum-relative-current-face ((t (:inherit linum :foreground "#fff607" :weight bold))))
  '(shadow ((t (:foreground "#666666"))))
  '(vi-tilde-fringe-face ((t (:foreground "#666666" :background "#1c1c1c"))))
+ '(whitespace-space ((t (:foreground "#353535"))))
+ '(whitespace-tab ((t (:foreground "#353535"))))
  '(window-divider-first-pixel ((t (:foreground "#151515")))))
