@@ -339,6 +339,7 @@ you should place your code here."
  '(hl-line ((t (:foreground nil :underline nil))))
  '(linum ((t (:inherit (shadow default) :background "#151515"))))
  '(linum-relative-current-face ((t (:inherit linum :foreground "#fff607" :weight bold))))
+ '(sh-heredoc ((t (:foreground "yellow1"))))
  '(shadow ((t (:foreground "#666666"))))
  '(vi-tilde-fringe-face ((t (:foreground "#666666" :background "#1c1c1c"))))
  '(whitespace-space ((t (:foreground "#353535"))))
