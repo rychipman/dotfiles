@@ -326,6 +326,29 @@ you should place your code here."
                                    tabs
                                    tab-mark))
   (global-whitespace-mode)
+  (setq org-agenda-files (list "~/org/work.org"
+                               "~/org/emacs.org"
+                               "~/org/personal.org"))
+  (setq org-refile-targets '((nil :maxlevel . 9)
+                             (org-agenda-files :maxlevel . 9)))
+  (setq org-todo-keywords
+        '((sequence "TODO(t!)" "STARTED(s!)" "WAITING(w@/!)" "|" "DONE(d@/!)" "CANCELED(c@/!)")))
+  (setq org-log-into-drawer "STATE-CHANGES")
+  (setq org-clock-into-drawer "TIMESHEET")
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-capture-templates
+        '(("w" "Work Todo" entry (file+headline "~/org/work.org" "Tasks")
+           "* TODO %?" :empty-lines 1 :prepend t)
+          ("p" "Personal Todo" entry (file+headline "~/org/personal.org" "Tasks")
+           "* TODO %?" :empty-lines 1 :prepend t)))
+
+  (defun add-property-with-date-captured ()
+    "Add CREATED property to the current item."
+    (interactive)
+    (org-set-property "CREATED" (format-time-string "%F")))
+  (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+
+  (spacemacs/toggle-mode-line-org-clock-on)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
