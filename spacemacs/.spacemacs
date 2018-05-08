@@ -344,10 +344,31 @@ you should place your code here."
   (setq org-clock-into-drawer "TIMESHEET")
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-capture-templates
-        '(("w" "Work Todo" entry (file+headline "~/org/work.org" "Tasks")
-           "* TODO %?" :empty-lines 1 :prepend t)
-          ("p" "Personal Todo" entry (file+headline "~/org/personal.org" "Tasks")
-           "* TODO %?" :empty-lines 1 :prepend t)))
+        '(("j" "Journal Entry"
+           entry (file+datetree "~/org/journal.org")
+           "* %?")
+          ("w" "Work Todo"
+           entry (file+headline "~/org/work.org" "Tasks")
+           "* TODO %?"
+           :empty-lines 1
+           :prepend t)
+          ("p" "Personal Todo"
+           entry (file+headline "~/org/personal.org" "Tasks")
+           "* TODO %?"
+           :empty-lines 1
+           :prepend t)))
+
+  (setq org-agenda-custom-commands
+        '(("b" "Backlog Review"
+           ((todo "WAITING"
+                  ((org-agenda-overriding-header "Blocked Tasks:")))
+            (tags-todo "work"
+                  ((org-agenda-skip-function
+                    '(or
+                      (org-agenda-skip-entry-if 'scheduled 'deadline)
+                      (org-agenda-skip-entry-if 'todo '("WAITING"))))
+                   (org-agenda-overriding-header "Unscheduled Work Tasks:")))
+            ))))
 
   (defun add-property-with-date-captured ()
     "Add CREATED property to the current item."
