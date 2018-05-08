@@ -61,8 +61,15 @@ values."
      syntax-checking
      ;; version-control
      (mu4e :variables
+           mu4e-use-fancy-chars 'nil
            mu4e-enable-mode-line t
-           mu4e-mu-binary "/usr/local/bin/mu")
+           mu4e-mu-binary "/usr/local/bin/mu"
+           mu4e-drafts-folder "/MongoDB/[Gmail].Drafts"
+           mu4e-sent-folder "/MongoDB/[Gmail].All Mail"
+           mu4e-trash-folder "/MongoDB/[Gmail].Trash"
+           mu4e-refile-folder "/MongoDB/[Gmail].All Mail"
+           mu4e-sent-messages-behavior 'delete
+           mu4e-get-mail-command "offlineimap")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
