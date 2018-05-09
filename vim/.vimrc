@@ -22,6 +22,8 @@ set splitright              " open vertical splits to right
 set splitbelow              " opens horizontal split below
 set shortmess=filnrxtToOI   " see :help shortmess
 
+set maxmempattern=10000
+
 " save up to 100 marks, enable capital marks
 if has('nvim')
     set viminfo='100,f1,\"100,:20,n~/.config/nvim/shada
@@ -97,8 +99,8 @@ set statusline+=%r   " read-only indicator
 set statusline+=%h   " help-buffer indicator
 set statusline+=%w   " preview indicator
 set statusline+=%=   " switch to right side
-set statusline+=%c/
-set statusline+=%{strwidth(getline('.'))}
+set statusline+=%v/
+set statusline+=%{strdisplaywidth(getline('.'))}
 set statusline+=\ \ \  " separation)
 set statusline+=%y   " filetype indicator
 set statusline+=\    " right side padding
@@ -139,22 +141,15 @@ nnoremap <leader>re :e ~/.vimrc<CR>
 
 " terminal options --------------------------------------------------------- {{{
 if has('nvim')
-    tnoremap <C-a>s <C-\><C-n><C-w>s :terminal<CR> i
-    tnoremap <C-a>v <C-\><C-n><C-w>v :terminal<CR> i
-    nnoremap <C-a>s <C-w>s :terminal<CR> i
-    nnoremap <C-a>v <C-\><C-n><C-w>v :terminal<CR> i
-
     nnoremap <leader>tt :terminal<CR> i
-    nnoremap <leader>ts <C-w>s :terminal<CR> i
-    nnoremap <leader>tv <C-w>v :terminal<CR> i
-
     augroup term_config
         autocmd!
         autocmd TermOpen * setlocal nonumber
         autocmd TermOpen * setlocal norelativenumber
         autocmd TermOpen * nnoremap <buffer> <C-c> i
         autocmd TermOpen * nnoremap <buffer> <CR> i
-        autocmd TermOpen term://* tnoremap <ESC> <C-\><C-n>
+        autocmd TermOpen term://* tnoremap <buffer> <ESC> <C-\><C-n>
+        autocmd TermOpen term://* set modified
     augroup END
 endif
 " -------------------------------------------------------- terminal settings }}}
@@ -162,12 +157,27 @@ endif
 " plugins ------------------------------------------------------------------ {{{
 call plug#begin('~/.vim/autoload/vim-plug') " initialize vim-plug
 
+Plug '~/git/personal/nvim-evg'
+
 Plug 'michalbachowski/vim-wombat256mod' " go-to color scheme
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround' " surrounding semantic units
 Plug 'wellle/targets.vim' " text objects
-Plug 'wavded/vim-stylus'
 Plug 'richsoni/vim-ecliptic' " clean system clipboard integration
 Plug 'junegunn/vim-slash' " search improvements
+
+Plug 'mtth/scratch.vim'
+    let g:scratch_insert_autohide = 0
+    let g:scratch_persistence_file = '~/.scratch.vim'
+    let g:scratch_top = 0
+    let g:scratch_height = 20
+
+Plug 'junegunn/vim-peekaboo'
+    let g:peekaboo_window = 'vertical topleft 50new'
+    let g:peekaboo_delay = 300
+    let g:peekaboo_compact = 0
+
+Plug 'nathangrigg/vim-beancount'
 
 Plug 'vimwiki/vimwiki'
 
@@ -188,9 +198,15 @@ Plug 'w0rp/ale'
     let g:ale_lint_on_filetype_changed = 1
     let g:ale_lint_on_save = 1
     let g:ale_lint_on_insert_leave = 1
-    let g:ale_lint_on_text_changed = 'normal'
+    "let g:ale_lint_on_text_changed = 'normal'
 
     let g:go_fmt_fail_silently = 1
+
+    let g:ale_go_gometalinter_executable = 'gometalinter.v2'
+    let g:ale_go_gometalinter_options = '--fast --config /Users/ryan/git/work/sqlproxy/.gometalinter.json'
+    let g:ale_linters = {
+    \   'go': ['gometalinter'],
+    \}
 
 Plug 'airblade/vim-gitgutter' " add git diff info in gutter
     let g:gitgutter_map_keys = 1
@@ -198,8 +214,16 @@ Plug 'airblade/vim-gitgutter' " add git diff info in gutter
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 
+Plug 'PProvost/vim-ps1'
+
+Plug 'cespare/vim-toml'
+
 Plug 'fatih/vim-go'
     let g:go_fmt_command = 'goimports'
+
+Plug 'pangloss/vim-javascript'
+
+Plug 'vim-scripts/clips.vim'
 
 Plug 'mattn/emmet-vim'                " html expansion with emmet
     let g:user_emmet_leader_key='<C-e>'
@@ -243,11 +267,11 @@ endif
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-    nnoremap <leader>e :Files<CR>
+    nnoremap <leader>f :Files<CR>
     nnoremap <leader>b :Buffers<CR>
-    nnoremap <leader>c :Commits<CR>
-    nnoremap <leader>f :Ag 
-    nnoremap <leader>h :History:<CR>
+    "nnoremap <leader>c :Commits<CR>
+    nnoremap <leader>a :Ag 
+    "nnoremap <leader>h :History:<CR>
     let g:fzf_colors = {
     \   'fg':      ['fg', 'Normal'],
     \   'bg':      ['bg', 'Normal'],
@@ -262,9 +286,32 @@ Plug 'junegunn/fzf.vim'
     \   'spinner': ['fg', 'Label'],
     \   'header':  ['fg', 'Comment']
     \}
+    augroup fzf
+        autocmd!
+        autocmd FileType fzf tnoremap <buffer> <ESC> <ESC>
+    augroup END
+
+    function! s:terminals()
+        return filter(range(1, bufnr('$')), 'getbufvar(v:val, "&buftype") ==# "terminal"')
+    endfunction
+
+    function! FZFTerminals()
+        call fzf#run(fzf#wrap({
+        \   'source': s:terminals(),
+        \   'sink': 'e',
+        \}))
+    endfunction
+
+    nnoremap <leader>t :<C-u>call FZFTerminals()<CR>
 
 Plug 'tpope/vim-fugitive'
-    nnoremap <leader>g :Gstatus<CR>
+    nnoremap <leader>gb :Gblame<CR>
+
+Plug 'junegunn/gv.vim'
+    nnoremap <leader>gl :GV<CR>
+
+Plug 'jreybert/vimagit'
+    nnoremap <leader>gm :tabnew<CR>:MagitOnly<CR>
 
 Plug 'romainl/vim-qf'
     nmap ]q <Plug>QfCnext
@@ -287,30 +334,73 @@ let g:base16colorspace=256
 
 " color scheme
 colorscheme wombat256mod
+
 highlight Normal ctermbg=233
 highlight SpecialKey ctermbg=233 ctermfg=235
+highlight Whitespace ctermbg=233 ctermfg=235
 highlight ExtraWhitespace ctermbg=red
 
-highlight mDiffInvisible ctermbg=234 ctermfg=234
+highlight TabLine cterm=NONE ctermbg=233 ctermfg=237
+highlight TabLineSel cterm=NONE ctermbg=235 ctermfg=white
+highlight TabLineFill cterm=NONE ctermfg=234 ctermbg=234
 
-highlight DiffAdd ctermbg=234 ctermfg=234
-highlight DiffDelete ctermbg=234 ctermfg=234
-highlight DiffChange ctermbg=234 ctermfg=234
+function! MyTabLabel(n)
+    let l:buflist = tabpagebuflist(a:n)
+    let l:winnr = tabpagewinnr(a:n)
+    let l:bufname = bufname(l:buflist[l:winnr - 1])
+    if l:bufname ==# ''
+        let l:bufname = '<none>'
+    endif
+    return l:bufname
+endfunction
+
+function! MyTabLine()
+    let l:tabline = ''
+    for l:i in range(tabpagenr('$'))
+        " select the highlighting
+        if l:i + 1 == tabpagenr()
+          let l:tabline .= '%#TabLineSel#'
+        else
+          let l:tabline .= '%#TabLine#'
+        endif
+
+        " set the tab page number (for mouse clicks)
+        let l:tabline .= '%' . (l:i + 1) . 'T'
+
+        " the label is made by MyTabLabel()
+        let l:tabline .= ' %{MyTabLabel(' . (l:i + 1) . ')} '
+    endfor
+
+    " after the last tab fill with TabLineFill and reset tab page nr
+    let l:tabline .= '%#TabLineFill#%T'
+    return l:tabline
+endfunction
+
+set tabline=%!MyTabLine()
+set showtabline=2
+
+" highlight mDiffInvisible ctermbg=234 ctermfg=234
+
+"highlight DiffAdd ctermbg=234 ctermfg=234
+"highlight DiffDelete ctermbg=234 ctermfg=234
+"highlight DiffChange ctermbg=234 ctermfg=234
 
 "highlight DiffText ctermbg=23
 
-highlight mDiffNormal ctermbg=234
-highlight mDiffAdd ctermbg=green
-highlight mDiffDelete ctermbg=red
-highlight mDiffChangeDeleteLine ctermbg=red
-highlight mDiffChangeAddLine ctermbg=green
-highlight mDiffChangeDeleteText ctermbg=blue
-highlight mDiffChangeAddText ctermbg=blue
+" highlight mDiffNormal ctermbg=234
+" highlight mDiffAdd ctermbg=22 ctermfg=white
+" highlight mDiffDelete ctermbg=88 ctermfg=white
+" highlight mDiffChangeDeleteLine ctermbg=red
+" highlight mDiffChangeAddLine ctermbg=green
+" highlight mDiffChangeDeleteText ctermbg=blue
+" highlight mDiffChangeAddText ctermbg=blue
 
 nnoremap <leader>de :call SynStack()<CR>
 function! SynStack()
-    let l:state = synIDattr((diff_hlID('.',col('.'))), 'name')
-    echo l:state
+    let l:out = 'hi<' . synIDattr(synID(line('.'),col('.'),1),'name') . '> trans<'
+        \ . synIDattr(synID(line('.'),col('.'),0),'name') . '> lo<'
+        \ . synIDattr(synIDtrans(synID(line('.'),col('.'),1)),'name') . '>'
+    echo l:out
 endfunction
 
 nnoremap <leader>do :call RecolorDiffBuffer('old')<CR>
