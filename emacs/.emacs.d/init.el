@@ -59,6 +59,7 @@
  '(diff-hl-change ((t (:foreground "#c1a10f" :background "#c1a10f"))))
  '(diff-hl-insert ((t (:foreground "#46843c" :background "#46843c"))))
  '(diff-hl-delete ((t (:foreground "#8e0801" :background "#8e0801"))))
+ '(cursor ((t (:background "orange"))))
  )
 
 (require 'use-package)
@@ -302,7 +303,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#1c1c1c" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "nil" :family "Source Code Pro"))))
  '(fringe ((t (:background "#151515"))))
- '(highlight ((t (:foreground nil))))
  '(hl-line ((t (:foreground nil :underline nil))))
  '(linum ((t (:inherit (shadow default) :background "#151515"))))
  '(shadow ((t (:foreground "#666666"))))
