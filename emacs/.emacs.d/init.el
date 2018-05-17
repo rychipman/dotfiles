@@ -309,6 +309,10 @@
   (define-key company-active-map [tab] 'company-complete-common-or-cycle)
   )
 
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
