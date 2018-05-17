@@ -46,6 +46,7 @@
 (global-whitespace-mode)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin"))
+(setenv "GOPATH" "/Users/ryan/.go")
 (setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin")))
 
 (load-theme 'wombat t)
@@ -250,7 +251,23 @@
   :ensure t
   :config
   (add-hook 'before-save-hook 'gofmt-before-save)
-  (setq-default gofmt-command "goimports"))
+  (setq-default gofmt-command "goimports")
+
+  (use-package company-go
+    :ensure t
+    :config
+    (add-hook 'go-mode-hook
+		(lambda ()
+		(set (make-local-variable 'company-backends) '(company-go))
+		(company-mode 1)))
+    )
+
+  (use-package go-eldoc
+    :ensure t
+    :config
+    (add-hook 'go-mode-hook 'go-eldoc-setup)
+    )
+  )
 
 (use-package mu4e
   :commands (mu4e)
