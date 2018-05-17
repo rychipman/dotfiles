@@ -313,6 +313,24 @@
   :ensure t
   :init (global-flycheck-mode))
 
+(use-package hydra
+  :ensure t
+  :config
+
+  (defhydra hydra-flycheck
+    (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
+     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+     :hint nil)
+    "errors"
+    ("f" flycheck-error-list-set-filter "filter")
+    ("j" flycheck-next-error "next")
+    ("k" flycheck-previous-error "prev")
+    ("gg" flycheck-first-error "first")
+    ("G" (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
+    ("q" nil)
+    )
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
