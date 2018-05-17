@@ -273,6 +273,17 @@
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
   )
 
+(use-package company
+  :ensure t
+  :config
+  (global-company-mode 1)
+  (setq-default company-echo-delay 0)
+  (setq-default company-idle-delay 0.1)
+  (setq-default company-auto-complete t)
+  (setq-default company-minimum-prefix-length 2)
+  (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
