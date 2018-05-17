@@ -21,8 +21,13 @@ hs.hotkey.bind(hyper, "F", function()
 end)
 
 -- open Spotify
-hs.hotkey.bind(hyper, "H", function()
+hs.hotkey.bind(hyper, "G", function()
     hs.application.launchOrFocus("Spotify")
+end)
+
+-- open iTerm
+hs.hotkey.bind(hyper, "H", function()
+    hs.application.launchOrFocus("iTerm")
 end)
 
 -- open emacs
