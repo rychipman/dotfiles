@@ -36,11 +36,17 @@
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
 
-(setq-default frame-zoomed 0)
-(defun toggle-zoom-frame ()
-  "toggle zoom state of current frame"
-  (cond ((eq frame-zoomed 0) (setq frame-zoomed 1) (set-face-attribute 'default (selected-frame) :height 120))
-	((eq frame-zoomed 1) (setq frame-zoomed 0) (set-face-attribute 'default (selected-frame) :height 150))))
+(defun zoom-frame-in ()
+ "Zoom in the current frame."
+ (interactive)
+ (set-face-attribute 'default (selected-frame)
+   :height (+ 10 (face-attribute 'default :height))))
+
+(defun zoom-frame-out ()
+ "Zoom out the current frame."
+ (interactive)
+ (set-face-attribute 'default (selected-frame)
+   :height (- (face-attribute 'default :height) 10)))
 
 (setq-default whitespace-style '(face spaces tabs tab-mark))
 (global-whitespace-mode)
@@ -163,7 +169,8 @@
 
    ;; zoom
    "z" '(:ignore t :which-key "zoom")
-   "zz" '(lambda () "toggle zoom" (interactive)(toggle-zoom-frame))
+   "zt" '(lambda () "toggle zoom" (interactive)(toggle-zoom-frame))
+   "zz" 'hydra-zoom/body
 
    ;; mu4e
    "m" '(:ignore t :which-key "mu4e")
@@ -316,6 +323,11 @@
 (use-package hydra
   :ensure t
   :config
+
+  (defhydra hydra-zoom ()
+    "zoom"
+    ("=" zoom-frame-in "in")
+    ("-" zoom-frame-out "out"))
 
   (defhydra hydra-flycheck
     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
