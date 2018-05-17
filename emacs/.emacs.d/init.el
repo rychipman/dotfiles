@@ -63,9 +63,9 @@
  '(font-lock-function-name-face ((t (:foreground "#efe67c"))))
  '(font-lock-type-face ((t (:foreground "#d5f29f"))))
  '(font-lock-keyword-face ((t (:foreground "#8cceff"))))
- '(diff-hl-change ((t (:foreground "#c1a10f" :background "#c1a10f"))))
- '(diff-hl-insert ((t (:foreground "#46843c" :background "#46843c"))))
- '(diff-hl-delete ((t (:foreground "#8e0801" :background "#8e0801"))))
+ '(git-gutter-fr:modified ((t (:foreground "#c1a10f"))))
+ '(git-gutter-fr:added ((t (:foreground "#46843c"))))
+ '(git-gutter-fr:deleted ((t (:foreground "#8e0801"))))
  '(cursor ((t (:background "orange"))))
  '(company-preview ((t (:background "#303030"))))
  '(company-preview-common ((t (:foreground "#8cceff"))))
@@ -296,14 +296,20 @@
     :config
     (counsel-projectile-mode 1)))
 
-(use-package diff-hl
+(use-package git-gutter-fringe
   :ensure t
   :config
-  (global-diff-hl-mode 1)
-  (diff-hl-flydiff-mode)
-  (fringe-mode 3)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-  )
+  (global-git-gutter-mode 1)
+  (setq-default fringes-outside-margins t)
+  (fringe-helper-define 'git-gutter-fr:added '(center repeated)
+    "..XXX...")
+  (fringe-helper-define 'git-gutter-fr:modified '(center repeated)
+    "..XXX...")
+  (fringe-helper-define 'git-gutter-fr:deleted 'bottom
+    "X......."
+    "XX......"
+    "XXX....."
+    "XXXX...."))
 
 (use-package company
   :ensure t
@@ -318,7 +324,17 @@
 
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config
+  (setq flycheck-indication-mode 'right-fringe)
+  (fringe-helper-define 'flycheck-fringe-bitmap-double-arrow 'center
+    "...XX..."
+    "..XXX..."
+    ".XXXX..."
+    "XXXXX..."
+    ".XXXX..."
+    "..XXX..."
+    "...XX..."))
 
 (use-package hydra
   :ensure t
