@@ -60,6 +60,13 @@
  '(diff-hl-insert ((t (:foreground "#46843c" :background "#46843c"))))
  '(diff-hl-delete ((t (:foreground "#8e0801" :background "#8e0801"))))
  '(cursor ((t (:background "orange"))))
+ '(company-preview ((t (:background "#303030"))))
+ '(company-preview-common ((t (:foreground "#8cceff"))))
+ '(company-tooltip ((t (:background "#303030"))))
+ '(company-tooltip-selection ((t (:background "#444444"))))
+ '(company-tooltip-common ((t (:foreground "#8cceff"))))
+ '(company-scrollbar-fg ((t (:background "#777777"))))
+ '(company-scrollbar-bg ((t (:background "#444444"))))
  )
 
 (require 'use-package)
