@@ -124,6 +124,7 @@
    "gs" 'magit-status
    "gm" 'magit-dispatch-popup
    "gb" 'magit-blame
+   "gg" 'hydra-gitgutter/body
 
    ;; org
    "o" '(:ignore t :which-key "org")
@@ -339,6 +340,15 @@
 (use-package hydra
   :ensure t
   :config
+
+  (defhydra hydra-gitgutter ()
+    "gitgutter"
+    ("j" git-gutter:next-hunk)
+    ("k" git-gutter:previous-hunk)
+    ("s" git-gutter:stage-hunk)
+    ("r" git-gutter:stage-hunk)
+    ("g" git-gutter:stage-hunk)
+    ("R" git-gutter:set-start-revision))
 
   (defhydra hydra-zoom ()
     "zoom"
