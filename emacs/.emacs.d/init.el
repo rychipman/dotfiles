@@ -292,20 +292,16 @@
   :commands (mu4e)
   :config
 
-  ;; don't set trashed flag when moving to trash
-  (setq mu4e-marks (remove-nth-element mu4e-marks 5))
-  (add-to-list 'mu4e-marks
-	       '(trash
-		 :char ("d" . "▼")
-		 :prompt "dtrash"
-		 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
-		 :action (lambda (docid msg target)
-			   (mu4e~proc-move docid
-			     (mu4e~mark-check-target target) "-N"))))
+  ;; general settings
+  (setq
+   mu4e-maildir "~/mail"
+   mu4e-mu-binary "/usr/local/bin/mu"
+   mu4e-get-mail.command "mbsync -Va"
+   mu4e-change-filenames-when-moving t
+   mu4e-completing-read-function 'completing-read
+   mu4e-confirm-quit nil)
 
-  (setq mu4e-change-filenames-when-moving t)
-  (setq mu4e-completing-read-function 'completing-read)
-  (setq mu4e-confirm-quit nil)
+  ;; set up contexts
   (setq mu4e-contexts
 	`(
 	   ,(make-mu4e-context
@@ -321,7 +317,8 @@
 		      ( mu4e-sent-folder   . "/mongodb/[Gmail].All Mail" )
 		      ( mu4e-trash-folder  . "/mongodb/[Gmail].Trash" )
 		      ( mu4e-refile-folder . "/mongodb/[Gmail].All Mail" )
-		      ( mu4e-compose-signature . nil )))
+		      ( mu4e-sent-messages-behavior . 'delete )
+		      ( mu4e-compose-signature      . nil )))
 
 	   ,(make-mu4e-context
 	     :name "personal"
@@ -336,14 +333,20 @@
 		      ( mu4e-sent-folder   . "/personal/Archive" )
 		      ( mu4e-trash-folder  . "/personal/Trash" )
 		      ( mu4e-refile-folder . "/personal/Archive" )
-		      ( mu4e-compose-signature . nil )))
-	   )
-	)
-  (setq-default
-   mu4e-maildir "~/mail"
-   mu4e-mu-binary "/usr/local/bin/mu"
-   mu4e-get-mail.command "mbsync -Va"
-   mu4e-sent-messages-behavior 'delete))
+		      ( mu4e-sent-messages-behavior . 'sent )
+		      ( mu4e-compose-signature      . nil )))))
+
+  ;; don't set trashed flag when moving to trash
+  (setq mu4e-marks (remove-nth-element mu4e-marks 5))
+  (add-to-list 'mu4e-marks
+	       '(trash
+		 :char ("d" . "▼")
+		 :prompt "dtrash"
+		 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
+		 :action (lambda (docid msg target)
+			   (mu4e~proc-move docid
+			     (mu4e~mark-check-target target) "-N"))))
+  )
 
 (use-package projectile
   :ensure t
