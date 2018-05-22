@@ -55,6 +55,8 @@
 (setenv "GOPATH" "/Users/ryan/.go")
 (setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin")))
 
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+
 (load-theme 'wombat t)
 (custom-theme-set-faces
  'wombat
@@ -276,6 +278,8 @@
     (add-hook 'go-mode-hook 'go-eldoc-setup)
     )
   )
+
+(use-package beancount)
 
 (defun remove-nth-element (list nth)
   "Return a copy of LIST without its NTH element."
