@@ -303,13 +303,46 @@
 			   (mu4e~proc-move docid
 			     (mu4e~mark-check-target target) "-N"))))
 
+  (setq mu4e-change-filenames-when-moving t)
+  (setq mu4e-completing-read-function 'completing-read)
+  (setq mu4e-confirm-quit nil)
+  (setq mu4e-contexts
+	`(
+	   ,(make-mu4e-context
+	     :name "mongodb"
+	     :enter-func (lambda () (mu4e-message "entering 'mongodb' context"))
+	     :leave-func (lambda () (mu4e-message "leaving 'mongodb' context"))
+	     :match-func (lambda (msg)
+			   (when msg
+			     (string= (mu4e-message-field msg :maildir) "/mongodb")))
+	     :vars '( ( user-mail-address  . "ryan@mongodb.com" )
+		      ( user-full-name     . "Ryan Chipman" )
+		      ( mu4e-drafts-folder . "/mongodb/[Gmail].Drafts" )
+		      ( mu4e-sent-folder   . "/mongodb/[Gmail].All Mail" )
+		      ( mu4e-trash-folder  . "/mongodb/[Gmail].Trash" )
+		      ( mu4e-refile-folder . "/mongodb/[Gmail].All Mail" )
+		      ( mu4e-compose-signature . nil )))
+
+	   ,(make-mu4e-context
+	     :name "personal"
+	     :enter-func (lambda () (mu4e-message "entering 'personal' context"))
+	     :leave-func (lambda () (mu4e-message "leaving 'personal' context"))
+	     :match-func (lambda (msg)
+			   (when msg
+			     (string= (mu4e-message-field msg :maildir) "/personal")))
+	     :vars '( ( user-mail-address  . "ryan@ryanchipman.com" )
+		      ( user-full-name     . "Ryan Chipman" )
+		      ( mu4e-drafts-folder . "/personal/Drafts" )
+		      ( mu4e-sent-folder   . "/personal/Archive" )
+		      ( mu4e-trash-folder  . "/personal/Trash" )
+		      ( mu4e-refile-folder . "/personal/Archive" )
+		      ( mu4e-compose-signature . nil )))
+	   )
+	)
   (setq-default
+   mu4e-maildir "~/mail"
    mu4e-mu-binary "/usr/local/bin/mu"
-   mu4e-get-mail.command "offlineimap"
-   mu4e-drafts-folder "/MongoDB/[Gmail].Drafts"
-   mu4e-sent-folder "/MongoDB/[Gmail].All Mail"
-   mu4e-trash-folder "/MongoDB/[Gmail].Trash"
-   mu4e-refile-folder "/MongoDB/[Gmail].All Mail"
+   mu4e-get-mail.command "mbsync -Va"
    mu4e-sent-messages-behavior 'delete))
 
 (use-package projectile
