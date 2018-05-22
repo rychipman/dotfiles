@@ -277,9 +277,28 @@
     )
   )
 
+(defun remove-nth-element (list nth)
+  "Return a copy of LIST without its NTH element."
+  (if (zerop nth) (cdr list)
+    (let ((last (nthcdr (1- nth) list)))
+      (setcdr last (cddr last))
+      list)))
+
 (use-package mu4e
   :commands (mu4e)
   :config
+
+  ;; don't set trashed flag when moving to trash
+  (setq mu4e-marks (remove-nth-element mu4e-marks 5))
+  (add-to-list 'mu4e-marks
+	       '(trash
+		 :char ("d" . "▼")
+		 :prompt "dtrash"
+		 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
+		 :action (lambda (docid msg target)
+			   (mu4e~proc-move docid
+			     (mu4e~mark-check-target target) "-N"))))
+
   (setq-default
    mu4e-mu-binary "/usr/local/bin/mu"
    mu4e-get-mail.command "offlineimap"
