@@ -301,6 +301,8 @@
    mu4e-completing-read-function 'completing-read
    mu4e-confirm-quit nil)
 
+  (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
   ;; set up contexts
   (setq mu4e-contexts
 	`(
