@@ -293,6 +293,7 @@
   :config
 
   ;; general settings
+  (require 'org-mu4e)
   (setq
    mu4e-maildir "~/mail"
    mu4e-mu-binary "/usr/local/bin/mu"
