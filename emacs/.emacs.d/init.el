@@ -36,6 +36,16 @@
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
 
+(defun zoom-frame-monitor ()
+ "Zoom the current frame to an appropriate size for my thinkvision monitor."
+ (interactive)
+ (set-face-attribute 'default (selected-frame) :height 150))
+
+(defun zoom-frame-laptop ()
+ "Zoom the current frame to an appropriate size for my laptop screen."
+ (interactive)
+ (set-face-attribute 'default (selected-frame) :height 120))
+
 (defun zoom-frame-in ()
  "Zoom in the current frame."
  (interactive)
@@ -172,7 +182,8 @@
 
    ;; zoom
    "z" '(:ignore t :which-key "zoom")
-   "zt" '(lambda () "toggle zoom" (interactive)(toggle-zoom-frame))
+   "zm" (lambda () "monitor" (interactive) (zoom-frame-monitor))
+   "zl" (lambda () "laptop" (interactive) (zoom-frame-laptop))
    "zz" 'hydra-zoom/body
 
    ;; mu4e
