@@ -291,14 +291,15 @@
 	     :leave-func (lambda () (mu4e-message "leaving 'mongodb' context"))
 	     :match-func (lambda (msg)
 			   (when msg
-			     (string= (mu4e-message-field msg :maildir) "/mongodb")))
+			     (string-prefix-p "/mongodb" (mu4e-message-field msg :maildir))))
 	     :vars '( ( user-mail-address  . "ryan@mongodb.com" )
 		      ( user-full-name     . "Ryan Chipman" )
-		      ( mu4e-drafts-folder . "/mongodb/[Gmail].Drafts" )
-		      ( mu4e-sent-folder   . "/mongodb/[Gmail].All Mail" )
-		      ( mu4e-trash-folder  . "/mongodb/[Gmail].Trash" )
-		      ( mu4e-refile-folder . "/mongodb/[Gmail].All Mail" )
-		      ( mu4e-sent-messages-behavior . 'delete )
+		      ( mu4e-drafts-folder . "/mongodb/Drafts" )
+		      ( mu4e-sent-folder   . "/mongodb/Sent" )
+		      ( mu4e-trash-folder  . "/mongodb/Trash" )
+		      ( mu4e-refile-folder . "/mongodb/Archived" )
+		      ( mu4e-sent-messages-behavior . delete )
+		      ( smtpmail-smtp-server        . "smtp.gmail.com" )
 		      ( mu4e-compose-signature      . nil )))
 
 	   ,(make-mu4e-context
@@ -307,14 +308,15 @@
 	     :leave-func (lambda () (mu4e-message "leaving 'personal' context"))
 	     :match-func (lambda (msg)
 			   (when msg
-			     (string= (mu4e-message-field msg :maildir) "/personal")))
+			     (string-prefix-p "/personal" (mu4e-message-field msg :maildir))))
 	     :vars '( ( user-mail-address  . "ryan@ryanchipman.com" )
 		      ( user-full-name     . "Ryan Chipman" )
 		      ( mu4e-drafts-folder . "/personal/Drafts" )
-		      ( mu4e-sent-folder   . "/personal/Archive" )
+		      ( mu4e-sent-folder   . "/personal/Sent Items" )
 		      ( mu4e-trash-folder  . "/personal/Trash" )
 		      ( mu4e-refile-folder . "/personal/Archive" )
-		      ( mu4e-sent-messages-behavior . 'sent )
+		      ( mu4e-sent-messages-behavior . sent )
+		      ( smtpmail-smtp-server        . "smtp.fastmail.com" )
 		      ( mu4e-compose-signature      . nil )))))
 
   ;; don't set trashed flag when moving to trash
