@@ -282,6 +282,20 @@
 
   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
+  ;; set up bookmarks
+  (setq mu4e-bookmarks
+    `(
+      ,(make-mu4e-bookmark
+	:name "Unread messages"
+	:query "flag:unread AND NOT maildir:/mongodb/Trash AND NOT maildir:/personal/Trash"
+	:key ?u)
+
+      ,(make-mu4e-bookmark
+	:name "Inbox messages"
+	:query "maildir:/mongodb/INBOX OR maildir:/personal/INBOX"
+	:key ?i)
+      ))
+
   ;; set up contexts
   (setq mu4e-contexts
 	`(
