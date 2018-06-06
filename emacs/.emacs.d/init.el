@@ -178,6 +178,11 @@
    "pD" 'counsel-projectile-find-dir
    "ps" 'counsel-projectile-rg
 
+   ;; ledger
+   "l" '(:ignore t :which-key "ledger")
+   "lf" (lambda () "file" (interactive) (find-file "~/ledger/test.ledger"))
+   "lr" 'ledger-report
+
    ;; resume
    "r" 'ivy-resume
 
@@ -258,7 +263,13 @@
     )
   )
 
-(use-package beancount)
+(use-package ledger-mode
+  :ensure t
+  :config
+  (setq ledger-reconcile-insert-effective-date nil)
+  (define-key ledger-mode-map (kbd "C-k") 'ledger-navigate-prev-xact-or-directive)
+  (define-key ledger-mode-map (kbd "C-j") 'ledger-navigate-next-xact-or-directive)
+  )
 
 (defun remove-nth-element (list nth)
   "Return a copy of LIST without its NTH element."
