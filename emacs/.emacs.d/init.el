@@ -87,6 +87,7 @@
  '(company-scrollbar-fg ((t (:background "#777777"))))
  '(company-scrollbar-bg ((t (:background "#444444"))))
  )
+(set-face-attribute 'highlight nil :foreground 'unspecified :background "#202020" :underline nil)
 
 (require 'use-package)
 
