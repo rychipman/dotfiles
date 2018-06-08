@@ -162,12 +162,6 @@
    "wD" 'eyebrowse-close-window-config
    "wf" 'eyebrowse-switch-to-window-config
 
-   ;; help
-   "h" '(:ignore t :which-key "help")
-   "hf" 'counsel-describe-function
-   "hv" 'counsel-describe-variable
-   "hk" 'counsel-describe-key
-
    ;; dired
    "d" '(:ignore t :which-key "dired")
    "dd" 'dired-jump-other-window
