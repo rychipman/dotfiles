@@ -386,9 +386,10 @@
   (global-company-mode 1)
   (setq-default company-echo-delay 0)
   (setq-default company-idle-delay 0.1)
-  (setq-default company-auto-complete t)
+  (setq-default company-auto-complete 'company-explicit-action-p)
   (setq-default company-minimum-prefix-length 2)
-  (define-key company-active-map [tab] 'company-complete-common-or-cycle)
+  (define-key company-active-map (kbd "<tab>") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (define-key company-active-map (kbd "S-<tab>") 'company-select-previous-or-abort)
   )
 
 (use-package flycheck
