@@ -107,15 +107,15 @@
 (use-package general
   :ensure t
   :config
-  (general-define-key   
+  (general-define-key
 
    :states '(normal visual emacs)
-   :prefix "SPC"  
+   :prefix "SPC"
 
    ;; file
    "f" '(:ignore t :which-key "file")
    "fs" 'save-buffer
-   "ff" 'counsel-find-file	      
+   "ff" 'counsel-find-file
    "fe" '(:ignore t :which-key "emacs")
    "fee" (lambda () "edit" (interactive) (find-file "~/.emacs.d/init.el"))
    "fer" (lambda () "reload" (interactive) (load-file user-init-file))
@@ -284,7 +284,7 @@
   (setq
    mu4e-maildir "~/mail"
    mu4e-mu-binary "/usr/local/bin/mu"
-   mu4e-get-mail.command "mbsync -Va"
+   mu4e-get-mail-command "mbsync -Va"
    mu4e-change-filenames-when-moving t
    mu4e-completing-read-function 'completing-read
    mu4e-confirm-quit nil)

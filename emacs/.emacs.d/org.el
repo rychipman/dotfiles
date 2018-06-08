@@ -153,7 +153,7 @@
 	  (when (member (org-get-todo-state) org-todo-keywords-1)
 	    (setq has-subtask t))))
       (and is-a-task has-subtask))))
-  
+
 (defun rpc/is-project-subtree-p ()
   "Any task with a todo keyword that is in a project subtree.
 Callers of this function already widen the buffer view."
