@@ -143,6 +143,7 @@
    "o" '(:ignore t :which-key "org")
    "oa" 'org-agenda
    "oc" 'org-capture
+   "ol" 'org-store-link
    "or" 'org-refile
    "oA" 'org-archive
    "oA" 'org-archive
