@@ -146,6 +146,7 @@
    "or" 'org-refile
    "oA" 'org-archive
    "oA" 'org-archive
+   "of" 'rpc/open-org-file
 
    ;; window
    "w" '(:ignore t :which-key "window")

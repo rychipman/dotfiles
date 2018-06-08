@@ -29,3 +29,8 @@
 (setq org-agenda-files (list "~/org/inbox.org"
 			    "~/org/tickler.org"
 			    "~/org/gtd.org"))
+
+(defun rpc/open-org-file ()
+  "Open my primary org file."
+  (interactive)
+  (find-file "~/org/gtd.org"))
