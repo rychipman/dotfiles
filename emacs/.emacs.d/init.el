@@ -311,7 +311,9 @@
       ))
 
   ;; set up contexts
-  (setq mu4e-contexts
+  (setq mu4e-context-policy 'pick-first
+	mu4e-compose-context-policy nil
+	mu4e-contexts
 	`(
 	   ,(make-mu4e-context
 	     :name "mongodb"
