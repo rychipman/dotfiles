@@ -58,7 +58,7 @@
  (set-face-attribute 'default (selected-frame)
    :height (- (face-attribute 'default :height) 10)))
 
-(setq-default whitespace-style '(face spaces tabs tab-mark))
+(setq-default whitespace-style '(face spaces tabs tab-mark trailing))
 (global-whitespace-mode)
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin"))
@@ -86,6 +86,7 @@
  '(company-tooltip-common ((t (:foreground "#8cceff"))))
  '(company-scrollbar-fg ((t (:background "#777777"))))
  '(company-scrollbar-bg ((t (:background "#444444"))))
+ '(whitespace-trailing ((t :background "#e5786d")))
  )
 (set-face-attribute 'highlight nil :foreground 'unspecified :background "#303030" :underline nil)
 
