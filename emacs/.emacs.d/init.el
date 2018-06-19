@@ -102,7 +102,8 @@
   :ensure t
   :config
   (ivy-mode 1)
-  (setq ivy-initial-inputs-alist nil))
+  (setq ivy-initial-inputs-alist nil)
+  (define-key ivy-minibuffer-map (kbd "C-<return>") 'ivy-immediate-done))
 
 (use-package general
   :ensure t
