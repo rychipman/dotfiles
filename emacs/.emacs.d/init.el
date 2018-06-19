@@ -180,6 +180,9 @@
    "l" '(:ignore t :which-key "ledger")
    "lf" (lambda () "file" (interactive) (find-file "~/ledger/test.ledger"))
    "lr" 'ledger-report
+   "lc" 'ledger-check-buffer
+   "li" 'rpc/ledger-match-imports
+   "la" 'rpc/ledger-add-interactive
 
    ;; resume
    "r" 'ivy-resume
