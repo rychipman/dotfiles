@@ -6,3 +6,4 @@
 
 (load-file "~/.emacs.d/ledger/ledger-xact.el")
 (load-file "~/.emacs.d/ledger/ledger-jump.el")
+(load-file "~/.emacs.d/ledger/ledger-import.el")

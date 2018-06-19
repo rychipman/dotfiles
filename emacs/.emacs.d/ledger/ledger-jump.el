@@ -10,6 +10,9 @@
 (defvar ledger-xacts nil
   "The current xact filtering function.")
 
+(defvar ledger-import-xacts nil
+  "The current xact filtering function.")
+
 (defvar ledger-xact-jumplist nil
   "The current xact filtering function.")
 
@@ -21,6 +24,9 @@
   (setq ledger-xact-jumplist nil
 		ledger-jumplist-filter filter)
   (rpc/ledger-populate-jumplist))
+
+(defun rpc/ledger-has-match (matcher)
+  (not (= 0 (seq-count matcher ledger-xacts))))
 
 (defun rpc/ledger-populate-jumplist ()
   "Populate 'ledger-xact-jumplist with the elements of 'ledger-xacts that match 'ledger-jumplist-filter."
