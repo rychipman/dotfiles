@@ -9,6 +9,9 @@
 (defun rpc/ledger-xact-line (xact)
   (cadr xact))
 
+(defun rpc/ledger-xact-date (xact)
+  (format-time-string "%Y/%m/%d" (nth 3 xact)))
+
 (defun rpc/ledger-xact-payee (xact)
   (nth 4 xact))
 
@@ -46,10 +49,17 @@
   (car post))
 
 (defun rpc/ledger-post-acct (post)
-  (-second-item post))
+  (nth 1 post))
 
 (defun rpc/ledger-post-amt (post)
-  (-third-item post))
+  (nth 2 post))
 
 (defun rpc/ledger-post-cleared (post)
-  (-fourth-item post))
+  (nth 3 post))
+
+(defun rpc/ledger-post-ofxid-tag (post)
+  (nth 4 post))
+
+(defun rpc/ledger-post-has-ofxid-tag (post)
+  (rpc/ledger-post-ofxid-tag post)
+  (nth 4 post))
