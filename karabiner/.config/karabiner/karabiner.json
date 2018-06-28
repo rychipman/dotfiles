@@ -14,26 +14,27 @@
                 "rules": [{
 					"manipulators": [
 						{
-							"description": "Change tab to control+option.",
+							"description": "Change tab to control+option (tab if pressed alone).",
 							"type": "basic",
 							"from": { "key_code": "tab" },
 							"to": [{
 								"key_code": "left_control",
 								"modifiers": [ "left_option" ]
-							}]
+							}],
+							"to_if_alone": [{ "key_code": "tab" }]
 						},
 						{
-							"description": "Change caps_lock to control (escape if pressed alone).",
+							"description": "Change caps_lock to command (escape if pressed alone).",
 							"type": "basic",
 							"from": { "key_code": "caps_lock" },
-							"to": [{ "key_code": "left_control" }],
+							"to": [{ "key_code": "left_command" }],
 							"to_if_alone": [{ "key_code": "escape" }]
 						},
 						{
-							"description": "Change return to control (return if pressed alone).",
+							"description": "Change return to command (return if pressed alone).",
 							"type": "basic",
 							"from": { "key_code": "return_or_enter" },
-							"to": [{ "key_code": "left_control" }],
+							"to": [{ "key_code": "left_command" }],
 							"to_if_alone": [{ "key_code": "return_or_enter" }]
 						}
 					]
