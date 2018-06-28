@@ -1,0 +1,44 @@
+{
+    "global": {
+        "check_for_updates_on_startup": true,
+        "show_in_menu_bar": true,
+        "show_profile_name_in_menu_bar": false
+    },
+    "profiles": [
+        {
+            "devices": [],
+            "name": "Ryan's Karabiner Elements Profile",
+            "selected": true,
+			"simple_modifications": {},
+            "complex_modifications": {
+                "rules": [{
+					"manipulators": [
+						{
+							"description": "Change tab to control+option.",
+							"type": "basic",
+							"from": { "key_code": "tab" },
+							"to": [{
+								"key_code": "left_control",
+								"modifiers": [ "left_option" ]
+							}]
+						},
+						{
+							"description": "Change caps_lock to control (escape if pressed alone).",
+							"type": "basic",
+							"from": { "key_code": "caps_lock" },
+							"to": [{ "key_code": "left_control" }],
+							"to_if_alone": [{ "key_code": "escape" }]
+						},
+						{
+							"description": "Change return to control (return if pressed alone).",
+							"type": "basic",
+							"from": { "key_code": "return_or_enter" },
+							"to": [{ "key_code": "left_control" }],
+							"to_if_alone": [{ "key_code": "return_or_enter" }]
+						}
+					]
+				}]
+            }
+        }
+    ]
+}
