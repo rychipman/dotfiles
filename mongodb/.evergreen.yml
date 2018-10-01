@@ -1,4 +1,4 @@
-api_server_host: http://evergreen.mongodb.com/api
+api_server_host: https://evergreen.mongodb.com/api
 ui_server_host: https://evergreen.mongodb.com
 api_key: 
 user: ryan.chipman
