@@ -62,15 +62,15 @@ for group in $( echo $TEST_GROUPS | sed 's/,/ /g' ); do
         config)
             osx_config="config-tests__os_full_matrix~osx"
             windows_config="config-tests__os_full_matrix~windows"
-            ubuntu_config="config-tests__os_full_matrix~ubuntu1404-64"
+            ubuntu_config="config-tests__os_full_matrix~ubuntu1604-64"
             VARIANTS="$VARIANTS""$osx_config,$windows_config,$ubuntu_config,"
             ;;
         default)
             osx_latest_standalone="full_matrix__os_full_matrix~osx_mongodb_version~latest_mongodb_topology~standalone"
-            windows_latest_standalone="full_matrix__os_full_matrix~windows_mongodb_version~latest_mongodb_topology~standalone"
             ubuntu_latest_standalone="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~latest_mongodb_topology~standalone"
-            ubuntu_34_replica="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~3.4_mongodb_topology~replica-set"
-            ubuntu_32_sharded="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~3.2_mongodb_topology~sharded-cluster"
+            windows_latest_standalone="full_matrix__os_full_matrix~windows_mongodb_version~latest_mongodb_topology~standalone"
+            windows_34_replica="full_matrix__os_full_matrix~windows_mongodb_version~3.4_mongodb_topology~replica-set"
+            windows_32_sharded="full_matrix__os_full_matrix~windows_mongodb_version~3.2_mongodb_topology~sharded-cluster"
             code_quality="code-quality"
             VARIANTS="$VARIANTS""$code_quality,$osx_latest_standalone,$windows_latest_standalone,$ubuntu_latest_standalone,$ubuntu_34_replica,$ubuntu_32_sharded,"
             ;;
