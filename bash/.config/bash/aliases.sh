@@ -6,6 +6,7 @@ alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -lah'
 alias mkdir='mkdir -pv'
+alias cd='cd -P'
 
 # grep, searching stuff
 alias grep='grep --color'
