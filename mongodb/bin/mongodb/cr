@@ -73,7 +73,7 @@ if [ -z "${JIRA_FLAG}" ]; then
 fi
 
 if [ -z "${DIFF_REV}" ]; then
-    DIFF_REV=$(git merge-base master HEAD)
+    DIFF_REV=$(git merge-base upstream/master HEAD)
 fi
 
 echo "upload.py location: ${CR_PATH}"
