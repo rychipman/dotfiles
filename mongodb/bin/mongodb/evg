@@ -69,10 +69,12 @@ for group in $( echo $TEST_GROUPS | sed 's/,/ /g' ); do
             osx_latest_standalone="full_matrix__os_full_matrix~osx_mongodb_version~latest_mongodb_topology~standalone"
             ubuntu_latest_standalone="full_matrix__os_full_matrix~ubuntu1404-64_mongodb_version~latest_mongodb_topology~standalone"
             windows_latest_standalone="full_matrix__os_full_matrix~windows_mongodb_version~latest_mongodb_topology~standalone"
+            windows_40_standalone="full_matrix__os_full_matrix~windows_mongodb_version~4.0_mongodb_topology~standalone"
+            windows_36_standalone="full_matrix__os_full_matrix~windows_mongodb_version~3.6_mongodb_topology~standalone"
             windows_34_replica="full_matrix__os_full_matrix~windows_mongodb_version~3.4_mongodb_topology~replica-set"
             windows_32_sharded="full_matrix__os_full_matrix~windows_mongodb_version~3.2_mongodb_topology~sharded-cluster"
             code_quality="code-quality"
-            VARIANTS="$VARIANTS""$code_quality,$osx_latest_standalone,$windows_latest_standalone,$ubuntu_latest_standalone,$ubuntu_34_replica,$ubuntu_32_sharded,"
+            VARIANTS="$VARIANTS""$code_quality,$osx_latest_standalone,$ubuntu_latest_standalone,$windows_latest_standalone,$windows_40_standalone,$windows_36_standalone,$windows_34_replica,$windows_32_sharded,"
             ;;
         none)
             VARIANTS=""
