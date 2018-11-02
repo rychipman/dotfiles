@@ -138,6 +138,7 @@
    ;; git
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
+   "gf" 'magit-file-popup
    "gm" 'magit-dispatch-popup
    "gb" 'magit-blame
    "gg" 'hydra-gitgutter/body
