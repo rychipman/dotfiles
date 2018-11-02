@@ -176,6 +176,7 @@
    "pd" 'projectile-dired-other-window
    "pD" 'counsel-projectile-find-dir
    "ps" 'counsel-projectile-rg
+   "pb" 'counsel-projectile-switch-to-buffer
 
    ;; ledger
    "l" '(:ignore t :which-key "ledger")
