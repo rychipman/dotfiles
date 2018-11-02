@@ -290,7 +290,8 @@
 (use-package ledger-mode
   :ensure t
   :config
-  (load-file "~/.emacs.d/ledger/ledger.el"))
+  (load-file "~/.emacs.d/ledger/ledger.el")
+  (define-key ledger-reconcile-mode-map (kbd "m") 'ledger-reconcile-toggle))
 
 (defun remove-nth-element (list nth)
   "Return a copy of LIST without its NTH element."
