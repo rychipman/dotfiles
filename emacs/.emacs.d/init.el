@@ -416,8 +416,7 @@
     ("j" git-gutter:next-hunk)
     ("k" git-gutter:previous-hunk)
     ("s" git-gutter:stage-hunk)
-    ("r" git-gutter:stage-hunk)
-    ("g" git-gutter:stage-hunk)
+    ("u" git-gutter:revert-hunk)
     ("R" git-gutter:set-start-revision))
 
   (defhydra hydra-zoom ()
