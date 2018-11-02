@@ -219,6 +219,21 @@
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
+  (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
+  (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
+
+  (defun rpc/evil-shift-right-visual ()
+	(interactive)
+	(evil-shift-right (region-beginning) (region-end))
+	(evil-normal-state)
+	(evil-visual-restore))
+
+  (defun rpc/evil-shift-left-visual ()
+	(interactive)
+	(evil-shift-left (region-beginning) (region-end))
+	(evil-normal-state)
+	(evil-visual-restore))
+
   (use-package evil-surround
     :ensure t
     :config
