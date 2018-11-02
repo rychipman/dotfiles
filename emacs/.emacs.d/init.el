@@ -33,6 +33,7 @@
 (global-linum-mode 1)
 (global-hl-line-mode 0)
 
+(setq-default tab-width 4)
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
 
