@@ -67,6 +67,7 @@
 (setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/")
 
 (load-theme 'wombat t)
 (custom-theme-set-faces
