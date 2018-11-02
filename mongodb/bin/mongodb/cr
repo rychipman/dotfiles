@@ -22,7 +22,7 @@ function get_git_branch() {
 # these variables are the same no matter what runtime options are used
 JIRA_USER=ryan.chipman
 CR_PATH="$HOME/bin/mongodb/upload.py"
-REVIEWERS="wisdom.omuya@10gen.com"
+REVIEWERS="wisdom.omuya@10gen.com,patrick.meredith@10gen.com"
 CC_LIST="chuck.kalmanek@10gen.com,biconnectoreng@10gen.com"
 
 while getopts "di:r:m:h" opt; do
