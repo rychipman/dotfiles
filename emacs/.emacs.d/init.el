@@ -61,9 +61,9 @@
 (setq-default whitespace-style '(face spaces tabs tab-mark trailing))
 (global-whitespace-mode)
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin:/Users/ryan/.cargo/bin:/Library/TeX/texbin"))
 (setenv "GOPATH" "/Users/ryan/.go")
-(setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin")))
+(setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
