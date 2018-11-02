@@ -6,6 +6,9 @@
    (ledger-payees-in-buffer)
    nil 'confirm))
 
+(defun rpc/ledger-prompt-amount ()
+  (completing-read "Amount: " nil nil nil "$"))
+
 (defun rpc/ledger-prompt-from-account ()
   (completing-read
    "From Account: "
@@ -27,10 +30,11 @@
 
 (defun rpc/ledger-add-interactive ()
   (interactive)
-  (let (date payee desc from to xact)
+  (let (date payee amt desc from to xact)
 
 	(setq date (ledger-read-date "Date: "))
 	(setq payee (rpc/ledger-prompt-payee))
+	(setq amt (rpc/ledger-prompt-amount))
 	(setq desc (ledger-read-string-with-default "Description" ""))
 	(setq from (rpc/ledger-prompt-from-account))
 	(setq to (rpc/ledger-prompt-to-account))
@@ -38,7 +42,7 @@
 	(setq xact (format "%s %s" date payee))
 	(unless (string= "" desc)
 	  (setq xact (format "%s\n    ;; %s" xact desc)))
-	(setq xact (format "%s\n    %s\n    %s" xact to from))
+	(setq xact (format "%s\n    %s  %s\n    %s" xact to amt from))
 
 	(goto-char (point-max))
 	(newline) (newline)
