@@ -63,6 +63,7 @@
 
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin:/Users/ryan/.cargo/bin:/Library/TeX/texbin"))
 (setenv "GOPATH" "/Users/ryan/.go")
+(setenv "PKG_CONFIG_PATH" (concat (getenv "PKG_CONFIG_PATH") "/usr/local/Cellar/openssl/1.0.2n/lib/pkgconfig"))
 (setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
