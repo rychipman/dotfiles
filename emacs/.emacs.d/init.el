@@ -185,8 +185,9 @@
    "li" 'rpc/ledger-match-imports
    "la" 'rpc/ledger-add-interactive
 
-   ;; resume
-   "r" 'ivy-resume
+   ;; ivy
+   "i" '(:ignore t :which-key "ivy")
+   "ir" 'ivy-resume
 
    ;; zoom
    "z" '(:ignore t :which-key "zoom")
