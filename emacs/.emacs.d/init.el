@@ -195,6 +195,9 @@
    "zl" (lambda () "laptop" (interactive) (zoom-frame-laptop))
    "zz" 'hydra-zoom/body
 
+   ;; compile
+   "c" 'compile
+
    ;; mu4e
    "m" '(:ignore t :which-key "mu4e")
    "mm" 'mu4e
