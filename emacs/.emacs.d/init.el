@@ -472,6 +472,22 @@
   (smartparens-global-mode)
   (show-smartparens-global-mode))
 
+(use-package rust-mode
+  :ensure t
+  :config
+  (setq rust-rustfmt-bin "~/.rustup/toolchains/nightly-x86_64-apple-darwin/bin/rustfmt")
+  (setq rust-format-on-save t)
+
+  (use-package cargo
+	:ensure t)
+
+  (use-package racer
+	:ensure t
+	:config
+	(add-hook 'rust-mode-hook #'racer-mode)
+	(add-hook 'racer-mode-hook #'eldoc-mode))
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
