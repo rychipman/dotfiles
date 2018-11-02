@@ -199,7 +199,11 @@
    "zz" 'hydra-zoom/body
 
    ;; compile
-   "c" 'compile
+   "c" '(:ignore t :which-key "compile")
+   "cb" 'rpc/compile/build
+   "cc" 'rpc/compile/check
+   "ct" 'rpc/compile/unit-test
+   "cC" 'compile
 
    ;; mu4e
    "m" '(:ignore t :which-key "mu4e")
@@ -292,6 +296,30 @@
   :config
   (load-file "~/.emacs.d/ledger/ledger.el")
   (define-key ledger-reconcile-mode-map (kbd "m") 'ledger-reconcile-toggle))
+
+(defvar rpc/compile/build-command nil)
+(defun rpc/compile/build ()
+  (interactive)
+  (let ((compilation-buffer-name-function (lambda (mode) "*compile/build*")))
+    (if rpc/compile/build-command
+	    (compile rpc/compile/build-command)
+	  (call-interactively 'compile))))
+
+(defvar rpc/compile/check-command nil)
+(defun rpc/compile/check ()
+  (interactive)
+  (let ((compilation-buffer-name-function (lambda (mode) "*compile/check*")))
+    (if rpc/compile/check-command
+	    (compile rpc/compile/check-command)
+	  (call-interactively 'compile))))
+
+(defvar rpc/compile/unit-test-command nil)
+(defun rpc/compile/unit-test ()
+  (interactive)
+  (let ((compilation-buffer-name-function (lambda (mode) "*compile/unit-test*")))
+    (if rpc/compile/unit-test-command
+	    (compile rpc/compile/unit-test-command)
+	  (call-interactively 'compile))))
 
 (defun remove-nth-element (list nth)
   "Return a copy of LIST without its NTH element."
