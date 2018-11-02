@@ -347,7 +347,11 @@
 		      ( mu4e-compose-signature      . nil )))))
 
   ;; don't set trashed flag when moving to trash
-  (setq mu4e-marks (remove-nth-element mu4e-marks 5))
+  (defvar rpc/mu4e-trash-flag-removed nil)
+  (unless rpc/mu4e-trash-flag-removed
+	(setq rpc/mu4e-trash-flag-removed t)
+	(setq mu4e-marks (remove-nth-element mu4e-marks 5)))
+
   (add-to-list 'mu4e-marks
 	       '(trash
 		 :char ("d" . "▼")
