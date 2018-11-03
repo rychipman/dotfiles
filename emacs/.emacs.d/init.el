@@ -233,6 +233,8 @@
   (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
   (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
 
+  (define-key evil-normal-state-map (kbd "/") 'swiper)
+
   (defun rpc/evil-shift-right-visual ()
 	(interactive)
 	(evil-shift-right (region-beginning) (region-end))
