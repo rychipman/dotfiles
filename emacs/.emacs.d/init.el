@@ -143,6 +143,8 @@
    "gm" 'magit-dispatch-popup
    "gb" 'magit-blame
    "gg" 'hydra-gitgutter/body
+   "gt" 'git-timemachine
+   "gl" 'git-link
 
    ;; org
    "o" '(:ignore t :which-key "org")
@@ -267,6 +269,12 @@
     :ensure t
     :config
     (global-evil-surround-mode 1)))
+
+(use-package git-link
+  :ensure t)
+
+(use-package git-timemachine
+  :ensure t)
 
 (use-package magit
   :ensure t
