@@ -206,6 +206,7 @@
    "cc" 'rpc/compile/check
    "ct" 'rpc/compile/unit-test
    "cC" 'compile
+   "ck" 'rpc/compile-quit-windows
 
    ;; mu4e
    "m" '(:ignore t :which-key "mu4e")
@@ -322,6 +323,17 @@
   :config
   (load-file "~/.emacs.d/ledger/ledger.el")
   (define-key ledger-reconcile-mode-map (kbd "m") 'ledger-reconcile-toggle))
+
+(defun rpc/compile-quit-windows ()
+  (interactive)
+  (rpc/kill-window-by-buffer-name "*compilation*")
+  (rpc/kill-window-by-buffer-name "*compile/build*")
+  (rpc/kill-window-by-buffer-name "*compile/check*")
+  (rpc/kill-window-by-buffer-name "*compile/unit-test*"))
+
+(defun rpc/kill-window-by-buffer-name (bufname &optional killbuf)
+  (let ((window (get-buffer-window bufname)))
+	(when window (quit-window killbuf window))))
 
 (defvar rpc/compile/build-command nil)
 (defun rpc/compile/build ()
