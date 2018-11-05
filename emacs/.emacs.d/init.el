@@ -546,7 +546,20 @@
   :ensure t)
 
 (use-package smart-jump
-  :ensure t)
+  :ensure t
+  :config
+  (define-key evil-normal-state-map (kbd "C-j") 'smart-jump-go)
+
+  (require 'smart-jump-go-mode)
+  (smart-jump-go-mode-register)
+  (define-key go-mode-map (kbd "C-c C-j") nil)
+
+  (require 'smart-jump-elisp-mode)
+  (smart-jump-elisp-mode-register)
+
+  (require 'smart-jump-rust-mode)
+  (smart-jump-rust-mode-register)
+  )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
