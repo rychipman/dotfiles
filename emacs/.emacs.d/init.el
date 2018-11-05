@@ -558,6 +558,11 @@
  '(package-selected-packages
    (quote
     (epresent evil-magit diff-hl badger-theme counsel-projectile projectile cider clojure-mode syndicate evil-surround go-mode eyebrowse magit which-key general use-package))))
+ '(safe-local-variable-values
+   (quote
+	((rpc/compile/build-command . "cd $(git rev-parse --show-toplevel) && go install cmd/mongosqld/mongosqld.go")
+	 (rpc/compile/check-command . "go install")
+	 (rpc/compile/unit-test-command . "go test")))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
