@@ -235,7 +235,7 @@
 
    ;; mu4e
    "m" '(:ignore t :which-key "mu4e")
-   "mm" 'mu4e
+   "mm" 'rpc/mu4e/open
 
    ;; misc
    "SPC" 'counsel-M-x
@@ -406,6 +406,18 @@
    mu4e-confirm-quit nil)
 
   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
+
+  (defun rpc/mu4e/open ()
+	(interactive)
+	(eyebrowse-create-window-config)
+	(mu4e))
+
+  (defun rpc/mu4e/quit ()
+	(interactive)
+	(mu4e-quit)
+	(eyebrowse-close-window-config))
+
+  (define-key mu4e-main-mode-map (kbd "q") 'rpc/mu4e/quit)
 
   ;; set up bookmarks
   (setq mu4e-bookmarks
