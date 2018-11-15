@@ -170,6 +170,11 @@
    "gt" 'git-timemachine
    "gl" 'git-link
 
+   ;; errors
+   "e" '(:ignore t :which-key "errors")
+   "en" 'next-error
+   "ep" 'previous-error
+
    ;; org
    "o" '(:ignore t :which-key "org")
    "oa" 'org-agenda
