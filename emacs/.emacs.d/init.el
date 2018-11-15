@@ -341,6 +341,9 @@
     :config
     (add-hook 'go-mode-hook 'go-eldoc-setup)
     )
+
+  (use-package go-dlv
+	:ensure t)
   )
 
 (use-package ledger-mode
@@ -566,6 +569,29 @@
     ("G" (progn (goto-char (point-max)) (flycheck-previous-error)) "last")
     ("q" nil)
     )
+
+  (defun rpc/gud/prompt-call ()
+	(interactive)
+	(gud-call (read-string "GUD (call): ")))
+
+  (defun rpc/gud/prompt-print ()
+	(interactive)
+	(gud-call (format "p %s" (read-string "GUD (print): "))))
+
+  (defhydra hydra-gud
+	(:foreign-keys run)
+	"GUD"
+	("n" gud-next "Next")
+	("s" gud-step "Step")
+	("c" gud-cont "Continue")
+	("p" gud-print "Print")
+	("P" rpc/gud/prompt-print "Print expression")
+	("B" gud-break "Break")
+	("d" gud-remove "Delete breakpoint")
+	("R" gud-refresh "Refresh")
+	("E" rpc/gud/prompt-call "Execute")
+	("Q" nil)
+	)
   )
 
 (use-package smartparens
