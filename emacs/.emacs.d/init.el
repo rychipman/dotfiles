@@ -647,6 +647,16 @@
   (smart-jump-rust-mode-register)
   )
 
+(use-package restclient
+  :ensure t
+  :config
+
+  (use-package company-restclient
+	:ensure t
+	:config
+	(add-to-list 'company-backends 'company-restclient))
+  )
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
