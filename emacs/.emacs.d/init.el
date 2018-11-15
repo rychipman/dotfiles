@@ -601,6 +601,9 @@
   (smartparens-global-mode)
   (show-smartparens-global-mode))
 
+(use-package js2-mode
+  :ensure t)
+
 (use-package rust-mode
   :ensure t
   :config
@@ -616,6 +619,9 @@
 	(add-hook 'rust-mode-hook #'racer-mode)
 	(add-hook 'racer-mode-hook #'eldoc-mode))
   )
+
+(use-package yaml-mode
+  :ensure t)
 
 (use-package toml-mode
   :ensure t)
