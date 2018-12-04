@@ -763,6 +763,14 @@ semantic unit starting with that char."
     :config
     (counsel-projectile-mode 1)))
 
+(use-package perspective
+  :ensure t
+  :config
+  (persp-mode)
+  (use-package persp-projectile
+	:ensure t)
+  )
+
 (use-package git-gutter-fringe
   :ensure t
   :config
