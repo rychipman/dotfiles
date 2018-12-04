@@ -662,6 +662,12 @@ semantic unit starting with that char."
    mu4e-get-mail-command "mbsync -Va"
    mu4e-change-filenames-when-moving t
    mu4e-completing-read-function 'completing-read
+   shr-color-visible-luminance-min 80
+   send-mail-function 'smtpmail-send-it
+   smtpmail-smtp-service 465
+   smtpmail-stream-type 'ssl
+   mu4e-compose-format-flowed t
+   message-kill-buffer-on-exit t
    mu4e-confirm-quit nil)
 
   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
