@@ -794,6 +794,7 @@ semantic unit starting with that char."
   (setq-default company-idle-delay 0.1)
   (setq-default company-auto-complete 'company-explicit-action-p)
   (setq-default company-minimum-prefix-length 2)
+  (setq-default company-dabbrev-downcase nil)
   (define-key company-active-map (kbd "<tab>") 'company-select-next-if-tooltip-visible-or-complete-selection)
   (define-key company-active-map (kbd "S-<tab>") 'company-select-previous-or-abort)
   )
