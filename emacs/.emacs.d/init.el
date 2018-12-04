@@ -606,7 +606,9 @@ semantic unit starting with that char."
   :ensure t
   :config
   (load-file "~/.emacs.d/ledger/ledger.el")
-  (define-key ledger-reconcile-mode-map (kbd "m") 'ledger-reconcile-toggle))
+  (define-key ledger-reconcile-mode-map (kbd "m") 'ledger-reconcile-toggle)
+  (define-key ledger-mode-map (kbd "C-j") 'ledger-navigate-next-xact-or-directive)
+  (define-key ledger-mode-map (kbd "C-k") 'ledger-navigate-prev-xact-or-directive))
 
 (defun rpc/compile-quit-windows ()
   (interactive)
