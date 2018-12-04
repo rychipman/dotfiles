@@ -856,6 +856,11 @@ semantic unit starting with that char."
 	)
   )
 
+(use-package boon
+  :ensure t
+  :config
+  (require 'boon-qwerty))
+
 (use-package smartparens
   :ensure t
   :config
