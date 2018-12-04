@@ -954,7 +954,11 @@ semantic unit starting with that char."
    (quote
 	((rpc/compile/build-command . "cd $(git rev-parse --show-toplevel) && go install cmd/mongosqld/mongosqld.go")
 	 (rpc/compile/check-command . "go install")
-	 (rpc/compile/unit-test-command . "go test")))))
+	 (rpc/compile/check-command . "go install -gcflags='-e'")
+	 (rpc/compile/unit-test-command . "go test")
+	 (rpc/compile/build-command . "cargo build")
+	 (rpc/compile/check-command . "cargo check")
+	 (rpc/compile/unit-test-command . "cargo test")))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
