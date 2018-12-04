@@ -854,6 +854,16 @@ semantic unit starting with that char."
 	("E" rpc/gud/prompt-call "Execute")
 	("Q" nil)
 	)
+
+  (defhydra hydra-smerge
+	(:foreign-keys run)
+	"smerge"
+	("n" smerge-next "Next")
+	("p" smerge-previous "Previous")
+	("RET" smerge-keep-current "Keep Current")
+	("Q" nil)
+ 	)
+
   )
 
 (use-package boon
