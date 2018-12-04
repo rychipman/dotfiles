@@ -947,6 +947,33 @@ semantic unit starting with that char."
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
  '(ivy-mode t)
+ '(ledger-reports
+   (quote
+	(("expenses-this-month" "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'this month'")
+	 (#("expenses-last-month" 0 1
+		(idx 3))
+	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'last month'")
+	 (#("bal" 0 1
+		(idx 1))
+	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'last month'")
+	 (#("unmatched" 0 1
+		(idx 7))
+	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger reg -p 'until 5 days ago' Liabilities and not %matched and not %copied --uncleared")
+	 (#("budget" 0 1
+		(idx 2))
+	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal not equity and not income and not expenses")
+	 (#("unknown" 0 1
+		(idx 6))
+	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger reg Unknown")
+	 (#("reg" 0 1
+		(idx 5))
+	  "%(binary) -f %(ledger-file) reg")
+	 (#("payee" 0 1
+		(idx 4))
+	  "%(binary) -f %(ledger-file) reg @%(payee)")
+	 (#("account" 0 1
+		(idx 0))
+	  "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
     (epresent evil-magit diff-hl badger-theme counsel-projectile projectile cider clojure-mode syndicate evil-surround go-mode eyebrowse magit which-key general use-package))))
