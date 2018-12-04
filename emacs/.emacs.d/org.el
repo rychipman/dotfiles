@@ -226,3 +226,11 @@ Skip project and sub-project tasks, habits, and project related tasks."
   "Open my primary org file."
   (interactive)
   (find-file "~/org/gtd.org"))
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)
+   (sh . t)
+   (sqlite . t)
+   (ledger . t)
+   (emacs-lisp . t)))
