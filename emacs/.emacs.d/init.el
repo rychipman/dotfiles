@@ -301,6 +301,257 @@
     :config
     (global-evil-surround-mode 1)))
 
+(defun kakmacs-deselect ()
+  (interactive)
+  (deactivate-mark))
+
+(defun kakmacs-kill-char-or-region ()
+  (interactive)
+  (if mark-active
+      (call-interactively #'kill-region)
+    (call-interactively #'delete-forward-char)))
+
+(defun kakmacs-replace-char-at-point ()
+  "Like vim's replace command."
+  (interactive)
+  (delete-char 1)
+  (insert " ")
+  (backward-char 1)
+  (message "Replace with char.")
+  (setq-local cursor-type '(hbar . 3))
+  (call-interactively #'quoted-insert)
+  (setq-local cursor-type (default-value 'cursor-type))
+  (delete-char 1)
+  (backward-char 1))
+
+(defun kakmacs-delete-and-yank ()
+  (interactive)
+  (delete-region (region-beginning) (region-end))
+  (yank))
+
+(defun kakmacs-delete-and-exit ()
+  (interactive)
+  (delete-region (region-beginning) (region-end))
+  (ryo-modal-mode -1))
+
+(defun kakmacs-end-of-line ()
+  "Mark to end of line."
+  (interactive)
+  (when (> (mark) (point)) (deactivate-mark))
+  (unless mark-active (set-mark (point)))
+  (when (looking-at-p "\n")
+    (if (<= (mark) (line-beginning-position))
+        (forward-line 1)
+      (set-mark (line-beginning-position))))
+  (goto-char (line-end-position)))
+
+(defun kakmacs-beginning-of-line ()
+  "Mark to beginning of line."
+  (interactive)
+  (when (< (mark) (point)) (deactivate-mark))
+  (unless mark-active (set-mark (point)))
+  (if (= (point) (line-beginning-position))
+      (if (>= (mark) (line-end-position))
+          (forward-line -1)
+        (set-mark (line-end-position)))
+    (let ((orig-point (point)))
+      (move-to-mode-line-start)
+      (when (= orig-point (point))
+        (move-beginning-of-line 1)))))
+
+(defun kakmacs-swiper-mark-match ()
+  "Mark swiper match."
+  (interactive)
+  (set-mark swiper--current-match-start))
+
+(defun kakmacs-mark-inner ()
+  "Takes a char, like ( or \" and marks the innards of the first
+  ancestor semantic unit starting with that char."
+  (interactive)
+  (let* ((expand-region-fast-keys-enabled nil)
+         (char (char-to-string
+                (read-char "Char: ")))
+         (q-char (regexp-quote char))
+         (starting-point (point)))
+    (flet ((message (&rest args) nil))
+      (er--expand-region-1)
+      (er--expand-region-1)
+      (while (and (not (= (point) (point-min)))
+                  (not (looking-at q-char)))
+        (er--expand-region-1))
+      (if (not (looking-at q-char))
+          (progn
+            (goto-char starting-point)
+            (setq mark-active nil)
+            (error (concat "No match for " char)))
+        (er/contract-region 1)))))
+
+(defun kakmacs-mark-outer ()
+  "Takes a char, like ( or \" and marks the first ancestor
+semantic unit starting with that char."
+  (interactive)
+  (let* ((expand-region-fast-keys-enabled nil)
+         (char (char-to-string
+                (read-char "Char: ")))
+         (q-char (regexp-quote char))
+         (starting-point (point)))
+    (flet ((message (&rest args) nil))
+      (when (looking-at q-char)
+        (er/expand-region 1))
+      (while (and (not (= (point) (point-min)))
+                  (not (looking-at q-char)))
+        (er/expand-region 1))
+      (unless (looking-at q-char)
+        (goto-char starting-point)
+        (setq mark-active nil)
+        (error (concat "No match for " char))))))
+
+(defun kakmacs-end-of-region ()
+  "Goto end of region."
+  (interactive)
+  (goto-char (region-end)))
+
+(use-package crux
+  :ensure t)
+
+(use-package expand-region
+  :ensure t)
+
+(use-package selected
+  :load-path "mylisp/selected"
+  :ensure t
+  :config
+  (setq selected-minor-mode-override t))
+
+(use-package ryo-modal
+  :ensure t
+  :bind ("C-c SPC" . ryo-modal-mode)
+  :commands ryo-modal-mode
+  :init
+  (add-hook 'ryo-modal-mode-hook
+            (lambda ()
+              (if ryo-modal-mode
+                  (selected-minor-mode 1)
+                (selected-minor-mode -1))))
+  :config
+  (progn
+	(ryo-modal-keys
+	 (:norepeat t)
+	 ("-" negative-argument)
+	 ("0" "M-0")
+	 ("1" "M-1")
+	 ("2" "M-2")
+	 ("3" "M-3")
+	 ("4" "M-4")
+	 ("5" "M-5")
+	 ("6" "M-6")
+	 ("7" "M-7")
+	 ("8" "M-8")
+	 ("9" "M-9"))
+
+	(ryo-modal-keys
+	 (:first '((lambda () (set-mark (point)))))
+	 ("w" forward-word)
+	 ("b" backward-word)
+	 ("F" avy-goto-word-1)
+	 ("H" backward-char)
+	 ("J" next-line)
+	 ("K" previous-line)
+	 ("L" forward-char))
+
+	(ryo-modal-keys
+	 (:first '(kakmacs-deselect))
+	 ("j" next-line)
+	 ("f" avy-goto-word-1 :then '(er/mark-word))
+	 ("k" previous-line)
+	 ("h" backward-char)
+	 ("l" forward-char)
+	 ("Ö" comment-dwim :exit t)
+	 ("<backspace>" delete-backward-char)
+	 ("z"
+	  (("." er/mark-symbol :name "Symbol")
+	   (":" er/mark-symbol-with-prefix :name "Symbol+Prefix")
+	   ("B" mark-whole-buffer :name "All buffer")
+	   ("E" org-mark-element :name "Org Element")
+	   ;("b" er/mark-python-block :name "Block")
+	   ("d" er/mark-defun :name "Defun")
+	   ("f" avy-goto-word-1 :then (er/mark-symbol) :name "◎ Symbol")
+	   ("i" kakmacs-mark-inner :name "Inner")
+	   ("m" er/mark-method-call :name "Method call")
+	   ("n" er/mark-next-accessor :name "Next accessor")
+	   ("o" kakmacs-mark-outer :name "Outer")
+	   ("p" er/mark-paragraph :name "Paragraph")
+	   ("s" er/mark-sentence :name "Sentence")
+	   ("t" org-mark-subtree :name "Org Subtree")
+	   ("u" er/mark-url :name "URL")
+	   ("w" er/mark-word :name "Word")
+	   (";" er/mark-comment :name "Comment")
+	   ("ö" er/mark-comment :name "Comment"))
+	  :name "select"))
+
+	(ryo-modal-keys
+	 ("v" ryo-modal-repeat)
+	 this is thi
+	 ("x" "M-x")
+	 ("." er/expand-region)
+	 ("," exchange-point-and-mark)
+	 ("d" kakmacs-kill-char-or-region)
+	 ("o" crux-smart-open-line :exit t)
+	 ("O" crux-smart-open-line-above :exit t)
+	 ("c" copy-region-as-kill)
+	 ("C" copy-region-as-kill :then '(kakmacs-end-of-region
+									  newline-and-indent
+									  yank))
+	 ("r" kakmacs-replace-char-at-point)
+	 ("u" undo-tree-undo)
+	 ("U" undo-tree-redo)
+	 ("ö" comment-line)
+	 ("S" query-replace)
+	 ("s" swiper :then '(kakmacs-swiper-mark-match))
+	 ("a" kakmacs-beginning-of-line)
+	 ("A" move-to-mode-line-start :exit t)
+	 ("e" kakmacs-end-of-line)
+	 ("E" end-of-line :exit t)
+	 ("n" mc/mark-next-like-this)
+	 ("N" mc/mark-previous-like-this)
+	 ("i" kakmacs-deselect :exit t)
+	 ("y" yank)
+	 ("p" pop-to-mark-command)
+	 ("P" counsel-mark-ring)
+	 ("q" kakmacs-deselect)
+	 ("R" delete-region :then '(yank) :exit t)
+	 ("Y" delete-region :then '(yank))
+	 ("g" :hydra
+	  '(hydra-nav (:pre (set-mark (point)))
+				  "A hydra for navigation"
+				  ("h" backward-up-list)
+				  ("l" down-list)
+				  ("j" forward-sexp)
+				  ("k" backward-sexp)
+				  ("a" beginning-of-defun)
+				  ("e" end-of-defun)
+				  ("n" forward-paragraph)
+				  ("p" backward-paragraph)
+				  ("f" forward-sentence)
+				  ("b" backward-sentence)
+				  ("i" imenu :color blue)
+				  ("q" nil "cancel" :color blue)
+				  ("g" avy-goto-line :color blue))))
+
+	(bind-keys
+	 :map selected-keymap
+	 ("F" avy-goto-word-1)
+	 ("W" . forward-word)
+	 ("B" . backward-word)
+	 ("H" . backward-char)
+	 ("J" . next-line)
+	 ("K" . previous-line)
+	 ("L" . forward-char)
+	 ("r" . kakmacs-delete-and-exit)
+	 )
+	)
+  )
+
 (use-package git-link
   :ensure t)
 
