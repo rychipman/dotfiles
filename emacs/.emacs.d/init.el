@@ -651,7 +651,7 @@ semantic unit starting with that char."
       list)))
 
 (use-package mu4e
-  :commands (mu4e)
+  :commands (mu4e rpc/mu4e/open rpc/mu4e/quit)
   :config
 
   ;; general settings
