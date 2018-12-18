@@ -26,6 +26,7 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(setq-default cursor-type 'bar)
 (blink-cursor-mode 0)
 (scroll-bar-mode -1)
 
@@ -409,6 +410,14 @@ semantic unit starting with that char."
                   (selected-minor-mode 1)
                 (selected-minor-mode -1))))
   :config
+  (defun rpc/ryo-modal-enter ()
+	(interactive)
+	(ryo-modal-mode 1))
+
+  (global-set-key (kbd "<escape>") #'rpc/ryo-modal-enter)
+  (setq ryo-modal-cursor-color nil)
+
+  (require 'expand-region)
   (progn
 	(ryo-modal-keys
 	 (:norepeat t)
