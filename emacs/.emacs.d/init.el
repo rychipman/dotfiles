@@ -334,31 +334,6 @@
   (delete-region (region-beginning) (region-end))
   (ryo-modal-mode -1))
 
-(defun kakmacs-end-of-line ()
-  "Mark to end of line."
-  (interactive)
-  (when (> (mark) (point)) (deactivate-mark))
-  (unless mark-active (set-mark (point)))
-  (when (looking-at-p "\n")
-    (if (<= (mark) (line-beginning-position))
-        (forward-line 1)
-      (set-mark (line-beginning-position))))
-  (goto-char (line-end-position)))
-
-(defun kakmacs-beginning-of-line ()
-  "Mark to beginning of line."
-  (interactive)
-  (when (< (mark) (point)) (deactivate-mark))
-  (unless mark-active (set-mark (point)))
-  (if (= (point) (line-beginning-position))
-      (if (>= (mark) (line-end-position))
-          (forward-line -1)
-        (set-mark (line-end-position)))
-    (let ((orig-point (point)))
-      (move-to-mode-line-start)
-      (when (= orig-point (point))
-        (move-beginning-of-line 1)))))
-
 (defun kakmacs-swiper-mark-match ()
   "Mark swiper match."
   (interactive)
@@ -451,8 +426,6 @@ semantic unit starting with that char."
 
 	(ryo-modal-keys
 	 (:first '((lambda () (set-mark (point)))))
-	 ("w" forward-word)
-	 ("b" backward-word)
 	 ("F" avy-goto-word-1)
 	 ("H" backward-char)
 	 ("J" next-line)
@@ -472,7 +445,7 @@ semantic unit starting with that char."
 	  (("." er/mark-symbol :name "Symbol")
 	   (":" er/mark-symbol-with-prefix :name "Symbol+Prefix")
 	   ("B" mark-whole-buffer :name "All buffer")
-	   ("E" org-mark-element :name "Org Element")
+	   ;("E" org-mark-element :name "Org Element")
 	   ;("b" er/mark-python-block :name "Block")
 	   ("d" er/mark-defun :name "Defun")
 	   ("f" avy-goto-word-1 :then (er/mark-symbol) :name "◎ Symbol")
@@ -480,9 +453,9 @@ semantic unit starting with that char."
 	   ("m" er/mark-method-call :name "Method call")
 	   ("n" er/mark-next-accessor :name "Next accessor")
 	   ("o" kakmacs-mark-outer :name "Outer")
-	   ("p" er/mark-paragraph :name "Paragraph")
-	   ("s" er/mark-sentence :name "Sentence")
-	   ("t" org-mark-subtree :name "Org Subtree")
+	   ;("p" er/mark-paragraph :name "Paragraph")
+	   ;("s" er/mark-sentence :name "Sentence")
+	   ;("t" org-mark-subtree :name "Org Subtree")
 	   ("u" er/mark-url :name "URL")
 	   ("w" er/mark-word :name "Word")
 	   (";" er/mark-comment :name "Comment")
@@ -491,9 +464,12 @@ semantic unit starting with that char."
 
 	(ryo-modal-keys
 	 ("v" ryo-modal-repeat)
-	 this is thi
 	 ("x" "M-x")
+	 (":" eval-expression)
 	 ("." er/expand-region)
+	 (">" er/contract-region)
+	 ("w" forward-word)
+	 ("b" backward-word)
 	 ("," exchange-point-and-mark)
 	 ("d" kakmacs-kill-char-or-region)
 	 ("o" crux-smart-open-line :exit t)
@@ -503,14 +479,11 @@ semantic unit starting with that char."
 									  newline-and-indent
 									  yank))
 	 ("r" kakmacs-replace-char-at-point)
-	 ("u" undo-tree-undo)
-	 ("U" undo-tree-redo)
+	 ("u" undo)
 	 ("ö" comment-line)
 	 ("S" query-replace)
 	 ("s" swiper :then '(kakmacs-swiper-mark-match))
-	 ("a" kakmacs-beginning-of-line)
 	 ("A" move-to-mode-line-start :exit t)
-	 ("e" kakmacs-end-of-line)
 	 ("E" end-of-line :exit t)
 	 ("n" mc/mark-next-like-this)
 	 ("N" mc/mark-previous-like-this)
@@ -521,6 +494,8 @@ semantic unit starting with that char."
 	 ("q" kakmacs-deselect)
 	 ("R" delete-region :then '(yank) :exit t)
 	 ("Y" delete-region :then '(yank))
+	 ("]" forward-paragraph)
+	 ("[" backward-paragraph)
 	 ("g" :hydra
 	  '(hydra-nav (:pre (set-mark (point)))
 				  "A hydra for navigation"
