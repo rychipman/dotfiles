@@ -668,6 +668,7 @@ semantic unit starting with that char."
    send-mail-function 'smtpmail-send-it
    smtpmail-smtp-service 465
    smtpmail-stream-type 'ssl
+   mu4e-hide-index-messages t
    mu4e-compose-format-flowed t
    message-kill-buffer-on-exit t
    mu4e-confirm-quit nil)
