@@ -57,7 +57,7 @@
   (interactive)
   (pop-to-buffer "*plaint-download*")
   (async-shell-command "cd ~/ledger && plaint download" (current-buffer) (current-buffer))
-  (evil-emacs-state)
+  ;(evil-emacs-state)
   (plaint-download-mode))
 
 (defun zoom-frame-monitor ()
@@ -256,50 +256,50 @@
   :config
   (which-key-mode 1))
 
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1)
-  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-  (add-hook 'with-editor-mode-hook 'evil-insert-state)
-
-  (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
-  (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
-
-  (define-key evil-normal-state-map (kbd "/") 'swiper)
-
-  (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
-  (define-key evil-normal-state-map (kbd "C-a") 'move-beginning-of-line)
-  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
-  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
-  (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
-  (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
-  (define-key evil-normal-state-map (kbd "C-k") 'kill-line)
-
-  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
-  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
-  (define-key evil-insert-state-map (kbd "C-n") 'next-line)
-  (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
-  (define-key evil-insert-state-map (kbd "C-f") 'forward-char)
-  (define-key evil-insert-state-map (kbd "C-b") 'backward-char)
-  (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
-
-  (defun rpc/evil-shift-right-visual ()
-	(interactive)
-	(evil-shift-right (region-beginning) (region-end))
-	(evil-normal-state)
-	(evil-visual-restore))
-
-  (defun rpc/evil-shift-left-visual ()
-	(interactive)
-	(evil-shift-left (region-beginning) (region-end))
-	(evil-normal-state)
-	(evil-visual-restore))
-
-  (use-package evil-surround
-    :ensure t
-    :config
-    (global-evil-surround-mode 1)))
+;(use-package evil
+;  :ensure t
+;  :config
+;  (evil-mode 1)
+;  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+;  (add-hook 'with-editor-mode-hook 'evil-insert-state)
+;
+;  (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
+;  (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
+;
+;  (define-key evil-normal-state-map (kbd "/") 'swiper)
+;
+;  (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+;  (define-key evil-normal-state-map (kbd "C-a") 'move-beginning-of-line)
+;  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
+;  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
+;  (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
+;  (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
+;  (define-key evil-normal-state-map (kbd "C-k") 'kill-line)
+;
+;  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+;  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+;  (define-key evil-insert-state-map (kbd "C-n") 'next-line)
+;  (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
+;  (define-key evil-insert-state-map (kbd "C-f") 'forward-char)
+;  (define-key evil-insert-state-map (kbd "C-b") 'backward-char)
+;  (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+;
+;  (defun rpc/evil-shift-right-visual ()
+;	(interactive)
+;	(evil-shift-right (region-beginning) (region-end))
+;	(evil-normal-state)
+;	(evil-visual-restore))
+;
+;  (defun rpc/evil-shift-left-visual ()
+;	(interactive)
+;	(evil-shift-left (region-beginning) (region-end))
+;	(evil-normal-state)
+;	(evil-visual-restore))
+;
+;  (use-package evil-surround
+;    :ensure t
+;    :config
+;    (global-evil-surround-mode 1)))
 
 (defun kakmacs-deselect ()
   (interactive)
@@ -562,8 +562,9 @@ semantic unit starting with that char."
   :ensure t
   :config
 
-  (use-package evil-magit
-    :ensure t))
+  ;(use-package evil-magit
+  ;  :ensure t)
+  )
 
 (use-package org
   :ensure t
@@ -918,7 +919,7 @@ semantic unit starting with that char."
 (use-package smart-jump
   :ensure t
   :config
-  (define-key evil-normal-state-map (kbd "C-j") 'smart-jump-go)
+  (global-set-key (kbd "C-j") 'smart-jump-go)
 
   (require 'smart-jump-go-mode)
   (smart-jump-go-mode-register)
