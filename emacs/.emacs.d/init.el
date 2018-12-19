@@ -26,7 +26,6 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
-(setq-default cursor-type 'bar)
 (blink-cursor-mode 0)
 (scroll-bar-mode -1)
 
@@ -58,7 +57,7 @@
   (interactive)
   (pop-to-buffer "*plaint-download*")
   (async-shell-command "cd ~/ledger && plaint download" (current-buffer) (current-buffer))
-  ;(evil-emacs-state)
+  (evil-emacs-state)
   (plaint-download-mode))
 
 (defun zoom-frame-monitor ()
@@ -257,50 +256,50 @@
   :config
   (which-key-mode 1))
 
-;(use-package evil
-;  :ensure t
-;  :config
-;  (evil-mode 1)
-;  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
-;  (add-hook 'with-editor-mode-hook 'evil-insert-state)
-;
-;  (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
-;  (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
-;
-;  (define-key evil-normal-state-map (kbd "/") 'swiper)
-;
-;  (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
-;  (define-key evil-normal-state-map (kbd "C-a") 'move-beginning-of-line)
-;  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
-;  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
-;  (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
-;  (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
-;  (define-key evil-normal-state-map (kbd "C-k") 'kill-line)
-;
-;  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
-;  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
-;  (define-key evil-insert-state-map (kbd "C-n") 'next-line)
-;  (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
-;  (define-key evil-insert-state-map (kbd "C-f") 'forward-char)
-;  (define-key evil-insert-state-map (kbd "C-b") 'backward-char)
-;  (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
-;
-;  (defun rpc/evil-shift-right-visual ()
-;	(interactive)
-;	(evil-shift-right (region-beginning) (region-end))
-;	(evil-normal-state)
-;	(evil-visual-restore))
-;
-;  (defun rpc/evil-shift-left-visual ()
-;	(interactive)
-;	(evil-shift-left (region-beginning) (region-end))
-;	(evil-normal-state)
-;	(evil-visual-restore))
-;
-;  (use-package evil-surround
-;    :ensure t
-;    :config
-;    (global-evil-surround-mode 1)))
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)
+  (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
+
+  (define-key evil-visual-state-map (kbd ">") 'rpc/evil-shift-right-visual)
+  (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
+
+  (define-key evil-normal-state-map (kbd "/") 'swiper)
+
+  (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+  (define-key evil-normal-state-map (kbd "C-a") 'move-beginning-of-line)
+  (define-key evil-normal-state-map (kbd "C-n") 'next-line)
+  (define-key evil-normal-state-map (kbd "C-p") 'previous-line)
+  (define-key evil-normal-state-map (kbd "C-f") 'forward-char)
+  (define-key evil-normal-state-map (kbd "C-b") 'backward-char)
+  (define-key evil-normal-state-map (kbd "C-k") 'kill-line)
+
+  (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
+  (define-key evil-insert-state-map (kbd "C-a") 'move-beginning-of-line)
+  (define-key evil-insert-state-map (kbd "C-n") 'next-line)
+  (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
+  (define-key evil-insert-state-map (kbd "C-f") 'forward-char)
+  (define-key evil-insert-state-map (kbd "C-b") 'backward-char)
+  (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+
+  (defun rpc/evil-shift-right-visual ()
+	(interactive)
+	(evil-shift-right (region-beginning) (region-end))
+	(evil-normal-state)
+	(evil-visual-restore))
+
+  (defun rpc/evil-shift-left-visual ()
+	(interactive)
+	(evil-shift-left (region-beginning) (region-end))
+	(evil-normal-state)
+	(evil-visual-restore))
+
+  (use-package evil-surround
+    :ensure t
+    :config
+    (global-evil-surround-mode 1)))
 
 (defun kakmacs-deselect ()
   (interactive)
@@ -414,8 +413,8 @@ semantic unit starting with that char."
 	(interactive)
 	(ryo-modal-mode 1))
 
-  (global-set-key (kbd "<escape>") #'rpc/ryo-modal-enter)
-  (setq ryo-modal-cursor-color nil)
+  ;(global-set-key (kbd "<escape>") #'rpc/ryo-modal-enter)
+  ;(setq ryo-modal-cursor-color nil)
 
   (defun rpc/surround (&optional char-str)
 	(interactive "schar: ")
@@ -525,39 +524,39 @@ semantic unit starting with that char."
 	 ("[" backward-paragraph)
 	 ("SPC"
 	  (;("w" rpc/window-hydra)
-	   ("pf" counsel-projectile-find-file)
-	   ("pp" counsel-projectile-switch-project)
-	   ("ps" counsel-projectile-rg)
-	   ("dd" dired-jump-other-window)
-	   ("mm" rpc/mu4e/open)
-	   ("gs" magit-status)
-       ("wl" windmove-right)
-       ("wh" windmove-left)
-       ("wk" windmove-up)
-       ("wj" windmove-down)
-       ("wd" delete-window)
-       ("ww" eyebrowse-next-window-config)
-	   ("wo" delete-other-windows)
-       ("wW" eyebrowse-create-window-config)
-       ("wR" eyebrowse-rename-window-config)
-       ("wD" eyebrowse-close-window-config)
-       ("wf" eyebrowse-switch-to-window-config)
-	   ("zm" zoom-frame-monitor)
-	   ("zl" zoom-frame-laptop)
-	   ("zz" hydra-zoom/body)
-	   ("cc" rpc/compile/check)
-	   ("cb" rpc/compile/build)
-	   ("ct" rpc/compile/unit-test)
-	   ("ck" rpc/compile-quit-windows)
-	   ("ld" plaint-download)
+	   ;("pf" counsel-projectile-find-file)
+	   ;("pp" counsel-projectile-switch-project)
+	   ;("ps" counsel-projectile-rg)
+	   ;("dd" dired-jump-other-window)
+	   ;("mm" rpc/mu4e/open)
+	   ;("gs" magit-status)
+       ;("wl" windmove-right)
+       ;("wh" windmove-left)
+       ;("wk" windmove-up)
+       ;("wj" windmove-down)
+       ;("wd" delete-window)
+       ;("ww" eyebrowse-next-window-config)
+	   ;("wo" delete-other-windows)
+       ;("wW" eyebrowse-create-window-config)
+       ;("wR" eyebrowse-rename-window-config)
+       ;("wD" eyebrowse-close-window-config)
+       ;("wf" eyebrowse-switch-to-window-config)
+	   ;("zm" zoom-frame-monitor)
+	   ;("zl" zoom-frame-laptop)
+	   ;("zz" hydra-zoom/body)
+	   ;("cc" rpc/compile/check)
+	   ;("cb" rpc/compile/build)
+	   ;("ct" rpc/compile/unit-test)
+	   ;("ck" rpc/compile-quit-windows)
+	   ;("ld" plaint-download)
 	   ;("lf" (lambda () (find-file "~/ledger/test.ledger")))
-	   ("lc" ledger-check-buffer)
-	   ("li" rpc/ledger-match-imports)
-	   ("la" rpc/ledger-add-interactive)
-	   ("en" next-error)
-	   ("ep" previous-error)
-	   ("fer" rpc/init/reload)
-	   ("fee" rpc/init/edit)
+	   ;("lc" ledger-check-buffer)
+	   ;("li" rpc/ledger-match-imports)
+	   ;("la" rpc/ledger-add-interactive)
+	   ;("en" next-error)
+	   ;("ep" previous-error)
+	   ;("fer" rpc/init/reload)
+	   ;("fee" rpc/init/edit)
 	   )
 	  :name "leader")
 
@@ -596,9 +595,8 @@ semantic unit starting with that char."
   :ensure t
   :config
 
-  ;(use-package evil-magit
-  ;  :ensure t)
-  )
+  (use-package evil-magit
+    :ensure t))
 
 (use-package org
   :ensure t
