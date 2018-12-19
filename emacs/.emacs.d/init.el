@@ -417,6 +417,23 @@ semantic unit starting with that char."
   (global-set-key (kbd "<escape>") #'rpc/ryo-modal-enter)
   (setq ryo-modal-cursor-color nil)
 
+  (defun rpc/surround (&optional char-str)
+	(interactive "schar: ")
+	(insert-pair nil char-str char-str))
+
+  (defun rpc/init/edit ()
+	(interactive)
+	(find-file user-init-file))
+
+  (defun rpc/init/reload ()
+	(interactive)
+	(load-file user-init-file))
+
+  (defun rpc/modal/edit-after ()
+	(interactive)
+	(forward-char)
+	(kakmacs-deselect))
+
   (require 'expand-region)
   (progn
 	(ryo-modal-keys
@@ -443,11 +460,7 @@ semantic unit starting with that char."
 
 	(ryo-modal-keys
 	 (:first '(kakmacs-deselect))
-	 ("j" next-line)
 	 ("f" avy-goto-word-1 :then '(er/mark-word))
-	 ("k" previous-line)
-	 ("h" backward-char)
-	 ("l" forward-char)
 	 ("Ö" comment-dwim :exit t)
 	 ("<backspace>" delete-backward-char)
 	 ("z"
@@ -477,6 +490,10 @@ semantic unit starting with that char."
 	 (":" eval-expression)
 	 ("." er/expand-region)
 	 (">" er/contract-region)
+	 ("j" next-line)
+	 ("k" previous-line)
+	 ("h" backward-char)
+	 ("l" forward-char)
 	 ("w" forward-word)
 	 ("b" backward-word)
 	 ("," exchange-point-and-mark)
@@ -496,6 +513,7 @@ semantic unit starting with that char."
 	 ("E" end-of-line :exit t)
 	 ("n" mc/mark-next-like-this)
 	 ("N" mc/mark-previous-like-this)
+	 ("a" rpc/modal/edit-after :exit t)
 	 ("i" kakmacs-deselect :exit t)
 	 ("y" yank)
 	 ("p" pop-to-mark-command)
@@ -538,10 +556,11 @@ semantic unit starting with that char."
 	   ("la" rpc/ledger-add-interactive)
 	   ("en" next-error)
 	   ("ep" previous-error)
-	   ;("fer" (lambda () (load-file user-init-file)))
-	   ;("fee" (lambda() (find-file user-init-file)))
+	   ("fer" rpc/init/reload)
+	   ("fee" rpc/init/edit)
 	   )
 	  :name "leader")
+
 	 ("g" :hydra
 	  '(hydra-nav (:pre (set-mark (point)))
 				  "A hydra for navigation"
@@ -561,13 +580,7 @@ semantic unit starting with that char."
 
 	(bind-keys
 	 :map selected-keymap
-	 ("F" avy-goto-word-1)
-	 ("W" . forward-word)
-	 ("B" . backward-word)
-	 ("H" . backward-char)
-	 ("J" . next-line)
-	 ("K" . previous-line)
-	 ("L" . forward-char)
+	 ("S" . rpc/surround)
 	 ("r" . kakmacs-delete-and-exit)
 	 )
 	)
