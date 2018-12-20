@@ -23,9 +23,12 @@
 
 (defun rpc/ledger-try-match-xact-at-point ()
   (interactive)
-  (let ((xact (rpc/ledger-find-xact-at-point)))
+  (let* ((xact (rpc/ledger-find-xact-at-point))
+		 (matcher (rpc/ledger-create-amount-matcher xact)))
+	;(message (format "found xact at point: %s" xact))
+	;(message (format "matcher: %s" matcher))
 	(cond
-	 ((rpc/ledger-has-match (rpc/ledger-create-amount-matcher xact))
+	 ((rpc/ledger-has-match matcher)
 	  (find-file-other-window "~/ledger/test.ledger")
 	  (setq ledger-match-candidate xact)
 	  (rpc/ledger-match-xact xact))
