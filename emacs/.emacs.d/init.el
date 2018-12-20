@@ -260,6 +260,11 @@
   :ensure t
   :config
   (evil-mode 1)
+
+  (evil-set-initial-state 'ledger-reconcile-mode 'emacs)
+  (evil-set-initial-state 'ledger-check-mode 'emacs)
+  (evil-set-initial-state 'special-mode 'emacs)
+
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
