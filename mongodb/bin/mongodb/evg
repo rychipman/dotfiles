@@ -19,12 +19,23 @@ function get_git_branch() {
     git branch --no-color 2> /dev/null | sed -e "/^[^*]/d" -e "s/* \(.*\)/\1/"
 }
 
-# if we aren't patching, pass the command through to evergreen
-if [ "$1" != "p" ]; then
-    exec evergreen $@
-fi
+case "$1" in
+    u)
+        # update evergreen
+        exec evergreen get-update --install
+        exit $?
+        ;;
+    p)
+        # create patch
+        ;;
+    *)
+        # dispatch to evg binary
+        exec evergreen $@
+        exit $?
+        ;;
+esac
 
-# remove the "p" from the cmdline args
+# remove the "p" or "u" from the cmdline args
 shift
 
 # calculate defaults
