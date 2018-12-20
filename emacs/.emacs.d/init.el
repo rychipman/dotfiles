@@ -261,6 +261,9 @@
   (define-key evil-visual-state-map (kbd "<") 'rpc/evil-shift-left-visual)
 
   (define-key evil-normal-state-map (kbd "/") 'swiper)
+  (define-key evil-normal-state-map (kbd "?") 'swiper)
+  (define-key evil-normal-state-map (kbd ":") 'eval-expression)
+  (define-key evil-normal-state-map (kbd "s") '(lambda () (interactive) (evil-ex "s")))
 
   (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
   (define-key evil-normal-state-map (kbd "C-a") 'move-beginning-of-line)
