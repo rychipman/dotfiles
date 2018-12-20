@@ -141,8 +141,6 @@
 
    ;; file
    "f" '(:ignore t :which-key "file")
-   "fs" 'save-buffer
-   "ff" 'counsel-find-file
    "fe" '(:ignore t :which-key "emacs")
    "fee" (lambda () "edit" (interactive) (find-file "~/.emacs.d/init.el"))
    "fer" (lambda () "reload" (interactive) (load-file user-init-file))
@@ -155,10 +153,6 @@
    ;; quit
    "q" '(:ignore t :which-key "quit")
    "qq" 'save-buffers-kill-terminal
-
-   ;; search
-   "s"  '(:ignore t :which-key "search")
-   "ss" 'swiper
 
    ;; git
    "g" '(:ignore t :which-key "git")
@@ -187,10 +181,6 @@
 
    ;; window
    "w" '(:ignore t :which-key "window")
-   "wl" 'evil-window-right
-   "wh" 'evil-window-left
-   "wk" 'evil-window-up
-   "wj" 'evil-window-down
    "wd" 'evil-window-delete
    "ww" 'eyebrowse-next-window-config
    "wW" 'eyebrowse-create-window-config
@@ -244,7 +234,6 @@
 
    ;; misc
    "SPC" 'counsel-M-x
-   ":" 'eval-expression
    ))
 
 (use-package avy
