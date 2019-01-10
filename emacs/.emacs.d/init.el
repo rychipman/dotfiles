@@ -273,6 +273,12 @@
 	(evil-normal-state)
 	(evil-visual-restore))
 
+  (use-package evil-god-state
+	:ensure t
+	:config
+	(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
+	(evil-define-key 'god global-map [escape] 'evil-god-state-bail))
+
   (use-package evil-surround
     :ensure t
     :config
