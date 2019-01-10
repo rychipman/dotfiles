@@ -573,8 +573,9 @@ semantic unit starting with that char."
   (use-package evil-magit
     :ensure t
 	:config
-	(define-key git-rebase-mode-map (kbd "J") 'git-rebase-move-line-down)
-	(define-key git-rebase-mode-map (kbd "K") 'git-rebase-move-line-up))
+	;(define-key git-rebase-mode-map (kbd "J") 'git-rebase-move-line-down)
+	;(define-key git-rebase-mode-map (kbd "K") 'git-rebase-move-line-up)
+	)
 
   (use-package forge
 	:ensure t))
