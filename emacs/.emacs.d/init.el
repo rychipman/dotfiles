@@ -250,6 +250,8 @@
   (evil-set-initial-state 'ledger-check-mode 'emacs)
   (evil-set-initial-state 'special-mode 'emacs)
 
+  (define-key evil-visual-state-map (kbd "v") 'exchange-point-and-mark)
+
   (define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
   (add-hook 'with-editor-mode-hook 'evil-insert-state)
 
