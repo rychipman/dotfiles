@@ -150,10 +150,6 @@
    "bb" 'counsel-ibuffer
    "bd" 'evil-delete-buffer
 
-   ;; quit
-   "q" '(:ignore t :which-key "quit")
-   "qq" 'save-buffers-kill-terminal
-
    ;; git
    "g" '(:ignore t :which-key "git")
    "gs" 'magit-status
@@ -228,12 +224,12 @@
    "cC" 'compile
    "ck" 'rpc/compile-quit-windows
 
-   ;; mu4e
-   "m" '(:ignore t :which-key "mu4e")
-   "mm" 'rpc/mu4e/open
+   ;; applications
+   "a" '(:ignore t :which-key "applications")
+   "am" 'rpc/mu4e/open
 
    ;; misc
-   "SPC" 'counsel-M-x
+   "x" 'counsel-M-x
    ))
 
 (use-package avy
