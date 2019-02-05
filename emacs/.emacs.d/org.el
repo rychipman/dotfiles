@@ -62,48 +62,26 @@
 (setq org-agenda-compact-blocks t)
 (setq org-agenda-custom-commands
       (quote (("N" "Notes" tags "NOTE"
-	       ((org-agenda-overriding-header "Notes")))
-	      (" " "Agenda"
-	       (;(agenda "" nil)
-		(tags "REFILE"
-		      ((org-agenda-overriding-header "Tasks to Refile")))
-		(tags-todo "-CANCELED/!"
-			   ((org-agenda-overriding-header "Stuck Projects")
-			    (org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
-		(tags-todo "-CANCELED+WAITING|HOLD/!"
-			   ((org-agenda-overriding-header "Waiting and Postponed Tasks")
-			    (org-agenda-skip-function 'rpc/skip-non-tasks)
-			    (org-tags-match-list-sublevels nil)))
-		(tags-todo "-CANCELED/!NEXT"
-			   ((org-agenda-overriding-header "Project Next Tasks")
-			    (org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
-		(tags-todo "-HOLD-CANCELED/!"
-			   ((org-agenda-overriding-header "Projects")
-			    (org-agenda-skip-function 'rpc/skip-non-projects)))
-		))
-	      ("w" "Work Agenda"
-	       (;(agenda "" nil)
-		(tags-todo "+work-CANCELED/!"
-			   ((org-agenda-overriding-header "Stuck Projects")
-			    (org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
-		(tags-todo "+work-CANCELED+WAITING|HOLD/!"
-			   ((org-agenda-overriding-header "Waiting and Postponed Tasks")
-			    (org-agenda-skip-function 'rpc/skip-non-tasks)
-			    (org-tags-match-list-sublevels nil)))
-		(tags-todo "+work-interns-CANCELED/!NEXT"
-			   ((org-agenda-overriding-header "Project Next Tasks")
-			    (org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
-		(tags-todo "+work-interns-HOLD-CANCELED/!"
-			   ((org-agenda-overriding-header "Projects")
-			    (org-agenda-skip-function 'rpc/skip-non-projects)))
-		(tags-todo "+work+interns-CANCELED/!NEXT"
-			   ((org-agenda-overriding-header "Project Next Tasks (intern-related)")
-			    (org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
-		(tags-todo "+work+interns-HOLD-CANCELED/!"
-			   ((org-agenda-overriding-header "Projects (intern-related)")
-			    (org-agenda-skip-function 'rpc/skip-non-projects)))
-		))
-	      )))
+			   ((org-agenda-overriding-header "Notes")))
+			  (" " "Agenda"
+			   (;(agenda "" nil)
+				(tags "REFILE"
+					  ((org-agenda-overriding-header "Tasks to Refile")))
+				(tags-todo "-CANCELED/!"
+						   ((org-agenda-overriding-header "Stuck Projects")
+							(org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
+				(tags-todo "-CANCELED+WAITING|HOLD/!"
+						   ((org-agenda-overriding-header "Waiting and Postponed Tasks")
+							(org-agenda-skip-function 'rpc/skip-non-tasks)
+							(org-tags-match-list-sublevels nil)))
+				(tags-todo "-CANCELED/!NEXT"
+						   ((org-agenda-overriding-header "Project Next Tasks")
+							(org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
+				(tags-todo "-HOLD-CANCELED/!"
+						   ((org-agenda-overriding-header "Projects")
+							(org-agenda-skip-function 'rpc/skip-non-projects)))
+				))
+			  )))
 
 (defun rpc/skip-non-projects ()
   "Skip trees that are not projects."
