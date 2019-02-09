@@ -59,29 +59,77 @@
 			    "~/org/tickler.org"
 			    "~/org/gtd.org"))
 
+(setq org-tag-persistent-alist
+	  '(("@seth")
+	    ("@wisdom")
+	    ("@patrick")
+	    ("@chuck")
+	    ("@craigh")
+	    ("@devin")
+	    ("@matt")))
+
+(setq rpc/org-agenda-block-notes '(tags "NOTE" ((org-agenda-overriding-header "Notes"))))
+(setq rpc/org-agenda-block-refile '(tags "REFILE" ((org-agenda-overriding-header "Items to Refile"))))
+(setq rpc/org-agenda-block-waiting '(tags-todo "-CANCELED+WAITING|HOLD/!"
+											   ((org-agenda-overriding-header "Waiting and Postponed Tasks")
+												(org-agenda-skip-function 'rpc/skip-non-tasks)
+												(org-tags-match-list-sublevels nil))))
+(setq rpc/org-agenda-block-misc '(tags-todo "misc" ((org-agenda-overriding-header "Misc Small Tasks"))))
+(setq rpc/org-agenda-block-jira '(tags-todo "@jira" ((org-agenda-overriding-header "Tasks Needing JIRA"))))
+(setq rpc/org-agenda-block-workflow '(tags-todo "workflow" ((org-agenda-overriding-header "Workflow Improvements"))))
+(setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding header "Async Discussions"))))
+
+(defun rpc/org-agenda-block-person (abbr)
+  `(tags-todo ,(format "@%s" abbr)
+			  ((org-agenda-overriding-header ,(format "TODOs requiring %s" abbr)))))
+
+(setq rpc/org-agenda-people
+	  `("p" "Tasks by Person"
+		,(mapcar 'rpc/org-agenda-block-person
+				 '("seth"
+				   "craigh"
+				   "wisdom"
+				   "chuck"
+				   "patrick"
+				   "devin"
+				   "matt"))))
+
+(setq rpc/org-agenda-workflow
+	  `("w" "Workflow Improvement Agenda"
+		(,rpc/org-agenda-block-workflow)))
+
+(setq rpc/org-agenda-discussions
+	  `("d" "Async Discussion Agenda"
+		(,rpc/org-agenda-block-discussions)))
+
+(setq rpc/org-agenda-refile
+	  `("r" "Items to Refile"
+		(,rpc/org-agenda-block-refile)))
+
+(setq rpc/org-agenda-main
+	  `(" " "Main Agenda"
+		(;(agenda "" nil)
+		 ,rpc/org-agenda-block-refile
+		 ,rpc/org-agenda-block-jira
+		 (tags-todo "-CANCELED/!"
+					((org-agenda-overriding-header "Stuck Projects")
+					 (org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
+		 ,rpc/org-agenda-block-waiting
+		 (tags-todo "-CANCELED/!NEXT"
+					((org-agenda-overriding-header "Project Next Tasks")
+					 (org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
+		 (tags-todo "-HOLD-CANCELED/!"
+					((org-agenda-overriding-header "Projects")
+					 (org-agenda-skip-function 'rpc/skip-non-projects)))
+		 ))
+	  )
+
 (setq org-agenda-compact-blocks t)
-(setq org-agenda-custom-commands
-      (quote (("N" "Notes" tags "NOTE"
-			   ((org-agenda-overriding-header "Notes")))
-			  (" " "Agenda"
-			   (;(agenda "" nil)
-				(tags "REFILE"
-					  ((org-agenda-overriding-header "Tasks to Refile")))
-				(tags-todo "-CANCELED/!"
-						   ((org-agenda-overriding-header "Stuck Projects")
-							(org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
-				(tags-todo "-CANCELED+WAITING|HOLD/!"
-						   ((org-agenda-overriding-header "Waiting and Postponed Tasks")
-							(org-agenda-skip-function 'rpc/skip-non-tasks)
-							(org-tags-match-list-sublevels nil)))
-				(tags-todo "-CANCELED/!NEXT"
-						   ((org-agenda-overriding-header "Project Next Tasks")
-							(org-agenda-skip-function 'rpc/skip-projects-and-single-tasks)))
-				(tags-todo "-HOLD-CANCELED/!"
-						   ((org-agenda-overriding-header "Projects")
-							(org-agenda-skip-function 'rpc/skip-non-projects)))
-				))
-			  )))
+(setq org-agenda-custom-commands `(,rpc/org-agenda-main
+								   ,rpc/org-agenda-people
+								   ,rpc/org-agenda-workflow
+								   ,rpc/org-agenda-discussions
+								   ,rpc/org-agenda-refile))
 
 (defun rpc/skip-non-projects ()
   "Skip trees that are not projects."
