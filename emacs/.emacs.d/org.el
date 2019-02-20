@@ -1,6 +1,9 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (setq-default org-hide-leading-stars t)
 
+(require 'periodic-commit-minor-mode)
+(add-hook 'org-mode-hook 'periodic-commit-minor-mode)
+
 (setq org-todo-keywords
     '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "HOLD(h)" "|" "DONE(d)" "CANCELED(c)")))
 
