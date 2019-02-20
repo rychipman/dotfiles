@@ -80,7 +80,7 @@
 (setq rpc/org-agenda-block-misc '(tags-todo "misc" ((org-agenda-overriding-header "Misc Small Tasks"))))
 (setq rpc/org-agenda-block-jira '(tags-todo "@jira" ((org-agenda-overriding-header "Tasks Needing JIRA"))))
 (setq rpc/org-agenda-block-workflow '(tags-todo "workflow" ((org-agenda-overriding-header "Workflow Improvements"))))
-(setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding header "Async Discussions"))))
+(setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding-header "Async Discussions"))))
 
 (defun rpc/org-agenda-block-person (abbr)
   `(tags-todo ,(format "@%s" abbr)
