@@ -143,6 +143,7 @@
    "f" '(:ignore t :which-key "file")
    "fe" '(:ignore t :which-key "emacs")
    "fee" (lambda () "edit" (interactive) (find-file "~/.emacs.d/init.el"))
+   "feo" (lambda () "edit" (interactive) (find-file "~/.emacs.d/org.el"))
    "fer" (lambda () "reload" (interactive) (load-file user-init-file))
 
    ;; buffer
@@ -172,8 +173,8 @@
    "ol" 'org-store-link
    "or" 'org-refile
    "oA" 'org-archive
-   "oA" 'org-archive
    "of" 'rpc/open-org-file
+   "oi" (lambda() "inbox" (interactive) (find-file "~/org/inbox.org"))
 
    ;; window
    "w" '(:ignore t :which-key "window")
