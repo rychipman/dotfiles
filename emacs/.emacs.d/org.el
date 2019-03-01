@@ -23,9 +23,20 @@
 	("T" "Tickler Entry"
 	entry (file+headline "~/org/tickler.org" "Tickler")
 	"* %i%?\n%U\n%a")
-	("n" "Note"
+	("n" "Templates for creating notes")
+	("nn" "General Note"
 	 entry (file+headline "~/org/inbox.org" "Notes")
-	 "* %? :NOTE:"
+	 "* %?\n%U"
+	 :empty-lines 1
+	 :prepend t)
+	("nr" "Retro reflection"
+	 entry (file+headline "~/org/inbox.org" "Retro thoughts")
+	 "* %?\n%U"
+	 :empty-lines 1
+	 :prepend t)
+	("nf" "Feedback example"
+	 entry (file+headline "~/org/inbox.org" "Feedback examples")
+	 "* %^{Title} %^g\n%U\n%?"
 	 :empty-lines 1
 	 :prepend t)
 	("l" "Task with link"
