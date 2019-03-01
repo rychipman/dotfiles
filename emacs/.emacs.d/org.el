@@ -52,6 +52,7 @@
 (setq org-refile-target-verify-function 'rpc/verify-refile-target)
 
 (add-hook 'org-capture-mode-hook 'evil-insert-state)
+(add-hook 'org-log-buffer-setup-hook 'evil-insert-state)
 
 (require 'org-agenda)
 
