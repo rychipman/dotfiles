@@ -101,6 +101,7 @@
  '(font-lock-function-name-face ((t (:foreground "#efe67c"))))
  '(font-lock-type-face ((t (:foreground "#d5f29f"))))
  '(font-lock-keyword-face ((t (:foreground "#8cceff"))))
+ '(font-lock-doc-face ((t (:foreground "Slategray4"))))
  '(git-gutter-fr:modified ((t (:foreground "#c1a10f"))))
  '(git-gutter-fr:added ((t (:foreground "#46843c"))))
  '(git-gutter-fr:deleted ((t (:foreground "#8e0801"))))
