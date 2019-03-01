@@ -25,27 +25,27 @@
 	"* %i%?\n%U\n%a")
 	("n" "Templates for creating notes")
 	("nn" "General Note"
-	 entry (file+headline "~/org/inbox.org" "Notes")
+	 entry (file+headline "~/org/gtd.org" "Notes")
 	 "* %?\n%U"
 	 :empty-lines 1
 	 :prepend t)
 	("nr" "Retro reflection"
-	 entry (file+headline "~/org/inbox.org" "Retro thoughts")
+	 entry (file+headline "~/org/gtd.org" "Retro thoughts")
 	 "* %?\n%U"
 	 :empty-lines 1
 	 :prepend t)
 	("nf" "Feedback example"
-	 entry (file+headline "~/org/inbox.org" "Feedback examples")
+	 entry (file+headline "~/org/gtd.org" "Feedback examples")
 	 "* %^{Title} %^g\n%U\n%?"
 	 :empty-lines 1
 	 :prepend t)
 	("l" "Task with link"
-	 entry (file+headline "~/org/inbox.org" "Tasks")
+	 entry (file+headline "~/org/gtd.org" "Inbox")
 	 "* TODO %?\n  %A"
 	 :empty-lines 1
 	 :prepend t)
 	("t" "Task"
-	entry (file+headline "~/org/inbox.org" "Tasks")
+	entry (file+headline "~/org/gtd.org" "Inbox")
 	"* TODO %?"
 	:empty-lines 1
 	:prepend t)))
@@ -81,9 +81,7 @@
 (define-key org-agenda-mode-map "j" 'org-agenda-next-item)
 (define-key org-agenda-mode-map "k" 'org-agenda-previous-item)
 
-(setq org-agenda-files (list "~/org/inbox.org"
-			    "~/org/tickler.org"
-			    "~/org/gtd.org"))
+(setq org-agenda-files (list "~/org/tickler.org" "~/org/gtd.org"))
 
 (setq org-tag-persistent-alist
 	  '(("@seth")
