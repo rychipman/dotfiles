@@ -320,10 +320,12 @@
 
 (use-package eyebrowse
   :ensure t
+  :init
+  (setq eyebrowse-keymap-prefix (kbd "C-c C-S-w"))
   :config
-  (eyebrowse-mode t)
   (setq-default eyebrowse-new-workspace t)
-  (setq-default eyebrowse-wrap-around t))
+  (setq-default eyebrowse-wrap-around t)
+  (eyebrowse-mode t))
 
 (use-package go-mode
   :ensure t
