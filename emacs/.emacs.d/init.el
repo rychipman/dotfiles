@@ -174,6 +174,7 @@
    "or" 'org-refile
    "oA" 'org-archive
    "of" 'rpc/open-org-file
+   "oh" 'rpc/org-narrow-to-headline
    "os" 'org-save-all-org-buffers
    "oi" (lambda() "inbox" (interactive) (find-file "~/org/inbox.org"))
 

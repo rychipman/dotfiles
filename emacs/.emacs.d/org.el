@@ -264,3 +264,12 @@ Skip project and sub-project tasks, habits, and project related tasks."
    (sqlite . t)
    (ledger . t)
    (emacs-lisp . t)))
+
+(defun rpc/org-narrow-to-headline ()
+  (interactive)
+  (rpc/open-org-file)
+  (widen)
+  (org-goto 'outline-path-completion)
+  (org-narrow-to-subtree)
+  (org-set-startup-visibility)
+  (org-cycle))
