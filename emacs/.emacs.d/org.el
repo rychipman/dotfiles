@@ -50,6 +50,16 @@
 	:empty-lines 1
 	:prepend t)))
 
+(defvar rpc/jira-domain "jira.mongodb.org")
+(defun org-jira-link-open (ticket)
+  (org-open-link-from-string
+   (format "https://%s/browse/%s" rpc/jira-domain ticket)))
+(defun org-jira-link-complete ()
+  (concat "jira:" (read-string "ticket: ")))
+(org-link-set-parameters "jira"
+						 :complete 'org-jira-link-complete
+						 :follow 'org-jira-link-open)
+
 (setq org-refile-use-outline-path t)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
