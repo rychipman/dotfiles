@@ -39,11 +39,22 @@
 	 "* %^{Title} %^g\n%U\n%?"
 	 :empty-lines 1
 	 :prepend t)
-	("l" "Task with link"
-	 entry (file+headline "~/org/gtd.org" "Inbox")
-	 "* TODO %?\n  %A"
+	("np" "Personal reflection"
+	 entry (file+headline "~/org/gtd.org" "Personal reflections")
+	 "* %^{Title}\n%U\n%?"
 	 :empty-lines 1
 	 :prepend t)
+	("q" "Question"
+	 entry (file+headline "~/org/gtd.org" "Questions")
+	 "* TODO %? %^g"
+	 :empty-lines 1
+	 :prepend t)
+	("p" "Project"
+	 entry (file+headline "~/org/gtd.org" "Projects")
+	 "* TODO %^{Project}\n:PROPERTIES:\n:CATEGORY: %^{Slug}\n:END:"
+	 :empty-lines 1
+	 :prepend t
+	 :immediate-finish t)
 	("t" "Task"
 	entry (file+headline "~/org/gtd.org" "Inbox")
 	"* TODO %?"
