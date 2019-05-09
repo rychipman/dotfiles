@@ -113,6 +113,10 @@
 (setq rpc/org-agenda-block-jira '(tags-todo "@jira" ((org-agenda-overriding-header "Tasks Needing JIRA"))))
 (setq rpc/org-agenda-block-workflow '(tags-todo "workflow" ((org-agenda-overriding-header "Workflow Improvements"))))
 (setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding-header "Async Discussions"))))
+(setq rpc/org-agenda-block-archivable '(tags-todo "-REFILE/"
+											 ((org-agenda-overriding-header "To Archive")
+											  (org-agenda-skip-function 'rpc/skip-non-archivable)
+											  (org-tags-match-list-sublevels nil))))
 
 (defun rpc/org-agenda-block-person (abbr)
   `(tags-todo ,(format "@%s" abbr)
@@ -141,6 +145,10 @@
 	  `("r" "Items to Refile"
 		(,rpc/org-agenda-block-refile)))
 
+(setq rpc/org-agenda-archive
+	  `("A" "Items to Archive"
+		(,rpc/org-agenda-block-archivable)))
+
 (setq rpc/org-agenda-main
 	  `(" " "Main Agenda"
 		(;(agenda "" nil)
@@ -164,7 +172,20 @@
 								   ,rpc/org-agenda-people
 								   ,rpc/org-agenda-workflow
 								   ,rpc/org-agenda-discussions
-								   ,rpc/org-agenda-refile))
+								   ,rpc/org-agenda-refile
+								   ,rpc/org-agenda-archive))
+
+(defun rpc/skip-non-archivable ()
+  "Skip trees that are not archivable tasks or projects."
+  (save-restriction
+	(widen)
+	(if (member (org-get-todo-state) '("DONE" "CANCELED"))
+	  (save-excursion (or (outline-next-heading) (point-max)))
+		nil
+	  )
+	)
+  )
+
 
 (defun rpc/skip-non-projects ()
   "Skip trees that are not projects."
