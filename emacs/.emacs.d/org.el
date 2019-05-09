@@ -71,6 +71,14 @@
 						 :complete 'org-jira-link-complete
 						 :follow 'org-jira-link-open)
 
+(defun rpc/org-link-describe (link desc)
+  (let* ((parts (split-string link ":"))
+		 (protocol (car parts))
+		 (path (cadr parts)))
+	path))
+
+(setq org-make-link-description-function #'rpc/org-link-describe)
+
 (setq org-refile-use-outline-path t)
 (setq org-outline-path-complete-in-steps nil)
 (setq org-refile-allow-creating-parent-nodes 'confirm)
