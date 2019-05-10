@@ -414,6 +414,7 @@
    mu4e-get-mail-command "mbsync -Va"
    mu4e-change-filenames-when-moving t
    mu4e-completing-read-function 'completing-read
+   mu4e-compose-dont-reply-to-self t
    shr-color-visible-luminance-min 80
    send-mail-function 'smtpmail-send-it
    smtpmail-smtp-service 465
@@ -422,6 +423,12 @@
    mu4e-compose-format-flowed t
    message-kill-buffer-on-exit t
    mu4e-confirm-quit nil)
+
+  (setq mu4e-user-mail-address-list '("ryan@mongodb.com"
+									  "ryan.chipman@mongodb.com"
+									  "ryan@10gen.com"
+									  "ryan.chipman@10gen.com"
+									  "ryan@ryanchipman.com"))
 
   (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 
