@@ -323,13 +323,13 @@ Skip project and sub-project tasks, habits, and project related tasks."
   (interactive)
   (find-file "~/org/gtd.org"))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((python . t)
-   (sh . t)
-   (sqlite . t)
-   (ledger . t)
-   (emacs-lisp . t)))
+;(org-babel-do-load-languages
+; 'org-babel-load-languages
+; '((python . t)
+;   (sh . t)
+;   (sqlite . t)
+;   (ledger . t)
+;   (emacs-lisp . t)))
 
 (defun rpc/org-narrow-to-headline ()
   (interactive)
