@@ -199,6 +199,7 @@
    "pD" 'counsel-projectile-find-dir
    "ps" 'counsel-projectile-rg
    "pb" 'counsel-projectile-switch-to-buffer
+   "pu" 'projectile-discover-projects-in-search-path
 
    ;; ledger
    "l" '(:ignore t :which-key "ledger")
@@ -516,6 +517,9 @@
 (use-package projectile
   :ensure t
   :config
+
+  (setq projectile-project-search-path '("~/git/"))
+
   (use-package counsel-projectile
     :ensure t
     :config
