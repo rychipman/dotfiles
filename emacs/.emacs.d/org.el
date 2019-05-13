@@ -121,6 +121,11 @@
 (setq rpc/org-agenda-block-jira '(tags-todo "@jira" ((org-agenda-overriding-header "Tasks Needing JIRA"))))
 (setq rpc/org-agenda-block-workflow '(tags-todo "workflow" ((org-agenda-overriding-header "Workflow Improvements"))))
 (setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding-header "Async Discussions"))))
+(setq rpc/org-agenda-block-projects '(tags-todo "-HOLD-CANCELLED/!"
+												((org-agenda-overriding-header "Projects")
+												 (org-agenda-skip-function 'rpc/skip-non-projects)
+												 (org-tags-match-list-sublevels 'indented)
+												 (org-agenda-sorting-strategy '(category-keep)))))
 (setq rpc/org-agenda-block-archivable '(tags-todo "-REFILE/"
 											 ((org-agenda-overriding-header "To Archive")
 											  (org-agenda-skip-function 'rpc/skip-non-archivable)
@@ -160,6 +165,7 @@
 (setq rpc/org-agenda-main
 	  `(" " "Main Agenda"
 		(;(agenda "" nil)
+		 ,rpc/org-agenda-block-projects
 		 ,rpc/org-agenda-block-refile
 		 ,rpc/org-agenda-block-jira
 		 (tags-todo "-CANCELED/!"
