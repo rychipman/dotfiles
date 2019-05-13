@@ -93,29 +93,8 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/")
 
-(load-theme 'wombat t)
-(custom-theme-set-faces
- 'wombat
- '(font-lock-builtin-face ((t (:foreground "#e5c654"))))
- '(font-lock-constant-face ((t (:foreground "#e58954"))))
- '(font-lock-function-name-face ((t (:foreground "#efe67c"))))
- '(font-lock-type-face ((t (:foreground "#d5f29f"))))
- '(font-lock-keyword-face ((t (:foreground "#8cceff"))))
- '(font-lock-doc-face ((t (:foreground "Slategray4"))))
- '(git-gutter-fr:modified ((t (:foreground "#c1a10f"))))
- '(git-gutter-fr:added ((t (:foreground "#46843c"))))
- '(git-gutter-fr:deleted ((t (:foreground "#8e0801"))))
- '(cursor ((t (:background "orange"))))
- '(company-preview ((t (:background "#303030"))))
- '(company-preview-common ((t (:foreground "#8cceff"))))
- '(company-tooltip ((t (:background "#303030"))))
- '(company-tooltip-selection ((t (:background "#444444"))))
- '(company-tooltip-common ((t (:foreground "#8cceff"))))
- '(company-scrollbar-fg ((t (:background "#777777"))))
- '(company-scrollbar-bg ((t (:background "#444444"))))
- '(whitespace-trailing ((t :background "#e5786d")))
- )
-(set-face-attribute 'highlight nil :foreground 'unspecified :background "#303030" :underline nil)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'umber t)
 
 (require 'use-package)
 
