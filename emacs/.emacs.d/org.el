@@ -125,10 +125,6 @@
 												 (org-agenda-skip-function 'rpc/skip-non-projects)
 												 (org-tags-match-list-sublevels 'indented)
 												 (org-agenda-sorting-strategy '(category-keep)))))
-(setq rpc/org-agenda-block-archivable '(tags-todo "-REFILE/"
-											 ((org-agenda-overriding-header "To Archive")
-											  (org-agenda-skip-function 'rpc/skip-non-archivable)
-											  (org-tags-match-list-sublevels nil))))
 
 (defun rpc/org-agenda-block-person (abbr)
   `(tags-todo ,(format "@%s" abbr)
@@ -160,17 +156,26 @@
 	  )
 
 (setq rpc/org-agenda-maintenance
-	  `("m" "Org-mode Maintenance"
-		(,rpc/org-agenda-block-refile)))
+	  '("M" "Org-mode Maintenance"
+		((tags-todo "REFILE"
+					((org-agenda-overriding-header "TODOs to Refile")))
+		 (tags "REFILE/DONE|CANCELED"
+			   ((org-agenda-overriding-header "Completed Items to Refile")))
+		 (tags-todo "TIMESTAMP_IA>=\"<-2m>\"&TIMESTAMP_IA<\"<-1m>\""
+					((org-agenda-overriding-header "Stale Tasks (1-2 mos)")))
+		 (tags-todo "TIMESTAMP_IA<\"<-2m>\""
+					((org-agenda-overriding-header "Very Stale Tasks (2 mos)")))
+		 (tags "TIMESTAMP_IA<\"<-2m>\"/DONE|CANCELED"
+			   ((org-agenda-overriding-header "Items to Archive (2 mos)")))
+		 )))
 
-(setq rpc/org-agenda-schedule
-	  `("s" "Schedule"
-		((agenda)
-		 (agenda))))
-
-(setq rpc/org-agenda-archive
-	  `("A" "Items to Archive"
-		(,rpc/org-agenda-block-archivable)))
+(setq rpc/org-agenda-review
+	  '("r" "Personal Review"
+		((tags-todo "TIMESTAMP_IA>\"<yesterday>\""
+					((org-agenda-overriding-header "Tasks Updated Today")))
+		 (tags "TIMESTAMP_IA>\"<yesterday>\"/DONE|CLOSED"
+			   ((org-agenda-overriding-header "Completed Today")))
+		 )))
 
 (setq rpc/org-agenda-main
 	  `(" " "Main Agenda"
@@ -190,12 +195,11 @@
 		 ))
 	  )
 
-(setq org-agenda-compact-blocks t)
+(setq org-agenda-compact-blocks nil)
 (setq org-agenda-custom-commands `(,rpc/org-agenda-main
-								   ,rpc/org-agenda-schedule
 								   ,rpc/org-agenda-people
 								   ,rpc/org-agenda-maintenance
-								   ,rpc/org-agenda-archive))
+								   ,rpc/org-agenda-review))
 
 (defun rpc/skip-non-archivable ()
   "Skip trees that are not archivable tasks or projects."
