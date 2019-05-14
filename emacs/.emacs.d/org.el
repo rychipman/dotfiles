@@ -5,7 +5,9 @@
 (add-hook 'org-mode-hook 'periodic-commit-minor-mode)
 
 (setq org-todo-keywords
-    '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "HOLD(h)" "|" "DONE(d)" "CANCELED(c)")))
+	  '((sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "HOLD(h)" "|" "DONE(d)" "CANCELED(c)")
+		(sequence "TASK(t)" "REVIEW(r)" "|" "DONE(d)")
+		(sequence "SETUP(s)" "WRITE(w)" "TEAMRV(t)" "FINALRV(f)" "|" "DONE(d)")))
 
 (setq org-todo-state-tags-triggers
       '(("CANCELED" ("CANCELED" . t))
