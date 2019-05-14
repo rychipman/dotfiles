@@ -37,14 +37,14 @@ are included.")
    `(homoglyph ((,class (:foreground "#ddaa6f" :weight bold))))
 
    ;; Font lock faces
-   `(font-lock-builtin-face ((,class (:foreground "#e5c654"))))
+   `(font-lock-builtin-face ((,class (:foreground "#d4b543"))))
    `(font-lock-comment-face ((,class (:foreground "#99968b"))))
    `(font-lock-constant-face ((,class (:foreground "#e58954"))))
-   `(font-lock-function-name-face ((,class (:foreground "#efe67c"))))
-   `(font-lock-keyword-face ((,class (:foreground "#8cceff" :weight bold))))
+   `(font-lock-function-name-face ((,class (:foreground "#ffe67c"))))
+   `(font-lock-keyword-face ((,class (:foreground "#8cceff"))))
    `(font-lock-string-face ((,class (:foreground "#95e454"))))
-   `(font-lock-type-face ((,class (:foreground "#d5f29f" :weight bold))))
-   `(font-lock-variable-name-face ((,class (:foreground "#cae682"))))
+   `(font-lock-type-face ((,class (:foreground "#cae682"))))
+   `(font-lock-variable-name-face ((,class (:foreground "#dd8866"))))
    `(font-lock-warning-face ((,class (:foreground "#ccaa8f"))))
    `(font-lock-doc-face ((,class (:foreground "#888888"))))
 
@@ -56,6 +56,7 @@ are included.")
 
    ;; Org faces
    `(org-special-keyword ((,class (:foreground "#8ac6f2"))))
+   `(org-date ((,class (:foreground "#8ac6f2"))))
 
    ;; Gnus faces
    `(gnus-group-news-1 ((,class (:weight bold :foreground "#95e454"))))
