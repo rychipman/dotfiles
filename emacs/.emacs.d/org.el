@@ -118,9 +118,6 @@
 												(org-agenda-skip-function 'rpc/skip-non-tasks)
 												(org-tags-match-list-sublevels nil))))
 (setq rpc/org-agenda-block-misc '(tags-todo "misc" ((org-agenda-overriding-header "Misc Small Tasks"))))
-(setq rpc/org-agenda-block-jira '(tags-todo "@jira" ((org-agenda-overriding-header "Tasks Needing JIRA"))))
-(setq rpc/org-agenda-block-workflow '(tags-todo "workflow" ((org-agenda-overriding-header "Workflow Improvements"))))
-(setq rpc/org-agenda-block-discussions '(tags-todo "discussion" ((org-agenda-overriding-header "Async Discussions"))))
 (setq rpc/org-agenda-block-projects '(tags-todo "-HOLD-CANCELLED/!"
 												((org-agenda-overriding-header "Projects")
 												 (org-agenda-skip-function 'rpc/skip-non-projects)
@@ -146,17 +143,28 @@
 				   "devin"
 				   "matt"))))
 
-(setq rpc/org-agenda-workflow
-	  `("w" "Workflow Improvement Agenda"
-		(,rpc/org-agenda-block-workflow)))
+(setq rpc/org-agenda-my-tasks
+	  '("y" "My Tasks"
+		((tags-todo "-CANCELED+WAITING"
+					((org-agenda-overriding-header "Due Today")))
+		 (tags-todo "-CANCELED+WAITING"
+					((org-agenda-overriding-header "Overdue")))
+		 (tags-todo "-CANCELED+WAITING"
+					((org-agenda-overriding-header "Due Soon")))
+		 (tags-todo "-CANCELED+WAITING"
+					((org-agenda-overriding-header "Blocked")))
+		 )
+		)
+	  )
 
-(setq rpc/org-agenda-discussions
-	  `("d" "Async Discussion Agenda"
-		(,rpc/org-agenda-block-discussions)))
-
-(setq rpc/org-agenda-refile
-	  `("r" "Items to Refile"
+(setq rpc/org-agenda-maintenance
+	  `("m" "Org-mode Maintenance"
 		(,rpc/org-agenda-block-refile)))
+
+(setq rpc/org-agenda-schedule
+	  `("s" "Schedule"
+		((agenda)
+		 (agenda))))
 
 (setq rpc/org-agenda-archive
 	  `("A" "Items to Archive"
@@ -167,7 +175,6 @@
 		(;(agenda "" nil)
 		 ,rpc/org-agenda-block-projects
 		 ,rpc/org-agenda-block-refile
-		 ,rpc/org-agenda-block-jira
 		 (tags-todo "-CANCELED/!"
 					((org-agenda-overriding-header "Stuck Projects")
 					 (org-agenda-skip-function 'rpc/skip-non-stuck-projects)))
@@ -183,10 +190,9 @@
 
 (setq org-agenda-compact-blocks t)
 (setq org-agenda-custom-commands `(,rpc/org-agenda-main
+								   ,rpc/org-agenda-schedule
 								   ,rpc/org-agenda-people
-								   ,rpc/org-agenda-workflow
-								   ,rpc/org-agenda-discussions
-								   ,rpc/org-agenda-refile
+								   ,rpc/org-agenda-maintenance
 								   ,rpc/org-agenda-archive))
 
 (defun rpc/skip-non-archivable ()
