@@ -123,7 +123,7 @@
    "f" '(:ignore t :which-key "file")
    "fe" '(:ignore t :which-key "emacs")
    "fee" (lambda () "edit" (interactive) (find-file "~/.emacs.d/init.el"))
-   "feo" (lambda () "edit" (interactive) (find-file "~/.emacs.d/org.el"))
+   "feo" (lambda () "edit" (interactive) (find-file "~/org/lisp/org.el"))
    "fer" (lambda () "reload" (interactive) (load-file user-init-file))
 
    ;; buffer
@@ -297,7 +297,7 @@
 (use-package org
   :ensure t
   :config
-  (load-file "~/.emacs.d/org.el"))
+  (load-file "~/org/lisp/org.el"))
 
 (use-package eyebrowse
   :ensure t
