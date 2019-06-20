@@ -57,3 +57,7 @@ super + m
     state=monocle; \
     bspc query -T -d | grep monocle && state=tiled; \
     bspc desktop --layout $state
+
+super + e
+   state=floating; \
+   bspc node --state $state
