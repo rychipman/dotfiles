@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# TODO: find a good locker program
+# lock the screen
+i3lock-wrapper --ignore-empty-password --nofork
 
 # reload the gpg-agent
 gpg-connect-agent reloadagent /bye
