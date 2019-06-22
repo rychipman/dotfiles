@@ -36,14 +36,14 @@ super + {comma,period}
 super + h
     bspc desktop --focus home
 
+super + j
+    ~/bin/bspwm/winopen emacs
+
 super + k
     ~/bin/bspwm/winopen firefox
 
-super + j
-    ~/bin/bspwm/winopen lxterminal
-
 super + l
-    ~/bin/bspwm/winopen --raise slack
+    ~/bin/bspwm/winopen lxterminal
 
 super + w
     bspc node --close
