@@ -10,12 +10,12 @@ xcape -e 'Control_L=Escape'
 xmodmap -e "clear mod4"
 
 # map return to return/control
-spare_modifier="Hyper_L"
-xmodmap -e "remove mod4 = $spare_modifier"
-xmodmap -e "keycode 36 = $spare_modifier"
-xmodmap -e "add Control = $spare_modifier"
+spare_modifier_1="Super_L"
+xmodmap -e "remove mod4 = $spare_modifier_1"
+xmodmap -e "keycode 36 = $spare_modifier_1"
+xmodmap -e "add Control = $spare_modifier_1"
 xmodmap -e "keycode any = Return"
-xcape -e "$spare_modifier=Return"
+xcape -e "$spare_modifier_1=Return"
 
 # map tab to tab/super
 spare_modifier_2="Hyper_R"
@@ -24,3 +24,9 @@ xmodmap -e "add mod4 = Hyper_R"
 xmodmap -e "keycode any = Tab"
 xcape -e "$spare_modifier_2=Tab"
 
+# map backslash to backslash/super
+spare_modifier_3="Hyper_L"
+xmodmap -e "keycode 51 = $spare_modifier_3"
+xmodmap -e "add mod4 = Hyper_L"
+xmodmap -e "keycode any = backslash"
+xcape -e "$spare_modifier_3=backslash"
