@@ -1,3 +1,4 @@
+**/*.fasl
 **/*.log
 nvim/.config/nvim/autoload/vim-plug/*
 vim/.vim/autoload/vim-plug/*
