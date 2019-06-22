@@ -390,6 +390,7 @@
   ;; general settings
   (require 'org-mu4e)
   (setq
+   org-mu4e-link-query-in-headers-mode t
    mu4e-maildir "~/mail"
    mu4e-mu-binary "/usr/local/bin/mu"
    mu4e-get-mail-command "mbsync -Va"
