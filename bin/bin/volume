@@ -3,8 +3,8 @@
 step="5%"
 start="50%"
 
-mutestatus="$(amixer get Master | grep Mono: | awk '{print $6}')"
-volstatus="$(amixer get Master | grep Mono: | awk '{print $4}')"
+mutestatus="$(amixer get Master | grep 'Front Left': | awk '{print $6}')"
+volstatus="$(amixer get Master | grep 'Front Left': | awk '{print $4}')"
 
 while getopts "idcmuts" opt; do
   case $opt in
