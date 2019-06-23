@@ -3,6 +3,7 @@ Host imap.fastmail.com
 User rpc@fastmail.com
 PassCmd "cat ~/.local/share/secrets/mbsync/mongodb"
 SSLType IMAPS
+CertificateFile /usr/local/etc/openssl/cert.pem
 
 IMAPStore personal-remote
 Account personal
@@ -26,6 +27,7 @@ Host imap.gmail.com
 User ryan.chipman@10gen.com
 PassCmd "cat ~/.local/share/secrets/mbsync/mongodb"
 SSLType IMAPS
+CertificateFile /usr/local/etc/openssl/cert.pem
 AuthMechs PLAIN
 
 IMAPStore mongodb-remote
