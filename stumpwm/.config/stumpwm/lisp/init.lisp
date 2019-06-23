@@ -15,6 +15,9 @@
 (defcommand lxterminal() ()
   (run-or-raise "lxterminal" '(:class "Lxterminal")))
 
+(defcommand slack() ()
+  (run-or-raise "slack" '(:class "Slack")))
+
 (define-keysym #x1008ff11 "XF86AudioLowerVolume")
 (define-keysym #x1008ff12 "XF86AudioMute")
 (define-keysym #x1008ff13 "XF86AudioRaiseVolume")
@@ -24,6 +27,7 @@
 (define-key *top-map* (kbd "XF86AudioMute") "exec volume -t")
 
 (define-key *top-map* (kbd "H-f") "fnext")
+(define-key *top-map* (kbd "H-h") "slack")
 (define-key *top-map* (kbd "H-j") "emacs")
 (define-key *top-map* (kbd "H-k") "firefox")
 (define-key *top-map* (kbd "H-l") "lxterminal")
