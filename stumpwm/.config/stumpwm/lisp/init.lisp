@@ -10,7 +10,7 @@
 (in-package :stumpwm)
 
 (defcommand firefox() ()
-  (run-or-raise "firefox" '(:class "Firefox")))
+  (run-or-raise "firefox" '(:class "firefox")))
 
 (defcommand lxterminal() ()
   (run-or-raise "lxterminal" '(:class "Lxterminal")))
