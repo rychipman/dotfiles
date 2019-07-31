@@ -1,22 +1,22 @@
 #!/bin/bash
 
-step="5%"
-start="50%"
+step='5%'
+start='50%'
 
 mutestatus="$(amixer get Master | grep 'Front Left': | awk '{print $6}')"
 volstatus="$(amixer get Master | grep 'Front Left': | awk '{print $4}')"
 
-while getopts "idcmuts" opt; do
+while getopts 'idcmuts' opt; do
   case $opt in
     i)
-        amixer set Master "$step"+
+        amixer set Master "$step+"
       ;;
     d)
-        amixer set Master "$step"-
+        amixer set Master "$step-"
       ;;
     c)
-        if [[ "$mutestatus" == "[off]" ]]; then
-            echo "muted"
+        if [ "$mutestatus" = '[off]' ]; then
+            echo 'muted'
         else
             echo "$volstatus"
         fi
@@ -28,7 +28,7 @@ while getopts "idcmuts" opt; do
         amixer set Master unmute
       ;;
     t)
-        if [[ "$mutestatus" == "[off]" ]]; then
+        if [ "$mutestatus" = '[off]' ]; then
             amixer set Master unmute
         else
             amixer set Master mute
