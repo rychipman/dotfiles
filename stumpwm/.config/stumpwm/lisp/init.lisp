@@ -53,5 +53,5 @@
 (set-msg-border-width 5)
 (setq *message-window-gravity* :center)
 (setq *input-window-gravity* :center)
-
-
+(setf *window-border-style* :thin)
+(setf *normal-border-width* 3)
