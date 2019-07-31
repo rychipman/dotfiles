@@ -25,8 +25,10 @@
 (defun rpc/ledger-format-and-save ()
   (interactive)
   (save-excursion
-	(ledger-sort-buffer)
 	(rpc/ledger-delete-extra-whitespace)
+	(when (thing-at-point 'line t)
+	  (ledger-sort-buffer)
+	  (rpc/ledger-delete-extra-whitespace))
 	(save-buffer)))
 
 (load-file "~/.emacs.d/ledger/ledger-xact.el")
