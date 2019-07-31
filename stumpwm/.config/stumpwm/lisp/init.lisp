@@ -1,13 +1,17 @@
-(load "~/quicklisp/setup.lisp")
-
-(ql:quickload :clx-truetype)
-(load-module "ttf-fonts")
-(xft:cache-fonts)
-
-(ql:quickload :slynk)
-(slynk:create-server)
-
 (in-package :stumpwm)
+
+(ignore-errors
+  (load "~/quicklisp/setup.lisp")
+
+  (ql:quickload :clx-truetype)
+  (load-module "ttf-fonts")
+  (xft:cache-fonts)
+
+  (set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
+			   "9x15bold"))
+
+  (ql:quickload :slynk)
+  (slynk:create-server))
 
 (defcommand firefox() ()
   (run-or-raise "firefox" '(:class "firefox")))
@@ -45,8 +49,6 @@
 
 (setf *screen-mode-line-format* "^f1[^B%n^b] %W")
 
-(set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
-			"9x15bold"))
 (set-fg-color "#71c2af")
 (set-bg-color "#1d2a30")
 (set-border-color "#464b50")
