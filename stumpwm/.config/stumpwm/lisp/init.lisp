@@ -1,18 +1,5 @@
 (in-package :stumpwm)
 
-(ignore-errors
-  (load "~/quicklisp/setup.lisp")
-
-  (ql:quickload :clx-truetype)
-  (load-module "ttf-fonts")
-  (xft:cache-fonts)
-
-  (set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
-			   "9x15bold"))
-
-  (ql:quickload :slynk)
-  (slynk:create-server))
-
 (defcommand firefox() ()
   (run-or-raise "firefox" '(:class "firefox")))
 
@@ -57,3 +44,16 @@
 (setq *input-window-gravity* :center)
 (setf *window-border-style* :thin)
 (setf *normal-border-width* 3)
+
+(ignore-errors
+  (load "~/quicklisp/setup.lisp")
+
+  (ql:quickload :clx-truetype)
+  (load-module "ttf-fonts")
+  (xft:cache-fonts)
+
+  (set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
+			   "9x15bold"))
+
+  (ql:quickload :slynk)
+  (slynk:create-server))
