@@ -98,6 +98,7 @@ done
 
 evergreen patch \
     --yes \
+    --large \
     --description "$DESCRIPTION" \
     --variants "$VARIANTS" \
     --tasks all \
