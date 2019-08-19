@@ -87,16 +87,16 @@
 
 (setq-default whitespace-style '(face spaces tabs tab-mark trailing))
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin:/Users/ryan/.cargo/bin:/Library/TeX/texbin"))
 (defun rpc/prevent-whitespace-mode-for-magit ()
   (not (derived-mode-p 'magit-mode)))
 
 (with-eval-after-load 'whitespace
   (add-function :before-while whitespace-enable-predicate 'rpc/prevent-whitespace-mode-for-magit))
 
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin:/Users/ryan/.cargo/bin:/Library/TeX/texbin:/home/ryan/mobile/flutter/bin:/home/ryan/mobile/flutter/.pub-cache/bin"))
 (setenv "GOPATH" "/Users/ryan/.go")
 (setenv "PKG_CONFIG_PATH" (concat (getenv "PKG_CONFIG_PATH") "/usr/local/Cellar/openssl/1.0.2n/lib/pkgconfig"))
-(setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin")))
+(setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin" "/home/ryan/mobile/flutter/bin")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/")
@@ -631,6 +631,18 @@
 (use-package js2-mode
   :ensure t)
 
+(use-package dart-mode
+  :ensure t
+  :custom
+  (dart-format-on-save t)
+  (dart-sdk-path "~/mobile/flutter/bin/cache/dart-sdk/"))
+
+(use-package flutter
+  :ensure t
+  :after dart-mode
+  :custom
+  (flutter-sdk-path "~/mobile/flutter/"))
+
 (use-package rust-mode
   :ensure t
   :config
@@ -715,7 +727,7 @@
 	  "%(binary) -f %(ledger-file) reg %(account)"))))
  '(package-selected-packages
    (quote
-	(forge key-chord crux ryo-modal perspective company-restclient restclient yaml-mode git-timemachine dumb-jump smart-jump toml-mode cargo cargo-mode persp-mode tablist elfeed mu4e-alert rust-mode gotest worf ledger-mode smartparens git-gutter-fringe hydra go-eldoc company epresent evil-magit diff-hl badger-theme counsel-projectile projectile cider clojure-mode syndicate evil-surround go-mode eyebrowse magit which-key general use-package)))
+	(dart-mode use-package-ensure-system-package forge key-chord crux ryo-modal perspective company-restclient restclient yaml-mode git-timemachine dumb-jump smart-jump toml-mode cargo cargo-mode persp-mode tablist elfeed mu4e-alert rust-mode gotest worf ledger-mode smartparens git-gutter-fringe hydra go-eldoc company epresent evil-magit diff-hl badger-theme counsel-projectile projectile cider clojure-mode syndicate evil-surround go-mode eyebrowse magit which-key general use-package)))
  '(safe-local-variable-values
    (quote
 	((rpc/compile/build-command . "cd $(git rev-parse --show-toplevel) && go install cmd/mongosqld/mongosqld.go")
