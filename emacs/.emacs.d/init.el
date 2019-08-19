@@ -35,6 +35,8 @@
 (global-linum-mode 1)
 (global-hl-line-mode 0)
 
+(global-set-key (kbd "C-j") 'xref-find-definitions)
+
 (setq-default tab-width 4)
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
@@ -661,22 +663,6 @@
 
 (use-package toml-mode
   :ensure t)
-
-(use-package smart-jump
-  :ensure t
-  :config
-  (global-set-key (kbd "C-j") 'smart-jump-go)
-
-  (require 'smart-jump-go-mode)
-  (smart-jump-go-mode-register)
-  (define-key go-mode-map (kbd "C-c C-j") nil)
-
-  (require 'smart-jump-elisp-mode)
-  (smart-jump-elisp-mode-register)
-
-  (require 'smart-jump-rust-mode)
-  (smart-jump-rust-mode-register)
-  )
 
 (use-package restclient
   :ensure t
