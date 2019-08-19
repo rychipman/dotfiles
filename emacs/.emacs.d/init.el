@@ -93,10 +93,18 @@
 (with-eval-after-load 'whitespace
   (add-function :before-while whitespace-enable-predicate 'rpc/prevent-whitespace-mode-for-magit))
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/Users/ryan/.go/bin:/Users/ryan/.cargo/bin:/Library/TeX/texbin:/home/ryan/mobile/flutter/bin:/home/ryan/mobile/flutter/.pub-cache/bin"))
-(setenv "GOPATH" "/Users/ryan/.go")
-(setenv "PKG_CONFIG_PATH" (concat (getenv "PKG_CONFIG_PATH") "/usr/local/Cellar/openssl/1.0.2n/lib/pkgconfig"))
-(setq exec-path (append exec-path '("/usr/local/bin" "/usr/sbin" "/usr/bin" "/sbin" "/Users/ryan/.go/bin" "/Users/ryan/.cargo/bin" "/Library/TeX/texbin" "/home/ryan/mobile/flutter/bin")))
+(defun rpc/set-path-from-env (env-var-name)
+  (let* ((env-echo-cmd (format ". ~/.bashrc; echo -n $%s" env-var-name))
+		 (env-var-value (shell-command-to-string env-echo-cmd)))
+    (setenv env-var-name env-var-value)
+    (when (string= env-var-name "PATH")
+    	(setq exec-path
+    		  (append (split-string-and-unquote env-var-value ":")
+    				  exec-path)))))
+
+(rpc/set-path-from-env "PATH")
+(rpc/set-path-from-env "GOPATH")
+(rpc/set-path-from-env "PKG_CONFIG_PATH")
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/")
