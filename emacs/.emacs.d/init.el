@@ -329,8 +329,12 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook (go-mode . lsp)
-  :commands lsp)
+  :commands lsp
+  :hook ((go-mode . lsp)
+		 (lsp-mode .lsp-ui)
+		 (before-save . lsp-format-buffer))
+  :custom
+  (lsp-ui-peek-enable nil))
 
 (use-package dap-mode
   :ensure t)
