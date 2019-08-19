@@ -400,7 +400,7 @@
   (setq
    org-mu4e-link-query-in-headers-mode t
    mu4e-maildir "~/mail"
-   mu4e-mu-binary "/usr/local/bin/mu"
+   mu4e-mu-binary "/usr/bin/mu"
    mu4e-get-mail-command "mbsync -Va"
    mu4e-change-filenames-when-moving t
    mu4e-completing-read-function 'completing-read
