@@ -325,30 +325,19 @@
   (setq-default eyebrowse-wrap-around t)
   (eyebrowse-mode t))
 
-(use-package go-mode
+(use-package lsp-mode
   :ensure t
-  :config
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  (setq-default gofmt-command "goimports")
+  :hook (go-mode . lsp)
+  :commands lsp)
 
-  (use-package company-go
-    :ensure t
-    :config
-    (add-hook 'go-mode-hook
-		(lambda ()
-		(set (make-local-variable 'company-backends) '(company-go))
-		(company-mode 1)))
-    )
+(use-package dap-mode
+  :ensure t)
 
-  (use-package go-eldoc
-    :ensure t
-    :config
-    (add-hook 'go-mode-hook 'go-eldoc-setup)
-    )
+(use-package company-lsp
+  :ensure t)
 
-  (use-package go-dlv
-	:ensure t)
-  )
+(use-package go-mode
+  :ensure t)
 
 (use-package ledger-mode
   :ensure t
