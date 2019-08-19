@@ -327,6 +327,9 @@
   (setq-default eyebrowse-wrap-around t)
   (eyebrowse-mode t))
 
+(use-package graphviz-dot-mode
+  :ensure t)
+
 (use-package lsp-mode
   :ensure t
   :commands lsp
