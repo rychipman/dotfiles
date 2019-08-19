@@ -164,6 +164,7 @@
    "of" 'rpc/open-org-file
    "oh" 'rpc/org-narrow-to-headline
    "os" 'org-save-all-org-buffers
+   "ot" 'rpc/org-clock-in
 
    ;; window
    "w" '(:ignore t :which-key "window")
