@@ -4,6 +4,8 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+(server-start)
+
 (setq mac-command-modifier 'control)
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
