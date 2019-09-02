@@ -43,29 +43,15 @@
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
 
-(defvar plaint-download-mode-map (make-sparse-keymap)
-  "Keymap for plaint-download-mode.")
-
-(defun plaint-download-quit ()
+(defun kludger-download ()
   (interactive)
-  (when (equal "*plaint-download*" (buffer-name))
-	(kill-buffer)))
+  (find-file-other-window "~/ledger/import.ledger")
+  (rpc/ledger-format-and-save)
+  (goto-char (point-max))
+  (insert "\n\n"
+		  (shell-command-to-string "kludger -l ~/ledger/test.ledger download 2>/dev/null"))
+  (rpc/ledger-format-and-save))
 
-(define-key plaint-download-mode-map (kbd "q") 'plaint-download-quit)
-(define-key plaint-download-mode-map (kbd "f") (lambda () (interactive) (find-file "~/ledger/import.ledger")))
-
-(define-minor-mode plaint-download-mode
-  "A minor mode for the *plaint-download* buffer."
-  nil
-  :lighter plaint
-  plaint-download-mode-map)
-
-(defun plaint-download ()
-  (interactive)
-  (pop-to-buffer "*plaint-download*")
-  (async-shell-command "cd ~/ledger && plaint download" (current-buffer) (current-buffer))
-  (evil-emacs-state)
-  (plaint-download-mode))
 
 (defun zoom-frame-monitor ()
  "Zoom the current frame to an appropriate size for my thinkvision monitor."
@@ -204,7 +190,7 @@
    ;; ledger
    "l" '(:ignore t :which-key "ledger")
    "lf" (lambda () "file" (interactive) (find-file "~/ledger/test.ledger"))
-   "ld" 'plaint-download
+   "ld" 'kludger-download
    "lr" 'ledger-report
    "lc" 'ledger-check-buffer
    "li" 'rpc/ledger-match-imports
