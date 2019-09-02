@@ -689,6 +689,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(dart-format-on-save t t)
+ '(dart-sdk-path "~/mobile/flutter/bin/cache/dart-sdk/" t)
+ '(flutter-sdk-path "~/mobile/flutter/" t)
  '(ivy-mode t)
  '(ledger-reports
    (quote
