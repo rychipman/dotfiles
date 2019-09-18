@@ -163,6 +163,7 @@
    "oh" 'rpc/org-narrow-to-headline
    "os" 'org-save-all-org-buffers
    "ot" 'rpc/org-clock-in
+   "om" 'rpc/org-open-meeting
 
    ;; window
    "w" '(:ignore t :which-key "window")
