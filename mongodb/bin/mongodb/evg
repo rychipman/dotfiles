@@ -109,4 +109,4 @@ evergreen patch \
 
 # open up the patch page
 url="$(evergreen list-patches -n 1 | grep Build | awk '{print $3}')"
-open "$url"
+xdg-open "$url"
