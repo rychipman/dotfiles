@@ -87,6 +87,9 @@ for group in $( echo $TEST_GROUPS | sed 's/,/ /g' ); do
             code_quality="code-quality"
             VARIANTS="$VARIANTS""$code_quality,$osx_latest_standalone,$ubuntu_latest_standalone,$windows_latest_standalone,$windows_40_standalone,$windows_36_standalone,$windows_34_replica,$windows_32_sharded,"
             ;;
+		metrics)
+			VARIANTS='metrics'
+			;;
         none)
             VARIANTS=""
             ;;
