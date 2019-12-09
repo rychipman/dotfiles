@@ -1,7 +1,7 @@
 IMAPAccount personal
 Host imap.fastmail.com
 User rpc@fastmail.com
-PassCmd "op get item 'Fastmail App Password' | jq -r '.details.password'"
+PassCmd "cat ~/.local/share/secrets/mbsync/personal"
 SSLType IMAPS
 
 IMAPStore personal-remote
@@ -24,7 +24,7 @@ Sync All
 IMAPAccount mongodb
 Host imap.gmail.com
 User ryan.chipman@10gen.com
-PassCmd "op get item 'Gmail App Password' | jq -r '.details.password'"
+PassCmd "cat ~/.local/share/secrets/mbsync/mongodb"
 SSLType IMAPS
 AuthMechs PLAIN
 
