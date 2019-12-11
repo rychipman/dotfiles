@@ -57,6 +57,9 @@ are included.")
    ;; Org faces
    `(org-special-keyword ((,class (:foreground "#8ac6f2"))))
    `(org-date ((,class (:foreground "#8ac6f2"))))
+   `(org-scheduled-previously ((,class (:foreground "#d4b543"))))
+   `(org-warning ((,class (:foreground "chocolate1"))))
+   `(org-upcoming-deadline ((,class (:foreground "#ccaa8f"))))
 
    ;; Gnus faces
    `(gnus-group-news-1 ((,class (:weight bold :foreground "#95e454"))))
