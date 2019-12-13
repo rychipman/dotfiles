@@ -60,6 +60,7 @@ are included.")
    `(org-scheduled-previously ((,class (:foreground "#d4b543"))))
    `(org-warning ((,class (:foreground "chocolate1"))))
    `(org-upcoming-deadline ((,class (:foreground "#ccaa8f"))))
+   `(org-agenda-done ((,class (:foreground "#99968b"))))
 
    ;; Gnus faces
    `(gnus-group-news-1 ((,class (:weight bold :foreground "#95e454"))))
