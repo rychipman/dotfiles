@@ -190,7 +190,7 @@
 
    ;; ledger
    "l" '(:ignore t :which-key "ledger")
-   "lf" (lambda () "file" (interactive) (find-file "~/ledger/test.ledger"))
+   "lf" (lambda () "file" (interactive) (find-file "~/ledger/journal.bc"))
    "ld" 'kludger-download
    "lr" 'ledger-report
    "lc" 'ledger-check-buffer
