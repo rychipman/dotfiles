@@ -352,6 +352,10 @@
   (define-key ledger-mode-map (kbd "C-j") 'ledger-navigate-next-xact-or-directive)
   (define-key ledger-mode-map (kbd "C-k") 'ledger-navigate-prev-xact-or-directive))
 
+(use-package beancount
+  :load-path "~/git/personal/beancount/editors/emacs/"
+  :mode ("\\.bc$" . beancount-mode))
+
 (defun rpc/compile-quit-windows ()
   (interactive)
   (rpc/kill-window-by-buffer-name "*compilation*")
