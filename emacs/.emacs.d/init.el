@@ -30,7 +30,9 @@
   (package-install 'use-package))
 
 (use-package no-littering
-  :ensure t)
+  :ensure t
+  :config
+  (setq custom-file (no-littering-expand-etc-file-name "custom.el")))
 
 (blink-cursor-mode 0)
 (scroll-bar-mode -1)
@@ -656,68 +658,3 @@
 	:config
 	(add-to-list 'company-backends 'company-restclient))
   )
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(dart-format-on-save t t)
- '(dart-sdk-path "~/mobile/flutter/bin/cache/dart-sdk/" t)
- '(flutter-sdk-path "~/mobile/flutter/" t)
- '(ivy-mode t)
- '(ledger-reports
-   (quote
-	(("expenses-this-month" "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'this month'")
-	 (#("expenses-last-month" 0 1
-		(idx 3))
-	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'last month'")
-	 (#("bal" 0 1
-		(idx 1))
-	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal Expenses -p 'last month'")
-	 (#("unmatched" 0 1
-		(idx 7))
-	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger reg -p 'until 5 days ago' Liabilities and not %matched and not %copied --uncleared")
-	 (#("budget" 0 1
-		(idx 2))
-	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger bal not equity and not income and not expenses")
-	 (#("unknown" 0 1
-		(idx 6))
-	  "ledger [[ledger-mode-flags]] -f /Users/ryan/ledger/test.ledger reg Unknown")
-	 (#("reg" 0 1
-		(idx 5))
-	  "%(binary) -f %(ledger-file) reg")
-	 (#("payee" 0 1
-		(idx 4))
-	  "%(binary) -f %(ledger-file) reg @%(payee)")
-	 (#("account" 0 1
-		(idx 0))
-	  "%(binary) -f %(ledger-file) reg %(account)"))))
- '(lsp-ui-peek-enable nil t)
- '(package-selected-packages
-   (quote
-	(yasnippet-snippets graphviz-dot-mode dart-mode use-package-ensure-system-package forge key-chord crux ryo-modal perspective company-restclient restclient yaml-mode git-timemachine dumb-jump smart-jump toml-mode cargo cargo-mode persp-mode tablist elfeed mu4e-alert rust-mode gotest worf ledger-mode smartparens git-gutter-fringe hydra go-eldoc company epresent evil-magit diff-hl badger-theme counsel-projectile projectile cider clojure-mode syndicate evil-surround go-mode eyebrowse magit which-key general use-package)))
- '(safe-local-variable-values
-   (quote
-	((rpc/compile/build-command . "cd $(git rev-parse --show-toplevel) && go install cmd/mongosqld/mongosqld.go")
-	 (rpc/compile/check-command . "go install")
-	 (rpc/compile/check-command . "go install -gcflags='-e'")
-	 (rpc/compile/unit-test-command . "go test")
-	 (rpc/compile/build-command . "cargo build")
-	 (rpc/compile/check-command . "cargo check")
-	 (rpc/compile/unit-test-command . "cargo test")))))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#1c1c1c" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "Source Code Pro"))))
- '(fringe ((t (:background "#151515"))))
- '(hl-line ((t (:foreground nil :underline nil))))
- '(linum ((t (:inherit (shadow default) :background "#151515"))))
- '(shadow ((t (:foreground "#666666"))))
- '(whitespace-space ((t (:foreground "#353535"))))
- '(whitespace-tab ((t (:foreground "#353535")))))
-(put 'narrow-to-region 'disabled nil)
