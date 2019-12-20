@@ -43,16 +43,6 @@
 (setq-default truncate-lines 0)
 (setq-default help-window-select t)
 
-(defun kludger-download ()
-  (interactive)
-  (find-file-other-window "~/ledger/import.ledger")
-  (rpc/ledger-format-and-save)
-  (goto-char (point-max))
-  (insert "\n\n"
-		  (shell-command-to-string "kludger -l ~/ledger/test.ledger download 2>/dev/null"))
-  (rpc/ledger-format-and-save))
-
-
 (defun zoom-frame-monitor ()
  "Zoom the current frame to an appropriate size for my thinkvision monitor."
  (interactive)
@@ -198,7 +188,6 @@
    ;; ledger
    "l" '(:ignore t :which-key "ledger")
    "lf" (lambda () "file" (interactive) (find-file "~/ledger/journal.bc"))
-   "ld" 'kludger-download
    "lr" 'ledger-report
    "lc" 'ledger-check-buffer
    "li" 'rpc/ledger-match-imports
