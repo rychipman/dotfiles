@@ -168,11 +168,6 @@
    ;; window
    "w" '(:ignore t :which-key "window")
    "wd" 'evil-window-delete
-   "ww" 'eyebrowse-next-window-config
-   "wW" 'eyebrowse-create-window-config
-   "wR" 'eyebrowse-rename-window-config
-   "wD" 'eyebrowse-close-window-config
-   "wf" 'eyebrowse-switch-to-window-config
 
    ;; dired
    "d" '(:ignore t :which-key "dired")
@@ -307,15 +302,6 @@
   :config
   (load-file "~/org/lisp/org.el"))
 
-(use-package eyebrowse
-  :ensure t
-  :init
-  (setq eyebrowse-keymap-prefix (kbd "C-c C-S-w"))
-  :config
-  (setq-default eyebrowse-new-workspace t)
-  (setq-default eyebrowse-wrap-around t)
-  (eyebrowse-mode t))
-
 (use-package graphviz-dot-mode
   :ensure t)
 
@@ -426,13 +412,11 @@
 
   (defun rpc/mu4e/open ()
 	(interactive)
-	(eyebrowse-create-window-config)
 	(mu4e))
 
   (defun rpc/mu4e/quit ()
 	(interactive)
-	(mu4e-quit)
-	(eyebrowse-close-window-config))
+	(mu4e-quit))
 
   (define-key mu4e-main-mode-map (kbd "q") 'rpc/mu4e/quit)
 
