@@ -111,6 +111,14 @@
    :height 3.0)
   )
 
+(use-package mood-line
+  :ensure t
+  :config (mood-line-mode))
+
+(use-package minions
+  :ensure t
+  :config (minions-mode 1))
+
 (use-package swiper
   :ensure t)
 
