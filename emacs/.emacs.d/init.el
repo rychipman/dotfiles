@@ -141,12 +141,8 @@
 
    ;; git
    "g" '(:ignore t :which-key "git")
-   "gs" 'magit-status
-   "gf" 'magit-file-popup
-   "gm" 'magit-dispatch-popup
    "gb" 'magit-blame
    "gg" 'hydra-gitgutter/body
-   "gt" 'git-timemachine
    "gl" 'git-link
 
    ;; errors
@@ -280,23 +276,11 @@
 (use-package git-link
   :ensure t)
 
-(use-package git-timemachine
+(use-package magit
   :ensure t)
 
-(use-package magit
-  :ensure t
-  :config
-
-  (use-package evil-magit
-    :ensure t
-	:config
-	;(define-key git-rebase-mode-map (kbd "J") 'git-rebase-move-line-down)
-	;(define-key git-rebase-mode-map (kbd "K") 'git-rebase-move-line-up)
-	)
-
-  ;(use-package forge
-  ;	:ensure t)
-  )
+(use-package evil-magit
+  :ensure t)
 
 (use-package org
   :ensure t
