@@ -548,6 +548,14 @@
 	:name "mongodb"
 	:command "monger"
 	:args '("start" "4.0"))
+
+  (prodigy-define-service
+	:name "fava"
+	:cwd "~/ledger"
+	:env '(("PYTHONPATH" "."))
+	:url "http://localhost:5000/beancount/income_statement/"
+	:command "fava"
+	:args '("-d" "journal.bc"))
   )
 
 (use-package flycheck
