@@ -73,12 +73,18 @@
 (setq-default whitespace-style '(face spaces tabs tab-mark trailing))
 
 (defun rpc/prevent-whitespace-mode-for-magit ()
+  "Return false if the current mode is derived from magit-mode.
+Intended to be used as a predicate for disabling
+'whitespace-mode' in magit buffers."
   (not (derived-mode-p 'magit-mode)))
 
 (with-eval-after-load 'whitespace
   (add-function :before-while whitespace-enable-predicate 'rpc/prevent-whitespace-mode-for-magit))
 
 (defun rpc/set-path-from-env (env-var-name)
+  "Set a PATH-style variable named ENV-VAR-NAME in Emacs.
+This is accomplished by checking if it is set in a bash shell. If
+the variable is PATH, also add each element to 'exec-path'."
   (let* ((env-echo-cmd (format ". ~/.bashrc; echo -n $%s" env-var-name))
 		 (env-var-value (shell-command-to-string env-echo-cmd)))
     (setenv env-var-name env-var-value)
