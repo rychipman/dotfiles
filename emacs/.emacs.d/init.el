@@ -507,7 +507,9 @@
   :ensure t
   :config
 
-  (setq projectile-project-search-path '("~/git/"))
+  (setq projectile-project-search-path '("~/git/"
+										 "~/git/personal/"
+										 "~/git/work/"))
 
   (use-package counsel-projectile
     :ensure t
