@@ -214,11 +214,7 @@
 
    ;; compile
    "c" '(:ignore t :which-key "compile")
-   "cb" 'rpc/compile/build
-   "cc" 'rpc/compile/check
-   "ct" 'rpc/compile/unit-test
    "cC" 'compile
-   "ck" 'rpc/compile-quit-windows
 
    ;; applications
    "a" '(:ignore t :which-key "applications")
@@ -334,41 +330,6 @@
 (use-package beancount
   :load-path "~/git/personal/beancount/editors/emacs/"
   :mode ("\\.bc$" . beancount-mode))
-
-(defun rpc/compile-quit-windows ()
-  (interactive)
-  (rpc/kill-window-by-buffer-name "*compilation*")
-  (rpc/kill-window-by-buffer-name "*compile/build*")
-  (rpc/kill-window-by-buffer-name "*compile/check*")
-  (rpc/kill-window-by-buffer-name "*compile/unit-test*"))
-
-(defun rpc/kill-window-by-buffer-name (bufname &optional killbuf)
-  (let ((window (get-buffer-window bufname)))
-	(when window (quit-window killbuf window))))
-
-(defvar rpc/compile/build-command nil)
-(defun rpc/compile/build ()
-  (interactive)
-  (let ((compilation-buffer-name-function (lambda (mode) "*compile/build*")))
-    (if rpc/compile/build-command
-	    (compile rpc/compile/build-command)
-	  (call-interactively 'compile))))
-
-(defvar rpc/compile/check-command nil)
-(defun rpc/compile/check ()
-  (interactive)
-  (let ((compilation-buffer-name-function (lambda (mode) "*compile/check*")))
-    (if rpc/compile/check-command
-	    (compile rpc/compile/check-command)
-	  (call-interactively 'compile))))
-
-(defvar rpc/compile/unit-test-command nil)
-(defun rpc/compile/unit-test ()
-  (interactive)
-  (let ((compilation-buffer-name-function (lambda (mode) "*compile/unit-test*")))
-    (if rpc/compile/unit-test-command
-	    (compile rpc/compile/unit-test-command)
-	  (call-interactively 'compile))))
 
 (defun remove-nth-element (list nth)
   "Return a copy of LIST without its NTH element."
