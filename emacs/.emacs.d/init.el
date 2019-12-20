@@ -104,6 +104,18 @@
 
 (require 'use-package)
 
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?f ?j ?d ?s ?k ?a ?l ?h))
+  (set-face-attribute
+   'aw-leading-char-face nil
+   :foreground "deep sky blue"
+   :weight 'bold
+   :height 3.0)
+  )
+
 (use-package swiper
   :ensure t)
 
