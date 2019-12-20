@@ -31,3 +31,5 @@
 	name = Ryan Chipman
 [github]
 	user = rychipman
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
