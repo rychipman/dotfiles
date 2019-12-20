@@ -647,6 +647,9 @@
   (smartparens-global-mode)
   (show-smartparens-global-mode))
 
+(use-package clojure-mode
+  :ensure t)
+
 (use-package js2-mode
   :ensure t)
 
