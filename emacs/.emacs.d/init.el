@@ -341,6 +341,9 @@
 (use-package company-lsp
   :ensure t)
 
+(use-package haskell-mode
+  :ensure t)
+
 (use-package go-mode
   :ensure t)
 
