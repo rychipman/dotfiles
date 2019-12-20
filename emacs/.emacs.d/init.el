@@ -499,6 +499,8 @@
 		 :action (lambda (docid msg target)
 			   (mu4e~proc-move docid
 			     (mu4e~mark-check-target target) "-N"))))
+  (setq message-citation-line-format "On %a, %b %d, %Y at %H:%M %p %f wrote:\n")
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
   )
 
 (use-package projectile
