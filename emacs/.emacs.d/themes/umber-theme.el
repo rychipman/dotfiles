@@ -16,7 +16,7 @@ are included.")
    'umber
 
    ;; Basic faces
-   `(default ((,class (:background "#242424" :foreground "#f6f3e8"))))
+   `(default ((,class (:background "#242424" :foreground "#f6f3e8" :height 110 :family "Source Code Pro"))))
    `(cursor ((,class (:background "orange"))))
 
    ;; Highlighting faces
