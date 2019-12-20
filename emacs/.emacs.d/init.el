@@ -552,6 +552,16 @@
   (define-key company-active-map (kbd "S-<tab>") 'company-select-previous-or-abort)
   )
 
+(use-package prodigy
+  :ensure t
+  :config
+
+  (prodigy-define-service
+	:name "mongodb"
+	:command "monger"
+	:args '("start" "4.0"))
+  )
+
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
