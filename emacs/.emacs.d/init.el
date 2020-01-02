@@ -495,6 +495,7 @@ the variable is PATH, also add each element to 'exec-path'."
 
 (use-package prodigy
   :ensure t
+  :bind ("C-x p" . prodigy)
   :config
 
   (prodigy-define-service
