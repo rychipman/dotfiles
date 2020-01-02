@@ -504,6 +504,11 @@ the variable is PATH, also add each element to 'exec-path'."
 	:args '("start" "4.0"))
 
   (prodigy-define-service
+	:name "mongosqld"
+	:command "mongosqld"
+	:args '("-vv"))
+
+  (prodigy-define-service
 	:name "fava"
 	:cwd "~/ledger"
 	:env '(("PYTHONPATH" "."))
