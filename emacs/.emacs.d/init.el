@@ -117,10 +117,6 @@ the variable is PATH, also add each element to 'exec-path'."
    :height 3.0)
   )
 
-(use-package mood-line
-  :ensure t
-  :config (mood-line-mode))
-
 (use-package minions
   :ensure t
   :config (minions-mode 1))
