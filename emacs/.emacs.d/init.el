@@ -306,6 +306,13 @@ the variable is PATH, also add each element to 'exec-path'."
 (use-package yasnippet-snippets
   :ensure t)
 
+(use-package lispy
+  :ensure t)
+
+(use-package aggressive-indent
+  :defer t
+  :hook ((emacs-lisp-mode . aggressive-indent-mode)))
+
 (use-package lsp-mode
   :ensure t
   :commands lsp
