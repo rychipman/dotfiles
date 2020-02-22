@@ -98,7 +98,6 @@ the variable is PATH, also add each element to 'exec-path'."
 (rpc/set-path-from-env "PKG_CONFIG_PATH")
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e/")
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'umber t)
