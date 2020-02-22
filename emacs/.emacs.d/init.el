@@ -306,6 +306,79 @@ the variable is PATH, also add each element to 'exec-path'."
 (use-package yasnippet-snippets
   :ensure t)
 
+(defvar audio-process nil
+  "Audio process currently playing media.")
+
+(defvar audio-programs
+  '(("m4a" . "cvlc")
+	("midi" . "timidity"))
+  "Program to use for executing audio files of various extensions.")
+
+(defun audio-program (file)
+  (cdr (assoc (file-name-extension file) audio-programs)))
+
+(defun audio/toggle (file &optional start)
+  "Stop a VLC process if one is running, otherwise start one.
+Use the provided FILE and START args if starting a process."
+  (unless (audio/stop)
+	(audio/start file start)))
+
+(defun audio/start (file &optional start)
+  "Start a VLC process with the provided FILE and START args."
+  (audio/stop)
+  (let* ((program          (audio-program file))
+		 (start-time-args  (when start `("--start-time" ,start))))
+	(message "program: %s" program)
+	(message "start-time-args: %s" start-time-args)
+	(setf audio-process
+		  (apply 'start-process "audio" nil program file start-time-args))))
+
+(defun audio/stop ()
+  "Stop the current VLC process, if it exists."
+  (interactive)
+  (when (process-live-p audio-process)
+	(delete-process audio-process)
+	"killed audio process"))
+
+(defun ly-play-choose-file ()
+  (interactive)
+  (save-excursion
+	(unless (re-search-backward "^% play://\\(.+\\)\\.\\(m4a\\):\\(.+\\)" nil t)
+	  (error "Could not find recognizable play:// uri"))
+	(let* ((basename (match-string-no-properties 1))
+		   (ext      (match-string-no-properties 2))
+		   (file (format "%s.%s" basename ext))
+		   (start    (format "%s" (match-string-no-properties 3))))
+	  (audio/toggle file start))))
+
+(defun ly-compile-score-play-midi ()
+  (interactive)
+  (save-excursion
+	(unless (re-search-backward "^% score://\\(.+\\.ly\\)")
+	  (error "Could not find recognizable score:// uri"))
+	(let* ((score   (match-string-no-properties 1))
+		   (dir     (file-name-directory score))
+		   (base    (file-name-base score))
+		   (noext   (file-name-sans-extension score))
+		   (midi    (format "%s.midi" noext))
+		   (compile (format "lilypond %s" score))
+		   (play    (format "timidity %s" midi)))
+	  (let ((default-directory dir))
+		(with-temp-buffer
+		  (shell-command compile t))
+		(audio/toggle midi)))))
+
+(general-define-key
+ :states '(normal visual emacs)
+ :keymaps 'LilyPond-mode-map
+ "C-p" 'ly-play-choose-file
+ "C-m" 'ly-compile-score-play-midi)
+
+(use-package lilypond-mode
+  :demand t
+  :mode "\\.ly\\'"
+  :config)
+
 (use-package lispy
   :ensure t)
 
