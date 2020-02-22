@@ -312,7 +312,8 @@ the variable is PATH, also add each element to 'exec-path'."
   :hook ((go-mode . lsp)
 		 (rust-mode . lsp)
 		 (lsp-mode . lsp-ui)
-		 (before-save . lsp-format-buffer))
+		 (before-save . lsp-format-buffer)
+		 (before-save . lsp-organize-imports))
   :custom
   (lsp-ui-peek-enable nil))
 
