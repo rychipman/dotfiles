@@ -28,13 +28,15 @@
 (define-key *top-map* (kbd "H-;") "colon")
 (define-key *top-map* (kbd "H-:") "eval")
 (define-key *top-map* (kbd "H-DEL") "exec lock")
-(set-prefix-key (kbd "H-q"))
+(set-prefix-key (kbd "H-m"))
 
 (defcommand toggle-modeline() ()
   (toggle-mode-line (current-screen) (current-head)))
-(define-key *top-map* (kbd "H-m") "toggle-modeline")
+;(define-key *top-map* (kbd "H-m") "toggle-modeline")
 
 (setf *screen-mode-line-format* "^f1[^B%n^b] %W")
+
+(setf *mouse-focus-policy* :click)
 
 (set-fg-color "#71c2af")
 (set-bg-color "#1d2a30")
@@ -43,17 +45,22 @@
 (setq *message-window-gravity* :center)
 (setq *input-window-gravity* :center)
 (setf *window-border-style* :thin)
-(setf *normal-border-width* 3)
+(setf *normal-border-width* 2)
 
-(ignore-errors
-  (load "~/quicklisp/setup.lisp")
+;(defun load-from-ql ()
+;  (load "~/quicklisp/setup.lisp")
+;
+;  (ql:quickload :clx-truetype)
+;  (load-module "ttf-fonts")
+;  (xft:cache-fonts)
+;
+;  (set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
+;			   "9x15bold"))
+;
+;  (require :swank)
+;  (swank-loader:init)
+;  (swank:create-server :port 4004
+;					   :style swank:*communication-style*
+;					   :dont-close t))
 
-  (ql:quickload :clx-truetype)
-  (load-module "ttf-fonts")
-  (xft:cache-fonts)
-
-  (set-font `(,(make-instance 'xft:font :family "Liberation Mono" :subfamily "Regular" :size 16)
-			   "9x15bold"))
-
-  (ql:quickload :slynk)
-  (slynk:create-server))
+;(load-from-ql)
