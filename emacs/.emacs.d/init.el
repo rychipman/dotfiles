@@ -328,8 +328,6 @@ Use the provided FILE and START args if starting a process."
   (audio/stop)
   (let* ((program          (audio-program file))
 		 (start-time-args  (when start `("--start-time" ,start))))
-	(message "program: %s" program)
-	(message "start-time-args: %s" start-time-args)
 	(setf audio-process
 		  (apply 'start-process "audio" nil program file start-time-args))))
 
@@ -353,6 +351,8 @@ Use the provided FILE and START args if starting a process."
 
 (defun ly-compile-score-play-midi ()
   (interactive)
+  (save-buffer)
+  (audio/stop)
   (save-excursion
 	(unless (re-search-backward "^% score://\\(.+\\.ly\\)")
 	  (error "Could not find recognizable score:// uri"))
@@ -366,7 +366,7 @@ Use the provided FILE and START args if starting a process."
 	  (let ((default-directory dir))
 		(with-temp-buffer
 		  (shell-command compile t))
-		(audio/toggle midi)))))
+		(audio/start midi)))))
 
 (general-define-key
  :states '(normal visual emacs)
