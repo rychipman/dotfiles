@@ -87,9 +87,6 @@ bindsym $mod+1 layout stacking
 bindsym $mod+2 layout tabbed
 bindsym $mod+3 layout toggle split
 
-bindsym $mod+x move scratchpad
-bindsym $mod+slash scratchpad show
-
 workspace "web" output eDP-1
 workspace "msg" output eDP-1
 workspace "edit" output DP-1-1 eDP-1
