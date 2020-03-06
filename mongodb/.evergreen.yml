@@ -12,7 +12,12 @@ projects:
   tasks:
   - all
 - name: sqlproxy-dev
-  default: false
+  variants:
+  - all
+  tasks:
+  - all
+- name: mongo-tools
+  default: true
   variants:
   - all
   tasks:
