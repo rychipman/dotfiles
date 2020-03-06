@@ -15,6 +15,12 @@ bindsym $mod+Control+j move to workspace edit
 bindsym $mod+Control+l move to workspace term
 bindsym $mod+Control+h move to workspace msg
 
+for_window [class="Google-chrome"] move to workspace msg
+bindsym $mod+Shift+h workspace msg; exec "google-chrome-stable --app=https://mongodb.slack.com"
+bindsym $mod+Shift+j workspace edit; exec emacs
+bindsym $mod+Shift+l workspace term; exec lxterminal
+bindsym $mod+Shift+k workspace web; exec firefox
+
 default_border pixel
 
 set $mod Mod4
@@ -36,7 +42,7 @@ bindsym $mod+r reload
 bindsym $mod+Shift+r restart
 
 # kill window
-bindsym $mod+Shift+k kill
+bindsym $mod+Control+k kill
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
