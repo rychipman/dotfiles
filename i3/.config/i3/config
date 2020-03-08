@@ -9,6 +9,7 @@ bindsym $mod+k workspace web
 bindsym $mod+j workspace edit
 bindsym $mod+l workspace term
 bindsym $mod+h workspace msg
+bindsym $mod+semicolon workspace msg
 
 bindsym $mod+Control+k move to workspace web
 bindsym $mod+Control+j move to workspace edit
@@ -42,7 +43,7 @@ bindsym $mod+r reload
 bindsym $mod+Shift+r restart
 
 # kill window
-bindsym $mod+Control+k kill
+bindsym $mod+BackSpace kill
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
