@@ -22,6 +22,8 @@ bindsym $mod+Shift+j workspace edit; exec emacs
 bindsym $mod+Shift+l workspace term; exec lxterminal
 bindsym $mod+Shift+k workspace web; exec firefox
 
+bindsym $mod+u [urgent="latest"] focus
+
 default_border pixel
 
 set $mod Mod4
