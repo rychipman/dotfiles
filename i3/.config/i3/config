@@ -10,17 +10,20 @@ bindsym $mod+j workspace edit
 bindsym $mod+l workspace term
 bindsym $mod+h workspace msg
 bindsym $mod+semicolon workspace msg
+bindsym $mod+z workspace vid
 
 bindsym $mod+Control+k move to workspace web
 bindsym $mod+Control+j move to workspace edit
 bindsym $mod+Control+l move to workspace term
 bindsym $mod+Control+h move to workspace msg
+bindsym $mod+Control+z move to workspace vid
 
 for_window [class="Google-chrome"] move to workspace msg
 bindsym $mod+Shift+h workspace msg; exec "google-chrome-stable --app=https://mongodb.slack.com"
 bindsym $mod+Shift+j workspace edit; exec emacs
 bindsym $mod+Shift+l workspace term; exec lxterminal
 bindsym $mod+Shift+k workspace web; exec firefox
+bindsym $mod+Shift+z workspace vid; exec zoom
 
 bindsym $mod+u [urgent="latest"] focus
 
@@ -103,6 +106,7 @@ bindsym $mod+3 layout toggle split
 
 workspace "web" output eDP-1
 workspace "msg" output eDP-1
+workspace "vid" output eDP-1
 workspace "edit" output DP-1-1 eDP-1
 workspace "term" output DP-1-3 eDP-1
 
