@@ -177,10 +177,6 @@ the variable is PATH, also add each element to 'exec-path'."
    "ot" 'rpc/org-clock-in
    "om" 'rpc/org-open-meeting
 
-   ;; window
-   "w" '(:ignore t :which-key "window")
-   "wd" 'evil-window-delete
-
    ;; dired
    "d" '(:ignore t :which-key "dired")
    "dd" 'dired-jump-other-window
