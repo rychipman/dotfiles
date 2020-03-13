@@ -1,9 +1,3 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
 (server-start)
 
 (setq mac-command-modifier 'control)
@@ -22,15 +16,25 @@
 (setq initial-scratch-message "Welcome to Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; install use-package
+(straight-use-package 'use-package)
 
 (use-package no-littering
-  :ensure t
+  :straight t
   :config
   (setq custom-file (no-littering-expand-etc-file-name "custom.el")))
 
@@ -102,10 +106,8 @@ the variable is PATH, also add each element to 'exec-path'."
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'umber t)
 
-(require 'use-package)
-
 (use-package ace-window
-  :ensure t
+  :straight t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?f ?j ?d ?s ?k ?a ?l ?h))
@@ -117,24 +119,24 @@ the variable is PATH, also add each element to 'exec-path'."
   )
 
 (use-package minions
-  :ensure t
+  :straight t
   :config (minions-mode 1))
 
 (use-package swiper
-  :ensure t)
+  :straight t)
 
 (use-package counsel
-  :ensure t)
+  :straight t)
 
 (use-package ivy
-  :ensure t
+  :straight t
   :config
   (ivy-mode 1)
   (setq ivy-initial-inputs-alist nil)
   (define-key ivy-minibuffer-map (kbd "C-<return>") 'ivy-immediate-done))
 
 (use-package general
-  :ensure t
+  :straight t
   :config
   (general-define-key
 
@@ -222,16 +224,16 @@ the variable is PATH, also add each element to 'exec-path'."
    ))
 
 (use-package avy
-  :ensure t
+  :straight t
   :commands (avy-goto-word-1))
 
 (use-package which-key
-  :ensure t
+  :straight t
   :config
   (which-key-mode 1))
 
 (use-package evil
-  :ensure t
+  :straight t
   :config
   (evil-mode 1)
 
@@ -263,44 +265,44 @@ the variable is PATH, also add each element to 'exec-path'."
 	(evil-visual-restore))
 
   (use-package evil-god-state
-	:ensure t
+	:straight t
 	:config
 	(evil-define-key 'normal global-map "," 'evil-execute-in-god-state)
 	(evil-define-key 'god global-map [escape] 'evil-god-state-bail))
 
   (use-package evil-surround
-    :ensure t
+    :straight t
     :config
     (global-evil-surround-mode 1)))
 
 (use-package crux
-  :ensure t)
+  :straight t)
 
 (use-package expand-region
-  :ensure t)
+  :straight t)
 
 (use-package git-link
-  :ensure t)
+  :straight t)
 
 (use-package magit
-  :ensure t)
+  :straight t)
 
 (use-package evil-magit
-  :ensure t)
+  :straight t)
 
 (use-package org
-  :ensure t
+  :straight t
   :config
   (load-file "~/org/lisp/org.el"))
 
 (use-package graphviz-dot-mode
-  :ensure t)
+  :straight t)
 
 (use-package yasnippet
-  :ensure t)
+  :straight t)
 
 (use-package yasnippet-snippets
-  :ensure t)
+  :straight t)
 
 (defvar audio-process nil
   "Audio process currently playing media.")
@@ -376,14 +378,14 @@ Use the provided FILE and START args if starting a process."
   :config)
 
 (use-package lispy
-  :ensure t)
+  :straight t)
 
 (use-package aggressive-indent
   :defer t
   :hook ((emacs-lisp-mode . aggressive-indent-mode)))
 
 (use-package lsp-mode
-  :ensure t
+  :straight t
   :commands lsp
   :hook ((go-mode . lsp)
 		 (rust-mode . lsp)
@@ -394,16 +396,16 @@ Use the provided FILE and START args if starting a process."
   (lsp-ui-peek-enable nil))
 
 (use-package dap-mode
-  :ensure t)
+  :straight t)
 
 (use-package company-lsp
-  :ensure t)
+  :straight t)
 
 (use-package haskell-mode
-  :ensure t)
+  :straight t)
 
 (use-package go-mode
-  :ensure t)
+  :straight t)
 
 (use-package beancount
   :load-path "~/git/personal/beancount/editors/emacs/"
@@ -529,7 +531,7 @@ Use the provided FILE and START args if starting a process."
   )
 
 (use-package projectile
-  :ensure t
+  :straight t
   :config
 
   (setq projectile-project-search-path '("~/git/"
@@ -537,12 +539,12 @@ Use the provided FILE and START args if starting a process."
 										 "~/git/work/"))
 
   (use-package counsel-projectile
-    :ensure t
+    :straight t
     :config
     (counsel-projectile-mode 1)))
 
 (use-package git-gutter-fringe
-  :ensure t
+  :straight t
   :config
   (global-git-gutter-mode 1)
   (setq-default fringes-outside-margins t)
@@ -557,7 +559,7 @@ Use the provided FILE and START args if starting a process."
     "XXXX...."))
 
 (use-package company
-  :ensure t
+  :straight t
   :config
   (global-company-mode 1)
   (setq-default company-echo-delay 0)
@@ -570,7 +572,7 @@ Use the provided FILE and START args if starting a process."
   )
 
 (use-package prodigy
-  :ensure t
+  :straight t
   :bind ("C-x p" . prodigy)
   :config
 
@@ -594,7 +596,7 @@ Use the provided FILE and START args if starting a process."
   )
 
 (use-package flycheck
-  :ensure t
+  :straight t
   :init (global-flycheck-mode)
   :config
   (setq flycheck-indication-mode 'right-fringe)
@@ -608,7 +610,7 @@ Use the provided FILE and START args if starting a process."
     "...XX..."))
 
 (use-package hydra
-  :ensure t
+  :straight t
   :config
 
   (defhydra hydra-gitgutter ()
@@ -626,8 +628,8 @@ Use the provided FILE and START args if starting a process."
 
   (defhydra hydra-flycheck
     (:pre (progn (setq hydra-lv t) (flycheck-list-errors))
-     :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
-     :hint nil)
+		  :post (progn (setq hydra-lv nil) (quit-windows-on "*Flycheck errors*"))
+		  :hint nil)
     "errors"
     ("f" flycheck-error-list-set-filter "filter")
     ("j" flycheck-next-error "next")
@@ -672,42 +674,42 @@ Use the provided FILE and START args if starting a process."
   )
 
 (use-package smartparens
-  :ensure t
+  :straight t
   :config
   (require 'smartparens-config)
   (smartparens-global-mode)
   (show-smartparens-global-mode))
 
 (use-package clojure-mode
-  :ensure t)
+  :straight t)
 
 (use-package js2-mode
-  :ensure t)
+  :straight t)
 
 (use-package dart-mode
-  :ensure t
+  :straight t
   :custom
   (dart-format-on-save t)
   (dart-sdk-path "~/mobile/flutter/bin/cache/dart-sdk/"))
 
 (use-package flutter
-  :ensure t
+  :straight t
   :after dart-mode
   :custom
   (flutter-sdk-path "~/mobile/flutter/"))
 
 (use-package yaml-mode
-  :ensure t)
+  :straight t)
 
 (use-package toml-mode
-  :ensure t)
+  :straight t)
 
 (use-package restclient
-  :ensure t
+  :straight t
   :config
 
   (use-package company-restclient
-	:ensure t
+	:straight t
 	:config
 	(add-to-list 'company-backends 'company-restclient))
   )
