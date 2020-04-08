@@ -711,3 +711,16 @@ Use the provided FILE and START args if starting a process."
 	:config
 	(add-to-list 'company-backends 'company-restclient))
   )
+
+(use-package prolog
+  :mode ("\\.pl\\'" . 'prolog-mode)
+  :config
+  (setq prolog-system 'swi
+		prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
+								  (t nil))
+		prolog-electric-if-then-else-flag t))
+
+(use-package ediprolog
+  :ensure t
+  :config
+  (define-key prolog-mode-map (kbd "C-c l") 'ediprolog-dwim))
