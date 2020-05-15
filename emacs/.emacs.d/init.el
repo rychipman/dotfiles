@@ -534,7 +534,11 @@ Use the provided FILE and START args if starting a process."
 (use-package projectile
   :ensure t
   :config
-
+  (defun rpc/compile-in-projectile-root (command)
+	(interactive (list (compilation-read-command compile-command)))
+	(let ((default-directory (projectile-project-root)))
+	  (compile command)))
+  (global-set-key (kbd "C-c l") 'rpc/compile-in-projectile-root)
   (setq projectile-project-search-path '("~/git/"
 										 "~/git/personal/"
 										 "~/git/work/"))
