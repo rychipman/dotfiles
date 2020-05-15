@@ -717,4 +717,4 @@ Use the provided FILE and START args if starting a process."
 (use-package ediprolog
   :ensure t
   :config
-  (define-key prolog-mode-map (kbd "C-c l") 'ediprolog-dwim))
+  (define-key prolog-mode-map (kbd "C-c C-e") 'ediprolog-dwim))
