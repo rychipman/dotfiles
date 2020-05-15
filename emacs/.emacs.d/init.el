@@ -167,11 +167,8 @@ the variable is PATH, also add each element to 'exec-path'."
 
    ;; org
    "o" '(:ignore t :which-key "org")
-   "oa" 'org-agenda
-   "oc" 'org-capture
    "ol" 'org-store-link
    "or" 'org-refile
-   "oA" 'org-archive
    "of" 'rpc/open-org-file
    "oh" 'rpc/org-narrow-to-headline
    "os" 'org-save-all-org-buffers
@@ -209,17 +206,6 @@ the variable is PATH, also add each element to 'exec-path'."
    "zm" (lambda () "monitor" (interactive) (zoom-frame-monitor))
    "zl" (lambda () "laptop" (interactive) (zoom-frame-laptop))
    "zz" 'hydra-zoom/body
-
-   ;; compile
-   "c" '(:ignore t :which-key "compile")
-   "cC" 'compile
-
-   ;; applications
-   "a" '(:ignore t :which-key "applications")
-   "am" 'rpc/mu4e/open
-
-   ;; misc
-   "x" 'counsel-M-x
    ))
 
 (use-package avy
