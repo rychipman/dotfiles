@@ -378,7 +378,8 @@ Use the provided FILE and START args if starting a process."
 		 (before-save . lsp-format-buffer)
 		 (before-save . lsp-organize-imports))
   :custom
-  (lsp-ui-peek-enable nil))
+  (lsp-ui-peek-enable nil)
+  (lsp-rust-server 'rust-analyzer))
 
 (use-package dap-mode
   :ensure t)
