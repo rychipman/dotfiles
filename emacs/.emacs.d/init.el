@@ -89,12 +89,13 @@ the variable is PATH, also add each element to 'exec-path'."
 		 (env-var-value (shell-command-to-string env-echo-cmd)))
     (setenv env-var-name env-var-value)
     (when (string= env-var-name "PATH")
-    	(setq exec-path
-    		  (append (split-string-and-unquote env-var-value ":")
-    				  exec-path)))))
+      (setq exec-path
+    		(append (split-string-and-unquote env-var-value ":")
+    				exec-path)))))
 
 (rpc/set-path-from-env "PATH")
 (rpc/set-path-from-env "GOPATH")
+(rpc/set-path-from-env "PYTHONPATH")
 (rpc/set-path-from-env "PKG_CONFIG_PATH")
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
