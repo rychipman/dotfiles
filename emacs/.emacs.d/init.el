@@ -421,6 +421,8 @@ Use the provided FILE and START args if starting a process."
   :commands (mu4e rpc/mu4e/open rpc/mu4e/quit)
   :config
 
+  (global-set-key (kbd "C-c m") 'rpc/mu4e/open)
+
   ;; general settings
   (require 'org-mu4e)
   (setq
