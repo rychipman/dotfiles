@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 rm -rf ~/.local/share/shotwell-clean
 mkdir -p ~/.local/share/shotwell-clean

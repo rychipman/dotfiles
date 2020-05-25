@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 step=50
 min=10

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # activation code: J46297JBS4JS5
 winedir=~/.local/share

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # map caps lock to control
 xmodmap -e 'keycode 66 = Control_L'
