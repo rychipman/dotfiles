@@ -390,6 +390,9 @@ Use the provided FILE and START args if starting a process."
 (use-package haskell-mode
   :ensure t)
 
+(use-package nix-mode
+  :ensure t)
+
 (use-package go-mode
   :ensure t)
 
