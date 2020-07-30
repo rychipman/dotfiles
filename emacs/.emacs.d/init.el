@@ -135,6 +135,9 @@ the variable is PATH, also add each element to 'exec-path'."
   (setq ivy-initial-inputs-alist nil)
   (define-key ivy-minibuffer-map (kbd "C-<return>") 'ivy-immediate-done))
 
+(use-package wgrep
+  :ensure t)
+
 (use-package general
   :ensure t
   :config
