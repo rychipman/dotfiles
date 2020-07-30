@@ -276,6 +276,26 @@ the variable is PATH, also add each element to 'exec-path'."
 (use-package magit
   :ensure t)
 
+(defun rpc/open-in-github ()
+  (interactive)
+  (let* ((rev (magit-rev-parse "HEAD"))
+		 (path (file-relative-name buffer-file-name (projectile-project-root)))
+		 (org "rychipman")
+		 (repo "dotfiles")
+		 (has-lines (use-region-p))
+		 (first-line (line-number-at-pos (region-beginning) t))
+		 (last-line (line-number-at-pos (region-end) t)))
+	(if has-lines
+		(rpc/open-file-in-github org repo rev path first-line last-line)
+	  (rpc/open-file-in-github org repo rev path))))
+
+(defun rpc/open-file-in-github (org repo rev path &optional first-line last-line)
+  (let ((line-hash (if first-line
+					   (format "#L%d-L%d" first-line last-line)
+					 "")))
+	(browse-url (format "https://github.com/%s/%s/tree/%s/%s%s"
+						org repo rev path line-hash))))
+
 (use-package evil-magit
   :ensure t)
 
