@@ -303,11 +303,6 @@ the variable is PATH, also add each element to 'exec-path'."
 (use-package evil-magit
   :ensure t)
 
-(use-package magit-todos
-  :ensure t
-  :config
-  (magit-todos-mode))
-
 (use-package org
   :ensure t
   :config
