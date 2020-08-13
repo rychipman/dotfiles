@@ -29,6 +29,7 @@ bindsym $mod+Shift+z workspace vid; exec zoom
 bindsym $mod+Shift+p workspace pass; exec 1password
 
 bindsym $mod+u [urgent="latest"] focus
+focus_on_window_activation focus
 
 default_border pixel
 
