@@ -11,12 +11,14 @@ bindsym $mod+l workspace term
 bindsym $mod+h workspace msg
 bindsym $mod+semicolon workspace msg
 bindsym $mod+z workspace vid
+bindsym $mod+p workspace pass
 
 bindsym $mod+Control+k move to workspace web
 bindsym $mod+Control+j move to workspace edit
 bindsym $mod+Control+l move to workspace term
 bindsym $mod+Control+h move to workspace msg
 bindsym $mod+Control+z move to workspace vid
+bindsym $mod+Control+p move to workspace pass
 
 for_window [class="Google-chrome"] move to workspace msg
 bindsym $mod+Shift+h workspace msg; exec "google-chrome-stable --app=https://mongodb.slack.com"
@@ -24,6 +26,7 @@ bindsym $mod+Shift+j workspace edit; exec emacs
 bindsym $mod+Shift+l workspace term; exec lxterminal
 bindsym $mod+Shift+k workspace web; exec firefox
 bindsym $mod+Shift+z workspace vid; exec zoom
+bindsym $mod+Shift+p workspace pass; exec 1password
 
 bindsym $mod+u [urgent="latest"] focus
 
