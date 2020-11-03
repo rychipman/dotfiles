@@ -703,23 +703,8 @@ Use the provided FILE and START args if starting a process."
   (smartparens-global-mode)
   (show-smartparens-global-mode))
 
-(use-package clojure-mode
-  :ensure t)
-
 (use-package js2-mode
   :ensure t)
-
-(use-package dart-mode
-  :ensure t
-  :custom
-  (dart-format-on-save t)
-  (dart-sdk-path "~/mobile/flutter/bin/cache/dart-sdk/"))
-
-(use-package flutter
-  :ensure t
-  :after dart-mode
-  :custom
-  (flutter-sdk-path "~/mobile/flutter/"))
 
 (use-package yaml-mode
   :ensure t)
@@ -736,16 +721,3 @@ Use the provided FILE and START args if starting a process."
 	:config
 	(add-to-list 'company-backends 'company-restclient))
   )
-
-(use-package prolog
-  :mode ("\\.pl\\'" . 'prolog-mode)
-  :config
-  (setq prolog-system 'swi
-		prolog-program-switches '((swi ("-G128M" "-T128M" "-L128M" "-O"))
-								  (t nil))
-		prolog-electric-if-then-else-flag t))
-
-(use-package ediprolog
-  :ensure t
-  :config
-  (define-key prolog-mode-map (kbd "C-c C-e") 'ediprolog-dwim))
