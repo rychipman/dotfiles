@@ -10,9 +10,9 @@
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
 (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups")) ) ; which directory to put backups file
+(setq backup-directory-alist `(("." . "~/.local/share/emacs/backups")) ) ; which directory to put backups file
 (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
-(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)) ) ;transform backups file name
+(setq auto-save-file-name-transforms '((".*" "~/.local/share/emacs/auto-save-list/" t)) ) ;transform backups file name
 (setq inhibit-startup-screen t)         ; inhibit useless and old-school startup screen
 (setq ring-bell-function 'ignore)	; silent bell when you make a mistake
 (setq coding-system-for-read 'utf-8)	; use utf-8 by default
