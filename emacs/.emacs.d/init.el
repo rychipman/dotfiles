@@ -709,6 +709,39 @@ Use the provided FILE and START args if starting a process."
 (use-package js2-mode
   :ensure t)
 
+(use-package web-mode
+  :ensure t
+  :mode ("\\.tsx\\'" "\\.jsx\\'"))
+
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+		 (typescript-mode . tide-hl-identifier-mode)
+		 (before-save . tide-format-before-save))
+  :config
+
+  (defun setup-tide-mode ()
+	(interactive)
+	(tide-setup)
+	(flycheck-mode +1)
+	(setq flycheck-check-syntax-automatically '(save mode-enabled))
+	(eldoc-mode +1)
+	(tide-hl-identifier-mode +1)
+	(company-mode +1))
+  (setq company-tooltip-align-annotations t)
+  (add-hook 'before-save-hook 'tide-format-before-save)
+  (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+  (add-hook 'web-mode-hook
+			(lambda ()
+			  (when (string-equal "tsx" (file-name-extension buffer-file-name))
+				(setup-tide-mode))))
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+  (setq typescript-indent-level 2)
+  )
+
 (use-package dart-mode
   :ensure t
   :custom
