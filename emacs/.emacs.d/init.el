@@ -22,13 +22,18 @@
 (setq initial-scratch-message "Welcome to Emacs") ; print a default message in the empty scratch buffer opened at startup
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
+; lsp-mode performance tweaks
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024))
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(setq package-user-dir "~/.local/share/emacs/elpa")
+(package-refresh-contents)
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
+
+(require 'use-package)
 
 (use-package no-littering
   :ensure t
@@ -103,8 +108,6 @@ the variable is PATH, also add each element to 'exec-path'."
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'umber t)
-
-(require 'use-package)
 
 (use-package ace-window
   :ensure t
@@ -397,28 +400,36 @@ Use the provided FILE and START args if starting a process."
   :defer t
   :hook ((emacs-lisp-mode . aggressive-indent-mode)))
 
+(use-package web-mode
+  :ensure t
+  :mode ("\\.jsx\\'" "\\.tsx\\'"))
+
+(use-package typescript-mode
+  :ensure t
+  :mode ("\\.ts\\'" "\\.js\\'"))
+
 (use-package lsp-mode
   :ensure t
-  :commands lsp
   :hook ((go-mode . lsp)
 		 (rust-mode . lsp)
-		 (lsp-mode . lsp-ui)
+		 (typescript-mode . lsp)
+		 (web-mode . lsp)
 		 (before-save . lsp-format-buffer)
-		 (before-save . lsp-organize-imports))
+		 (lsp-mode . lsp-enable-which-key-integration))
+  :bind ("C-c l" . lsp-keymap-prefix)
   :custom
-  (lsp-ui-peek-enable nil)
-  (lsp-rust-server 'rust-analyzer))
+  (lsp-ui-sideline-show-diagnostics t)
+  (lsp-ui-sideline-show-hover nil)
+  (lsp-ui-sideline-show-code-actions t)
+  )
 
-(use-package dap-mode
+(use-package lsp-ui
   :ensure t)
 
 (use-package company-lsp
   :ensure t)
 
-(use-package haskell-mode
-  :ensure t)
-
-(use-package nix-mode
+(use-package dap-mode
   :ensure t)
 
 (use-package go-mode
@@ -556,7 +567,7 @@ Use the provided FILE and START args if starting a process."
 	(interactive (list (compilation-read-command compile-command)))
 	(let ((default-directory (projectile-project-root)))
 	  (compile command)))
-  (global-set-key (kbd "C-c l") 'rpc/compile-in-projectile-root)
+  ;(global-set-key (kbd "C-c l") 'rpc/compile-in-projectile-root)
   (setq projectile-project-search-path '("~/git/"
 										 "~/git/personal/"
 										 "~/git/work/"))
@@ -586,9 +597,9 @@ Use the provided FILE and START args if starting a process."
   :config
   (global-company-mode 1)
   (setq-default company-echo-delay 0)
-  (setq-default company-idle-delay 0.1)
+  (setq-default company-idle-delay 0.0)
   (setq-default company-auto-complete 'company-explicit-action-p)
-  (setq-default company-minimum-prefix-length 2)
+  (setq-default company-minimum-prefix-length 1)
   (setq-default company-dabbrev-downcase nil)
   (define-key company-active-map (kbd "<tab>") 'company-select-next-if-tooltip-visible-or-complete-selection)
   (define-key company-active-map (kbd "S-<tab>") 'company-select-previous-or-abort)
