@@ -435,6 +435,11 @@ Use the provided FILE and START args if starting a process."
 (use-package go-mode
   :ensure t)
 
+(use-package rust-mode
+  :ensure t
+  :custom
+  (lsp-rust-server 'rust-analyzer))
+
 (use-package beancount
   :load-path "~/git/personal/beancount/editors/emacs/"
   :mode ("\\.bc$" . beancount-mode))
