@@ -129,7 +129,10 @@ the variable is PATH, also add each element to 'exec-path'."
   :ensure t)
 
 (use-package counsel
-  :ensure t)
+  :ensure t
+  :bind (("M-x" . counsel-M-x)
+		 ("C-h f" . counsel-describe-function)
+		 ("C-h v" . counsel-describe-variable)))
 
 (use-package ivy
   :ensure t
@@ -137,6 +140,12 @@ the variable is PATH, also add each element to 'exec-path'."
   (ivy-mode 1)
   (setq ivy-initial-inputs-alist nil)
   (define-key ivy-minibuffer-map (kbd "C-<return>") 'ivy-immediate-done))
+
+(use-package ivy-rich
+  :ensure t
+  :config
+  (ivy-rich-mode 1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
 (use-package wgrep
   :ensure t)
