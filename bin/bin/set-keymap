@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
+# reset mappings if any exist
+setxkbmap
+
+# kill any currently running xcape processes
+pkill xcape
+
+# remove everything from mod4
+xmodmap -e "clear mod4"
+
+# map Super_L and Super_R (cmd on mac keyboard) to control
+xmodmap -e 'add Control = Super_L Super_R'
+
 # map caps lock to control
 xmodmap -e 'keycode 66 = Control_L'
 xmodmap -e 'clear Lock'
 xmodmap -e 'add Control = Control_L'
 xcape -e 'Control_L=Escape'
-
-# remove everything from mod4
-xmodmap -e "clear mod4"
 
 # map return to return/control
 spare_modifier="Hyper_L"
