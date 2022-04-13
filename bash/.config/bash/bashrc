@@ -31,3 +31,6 @@ done
 
 # import dircolors
 eval $(dircolors ~/.config/bash/dircolors)
+
+# set up direnv
+eval "$(direnv hook bash)"
