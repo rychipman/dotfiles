@@ -166,11 +166,6 @@ the variable is PATH, also add each element to 'exec-path'."
    "feo" (lambda () "edit" (interactive) (find-file "~/org/lisp/org.el"))
    "fer" (lambda () "reload" (interactive) (load-file user-init-file))
 
-   ;; buffer
-   "b" '(:ignore t :which-key "file")
-   "bb" 'counsel-ibuffer
-   "bd" 'evil-delete-buffer
-
    ;; git
    "g" '(:ignore t :which-key "git")
    "gb" 'magit-blame
