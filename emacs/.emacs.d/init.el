@@ -413,6 +413,9 @@ Use the provided FILE and START args if starting a process."
   :ensure t
   :mode ("\\.ts\\'" "\\.js\\'"))
 
+(use-package groovy-mode
+  :ensure t)
+
 (use-package lsp-mode
   :ensure t
   :hook ((go-mode . lsp)
@@ -444,6 +447,9 @@ Use the provided FILE and START args if starting a process."
   :ensure t
   :custom
   (lsp-rust-server 'rust-analyzer))
+
+(use-package elixir-mode
+  :ensure t)
 
 (use-package beancount
   :load-path "~/git/personal/beancount/editors/emacs/"
