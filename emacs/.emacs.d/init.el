@@ -9,6 +9,7 @@
 (setq mac-command-modifier 'control)
 (setq delete-old-versions -1 )		; delete excess backup versions silently
 (setq version-control t )		; use version control
+(setq create-lockfiles nil)
 (setq vc-make-backup-files t )		; make backups file even when in version controlled dir
 (setq backup-directory-alist `(("." . "~/.local/share/emacs/backups")) ) ; which directory to put backups file
 (setq vc-follow-symlinks t )				       ; don't ask for confirmation when opening symlinked file
