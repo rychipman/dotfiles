@@ -80,3 +80,7 @@
 
 (use-package! beancount
   :mode ("\\.bc$" . beancount-mode))
+
+(map! :leader
+      :desc "Open beancount journal file"
+      "f b" (lambda () (interactive) (find-file "~/ledger/journal.bc")))
