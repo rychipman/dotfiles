@@ -580,8 +580,9 @@ Use the provided FILE and START args if starting a process."
 				 :prompt "dtrash"
 				 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
 				 :action (lambda (docid msg target)
-						   (mu4e~proc-move docid
-										   (mu4e~mark-check-target target) "-N"))))
+						   (mu4e--server-move docid
+											  (mu4e~mark-check-target target)
+											  "-N"))))
   (setq message-citation-line-format "On %a, %b %d, %Y at %H:%M %p %f wrote:\n")
   (setq message-citation-line-function 'message-insert-formatted-citation-line)
   )
