@@ -258,6 +258,8 @@ the variable is PATH, also add each element to 'exec-path'."
   (define-key evil-normal-state-map (kbd "/") 'swiper)
   (define-key evil-normal-state-map (kbd "?") 'swiper)
 
+  (setq evil-undo-system "undo-redo")
+
   (defun rpc/evil-shift-right-visual ()
 	(interactive)
 	(evil-shift-right (region-beginning) (region-end))
