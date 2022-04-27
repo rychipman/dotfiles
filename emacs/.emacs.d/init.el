@@ -627,8 +627,9 @@ Use the provided FILE and START args if starting a process."
   (setq-default company-auto-complete 'company-explicit-action-p)
   (setq-default company-minimum-prefix-length 1)
   (setq-default company-dabbrev-downcase nil)
-  (define-key company-active-map (kbd "<tab>") 'company-select-next-if-tooltip-visible-or-complete-selection)
+  (define-key company-active-map (kbd "<tab>") 'company-select-next)
   (define-key company-active-map (kbd "S-<tab>") 'company-select-previous-or-abort)
+  (define-key company-active-map (kbd "RET") 'company-complete)
   )
 
 (use-package prodigy
