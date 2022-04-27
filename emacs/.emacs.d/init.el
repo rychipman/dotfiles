@@ -326,7 +326,9 @@ the variable is PATH, also add each element to 'exec-path'."
   :ensure t)
 
 (use-package yasnippet
-  :ensure t)
+  :ensure t
+  :config
+  (yas-global-mode t))
 
 (use-package yasnippet-snippets
   :ensure t)
