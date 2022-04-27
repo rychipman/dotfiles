@@ -229,8 +229,17 @@ the variable is PATH, also add each element to 'exec-path'."
   :config
   (which-key-mode 1))
 
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
 
@@ -307,9 +316,6 @@ the variable is PATH, also add each element to 'exec-path'."
 					 "")))
 	(browse-url (format "https://github.com/%s/%s/tree/%s/%s%s"
 						org repo rev path line-hash))))
-
-(use-package evil-magit
-  :ensure t)
 
 (use-package org
   :ensure t
