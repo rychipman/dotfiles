@@ -84,3 +84,5 @@
 (map! :leader
       :desc "Open beancount journal file"
       "f b" (lambda () (interactive) (find-file "~/ledger/journal.bc")))
+
+(map! :n "/" #'consult-line)
