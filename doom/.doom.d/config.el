@@ -96,3 +96,15 @@
     :url "http://localhost:5000/beancount/income_statement/"
     :command "fava"
     :args '("-d" "journal.bc")))
+
+(after! python
+  (define-minor-mode python-extra-autosave-mode
+    "Minor mode for doing extra on-save tasks in python buffers."
+    :lighter " py-save-extra"
+    :global nil
+    (when (not (derived-mode-p 'python-mode))
+      (error "python-extra-autosave-mode only works with python buffers"))
+    (if python-extra-autosave-mode
+        (add-hook! 'before-save-hook :local #'pyimport-remove-unused #'py-isort-before-save)
+      (remove-hook! 'before-save-hook :local #'pyimport-remove-unused #'py-isort-before-save)))
+  (add-hook! 'python-mode-hook #'python-extra-autosave-mode))
