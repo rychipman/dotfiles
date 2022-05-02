@@ -86,3 +86,13 @@
       "f b" (lambda () (interactive) (find-file "~/ledger/journal.bc")))
 
 (map! :n "/" #'consult-line)
+
+(use-package! prodigy
+  :bind ("C-x P" . prodigy)
+  :config
+  (prodigy-define-service
+    :name "fava"
+    :cwd "~/ledger"
+    :url "http://localhost:5000/beancount/income_statement/"
+    :command "fava"
+    :args '("-d" "journal.bc")))
