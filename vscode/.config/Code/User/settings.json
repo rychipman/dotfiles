@@ -1,9 +1,0 @@
-{
-    "go.toolsManagement.autoUpdate": true,
-    "files.associations": {
-        "*.bc": "beancount"
-    },
-    "explorer.confirmDelete": false,
-    "diffEditor.renderSideBySide": false,
-    "window.menuBarVisibility": "hidden",
-}
