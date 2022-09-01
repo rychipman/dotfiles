@@ -1,2 +1,2 @@
 
-export STOW_DIR=~/.dotfiles
+export STOW_DIR=~/dotfiles
