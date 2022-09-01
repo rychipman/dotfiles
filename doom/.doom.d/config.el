@@ -46,6 +46,8 @@
 (setq projectile-project-search-path '("~/git/work"
                                        "~/git/personal"))
 
+(setq mac-command-modifier 'control)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
