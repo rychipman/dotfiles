@@ -33,7 +33,7 @@
                                         "key_code": "tab"
                                     }
                                 ],
-                                "to_if_held_down": [
+                                "to": [
                                     {
                                         "key_code": "left_shift",
                                         "modifiers": [
