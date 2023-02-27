@@ -49,6 +49,11 @@ hs.hotkey.bind(hyper, "O", function()
     hs.application.launchOrFocus("Todoist")
 end)
 
+-- open Quicken
+hs.hotkey.bind(hyper, "I", function()
+    hs.application.launchOrFocus("Quicken")
+end)
+
 -- open Zoom
 hs.hotkey.bind(hyper, "M", function()
     hs.application.launchOrFocus("zoom.us")
