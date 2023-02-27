@@ -19,55 +19,131 @@ hs.hotkey.bind(hyper, "F", function()
     hs.window.focusedWindow():toggleFullScreen()
 end)
 
--- open Spotify
-hs.hotkey.bind(hyper, "G", function()
-    hs.application.launchOrFocus("Spotify")
-end)
+apps = {
+  {
+    name = "Firefox",
+    hyperKey = "K",
+    localBindings = {
+      {
+        description = "tab left",
+        from = {modifiers = hyper, key = "["},
+        to = {modifiers = {"command", "option"}, key = "Left"},
+      },
+      {
+        description = "tab right",
+        from = {modifiers = hyper, key = "]"},
+        to = {modifiers = {"command", "option"}, key = "Right"},
+      },
+    },
+  },
+  {
+    name = "Slack",
+    hyperKey = "L",
+    localBindings = {
+      {
+        description = "next unread",
+        from = {modifiers = {"command"}, key = "J"},
+        to = {modifiers = {"shift", "option"}, key = "Down"},
+      },
+      {
+        description = "prev unread",
+        from = {modifiers = {"command"}, key = "K"},
+        to = {modifiers = {"shift", "option"}, key = "Up"},
+      },
+    },
+  },
+  {
+    name = "Todoist",
+    hyperKey = "O",
+    localBindings = {
+      {
+        description = "C-j down",
+        from = {modifiers = {"command"}, key = "J"},
+        to = {modifiers = {}, key = "Down"},
+      },
+      {
+        description = "C-n down",
+        from = {modifiers = {"command"}, key = "N"},
+        to = {modifiers = {}, key = "Down"},
+      },
+      {
+        description = "C-k up",
+        from = {modifiers = {"command"}, key = "K"},
+        to = {modifiers = {}, key = "Up"},
+      },
+      {
+        description = "C-p up",
+        from = {modifiers = {"command"}, key = "P"},
+        to = {modifiers = {}, key = "Up"},
+      },
+    },
+  },
+  {
+    name = "Quicken",
+    hyperKey = "I",
+    localBindings = {
+      {
+        description = "C-j down",
+        from = {modifiers = {"command"}, key = "J"},
+        to = {modifiers = {}, key = "Down"},
+      },
+      {
+        description = "C-k up",
+        from = {modifiers = {"command"}, key = "K"},
+        to = {modifiers = {}, key = "Up"},
+      },
+    },
+  },
+  {
+    name = "Zoom",
+    hyperKey = "Z",
+  },
+  {
+    name = "Messages",
+    hyperKey = "M",
+    localBindings = {
+      {
+        description = "Next Conversation",
+        from = {modifiers = {"command"}, key = "J"},
+        to = {modifiers = {"control"}, key = "Tab"},
+      },
+      {
+        description = "Prev Conversation",
+        from = {modifiers = {"command"}, key = "K"},
+        to = {modifiers = {"control", "shift"}, key = "Tab"},
+      },
+    },
+  },
+  {
+    name = "iTerm",
+    hyperKey = "H",
+  },
+  {
+    name = "emacs",
+    hyperKey = "J",
+  },
+  {
+    name = "Spotify",
+    hyperKey = "G",
+  },
+}
 
--- open iTerm
-hs.hotkey.bind(hyper, "H", function()
-    hs.application.launchOrFocus("iTerm")
-end)
-
--- open emacs
-hs.hotkey.bind(hyper, "J", function()
-    hs.application.launchOrFocus("emacs")
-end)
-
--- open Firefox
-hs.hotkey.bind(hyper, "K", function()
-    hs.application.launchOrFocus("Firefox")
-end)
-local ff_modal = hs.hotkey.modal.new()
-ff_modal:bind(hyper, "[", function() hs.eventtap.keyStroke({"command", "option"}, "Left") end)
-ff_modal:bind(hyper, "]", function() hs.eventtap.keyStroke({"command", "option"}, "Right") end)
-hs.window.filter.new('Firefox')
-    :subscribe(hs.window.filter.windowFocused,function()
-        ff_modal:enter()
+for _, app in pairs(apps) do
+  if app.hyperKey ~= nil then
+    hs.hotkey.bind(hyper, app.hyperKey, function()
+      hs.application.launchOrFocus(app.name)
     end)
-    :subscribe(hs.window.filter.windowUnfocused,function()
-        ff_modal:exit()
-    end)
+  end
 
--- open Slack
-hs.hotkey.bind(hyper, "L", function()
-    hs.application.launchOrFocus("Slack")
-end)
-
--- open Todoist
-hs.hotkey.bind(hyper, "O", function()
-    hs.application.launchOrFocus("Todoist")
-end)
-
--- open Quicken
-hs.hotkey.bind(hyper, "I", function()
-    hs.application.launchOrFocus("Quicken")
-end)
-
--- open Zoom
-hs.hotkey.bind(hyper, "M", function()
-    hs.application.launchOrFocus("zoom.us")
-end)
-hs.hotkey.bind(hyper, "Z", function()
-    hs.application.launchOrFocus("zoom.us")
-end)
+  if app.localBindings ~= nil then
+    local modal = hs.hotkey.modal.new()
+    for _, bind in pairs(app.localBindings) do
+        modal:bind(bind.from.modifiers, bind.from.key, function()
+          hs.eventtap.keyStroke(bind.to.modifiers, bind.to.key)
+        end)
+    end
+    hs.window.filter.new(app.name)
+        :subscribe(hs.window.filter.windowFocused, function() modal:enter() end)
+        :subscribe(hs.window.filter.windowUnfocused, function() modal:exit() end)
+  end
+end
