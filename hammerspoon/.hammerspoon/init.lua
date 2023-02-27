@@ -148,3 +148,23 @@ for _, app in pairs(apps) do
         :subscribe(hs.window.filter.windowUnfocused, function() modal:exit() end)
   end
 end
+
+local choices = {
+  {
+    ["text"] = "First Choice",
+  },
+  {
+    ["text"] = "Second Choice",
+    ["subText"] = "Some subtext",
+  },
+}
+
+function onChoice(choice)
+  print(choice)
+end
+
+hs.hotkey.bind(hyper, "c", function()
+  local chooser = hs.chooser.new(onChoice)
+    :choices(choices)
+    :show()
+end)
