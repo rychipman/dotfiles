@@ -85,7 +85,7 @@ apps = {
     },
   },
   {
-    name = "Zoom",
+    name = "zoom.us",
     hyperKey = "Z",
   },
   {
