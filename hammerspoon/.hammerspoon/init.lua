@@ -128,11 +128,22 @@ apps = {
   },
 }
 
+function doAppHyperKey(appName)
+  local app = hs.application.get(appName)
+  if app then
+    if app:isFrontmost() then
+      app:hide()
+    else
+      app:activate()
+    end
+  else
+    hs.application.launchOrFocus(appName)
+  end
+end
+
 for _, app in pairs(apps) do
   if app.hyperKey ~= nil then
-    hs.hotkey.bind(hyper, app.hyperKey, function()
-      hs.application.launchOrFocus(app.name)
-    end)
+    hs.hotkey.bind(hyper, app.hyperKey, function() doAppHyperKey(app.name) end)
   end
 
   if app.localBindings ~= nil then
