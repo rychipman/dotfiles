@@ -24,6 +24,16 @@ apps = {
         from = {modifiers = hyper, key = "]"},
         to = {modifiers = {"command", "option"}, key = "Right"},
       },
+      {
+        description = "C-j down",
+        from = {modifiers = {"command"}, key = "J"},
+        to = {modifiers = {}, key = "Down"},
+      },
+      {
+        description = "C-k up",
+        from = {modifiers = {"command"}, key = "K"},
+        to = {modifiers = {}, key = "Up"},
+      },
     },
   },
   {
