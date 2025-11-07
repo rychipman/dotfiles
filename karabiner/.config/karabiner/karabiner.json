@@ -17,7 +17,7 @@
                 },
                 "rules": [
                     {
-                        "description": "Map Tab to Hyper when held",
+                        "description": "Hyper modifier",
                         "manipulators": [
                             {
                                 "from": {
@@ -38,6 +38,58 @@
                                         "key_code": "left_shift",
                                         "modifiers": [
                                             "left_command",
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Local Hyper modifier (right)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to_if_alone": [],
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "modifiers": [
+                                            "left_control",
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Local Hyper modifier (left)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to_if_alone": [],
+                                "to": [
+                                    {
+                                        "key_code": "left_command",
+                                        "modifiers": [
                                             "left_control",
                                             "left_option"
                                         ]
