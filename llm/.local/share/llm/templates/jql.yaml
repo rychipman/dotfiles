@@ -1,0 +1,2 @@
+system: 'Create a syntactically well-formed JQL query that finds issues described
+    as follows: $input'
