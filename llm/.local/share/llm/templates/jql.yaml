@@ -1,2 +1,8 @@
-system: 'Create a syntactically well-formed JQL query that finds issues described
-    as follows: $input'
+name: jql
+system: >
+  Create a syntactically well-formed JQL query that finds issues with the specified criteria.
+  Return only a single jql query, without any explanation or fluff. Do not use code fences.
+fragments:
+  - /Users/ryan.chipman/.local/share/llm/artifacts/mongodb.md
+prompt: 'Issues to find: $input'
+#extract: true
