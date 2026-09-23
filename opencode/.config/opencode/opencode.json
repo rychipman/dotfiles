@@ -1,6 +1,7 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "share": "disabled",
+  "enabled_providers": ["fireworks-ai"],
   "mcp": {
     "devprod-mcp": {
       "type": "remote",
