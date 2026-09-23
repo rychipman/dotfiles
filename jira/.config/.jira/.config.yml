@@ -1,0 +1,4 @@
+server: https://jira.mongodb.org
+login: ryan.chipman@mongodb.com
+installation: local
+auth_type: bearer
