@@ -10,6 +10,7 @@ transmission/.config/transmission/torrents
 transmission/.config/transmission/resume
 transmission/.config/transmission/stats.json
 mongodb/bin/mongodb/evergreen
+bin/bin/kanopy-oidc
 emacs/.emacs.d/var
 emacs/.emacs.d/etc
 emacs/.emacs.d/elpa
