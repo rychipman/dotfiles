@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "share": "disabled",
+  "mcp": {
+    "devprod-mcp": {
+      "type": "remote",
+      "url": "https://devprod-mcp-gateway.corp.mongodb.com/mcp"
+    }
+  }
+}

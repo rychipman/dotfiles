@@ -49,6 +49,7 @@ stow -n -v <package>  # dry run to verify before applying
 | llm | LLM CLI config, templates, model definitions |
 | mongodb | MongoDB shell and tools |
 | nvim-old | Legacy Neovim config (nvim replaced by `vim`) |
+| opencode | OpenCode config (MCP servers, etc.) |
 | rust | Cargo/Rust environment |
 | ssh | SSH config |
 | stow | Stow's own config (`STOW_DIR`, global ignore) |
