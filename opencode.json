@@ -1,6 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "model": "fireworks-work/accounts/fireworks/models/deepseek-v4p1-flash",
+  "experimental": {
+    "policies": [
+      { "action": "provider.use", "resource": "opencode", "effect": "deny" }
+    ]
+  },
   "providers": {
     "fireworks-work": {
       "name": "Fireworks AI (work)",
