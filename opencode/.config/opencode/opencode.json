@@ -1,11 +1,14 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "share": "disabled",
-  "enabled_providers": ["fireworks-ai"],
   "mcp": {
     "devprod-mcp": {
       "type": "remote",
       "url": "https://devprod-mcp-gateway.corp.mongodb.com/mcp"
+    },
+    "glean_default": {
+      "type": "remote",
+      "url": "https://mongodb-be.glean.com/mcp/default"
     }
   }
 }
