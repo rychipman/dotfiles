@@ -33,6 +33,7 @@ stow -n -v <package>  # dry run to verify before applying
 
 | Package | Purpose |
 |---------|---------|
+| agents | Authored global agent skills, stowed to `~/.agents/skills` |
 | bash | Shell config, prompt, aliases, functions |
 | bin | Personal scripts, stowed to `~/bin` |
 | claude | `~/.claude/settings.json` |
@@ -55,6 +56,23 @@ stow -n -v <package>  # dry run to verify before applying
 | stow | Stow's own config (`STOW_DIR`, global ignore) |
 | tmux | Terminal multiplexer |
 | vim | Vim config with vim-plug |
+
+## Global agent skills
+
+Authored skills live in `agents/.agents/skills/<id>/SKILL.md` and stow to
+`~/.agents/skills`, the canonical cross-agent location. OpenCode reads that
+directory natively; `~/.claude/skills/<id>` is a per-skill symlink into it for
+Claude Code. Third-party skills installed there by the `vercel-labs/skills` CLI
+(and its `~/.agents/.skill-lock.json`) are not vendored into this repo.
+
+Adding a skill needs a re-stow plus a Claude symlink:
+
+```bash
+cd ~/dotfiles && stow -R agents
+for d in agents/.agents/skills/*/; do
+  ln -sfn "../../.agents/skills/$(basename "$d")" ~/.claude/skills/"$(basename "$d")"
+done
+```
 
 ## Git conventions
 
