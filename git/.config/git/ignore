@@ -6,6 +6,7 @@
 *.ignore
 venv
 .DS_Store
+.envrc
 .orca
 
 **/.claude/settings.local.json
