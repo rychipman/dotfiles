@@ -14,3 +14,5 @@ bin/bin/kanopy-oidc
 emacs/.emacs.d/var
 emacs/.emacs.d/etc
 emacs/.emacs.d/elpa
+alfred/Library/Application Support/Alfred/Alfred.alfredpreferences/preferences/local
+alfred/Library/Application Support/Alfred/Alfred.alfredpreferences/remote
